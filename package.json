@@ -1,0 +1,15 @@
+{
+  "name": "tarantola",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agente che fa paper trading da solo, a orari fissi, senza nessuno davanti allo schermo",
+  "type": "module",
+  "scripts": {
+    "once": "bun run src/cli.ts once",
+    "schedule": "bun run src/cli.ts schedule",
+    "status": "bun run src/cli.ts status",
+    "reconcile": "bun run src/cli.ts reconcile",
+    "demo:1": "bun run src/cli.ts once --fake --slot 15:40",
+    "test": "bun test"
+  }
+}

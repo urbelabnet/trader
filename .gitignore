@@ -1,0 +1,10 @@
+# Le chiavi: mai nel repository
+secrets.ts
+
+# Lo stato di prova (broker finto): di ogni macchina il suo
+state/fakebroker.json
+
+# Roba locale
+node_modules/
+.DS_Store
+logs/avviso.log

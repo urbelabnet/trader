@@ -1,0 +1,80 @@
+# La sveglia di GitHub Actions: non c'è `bun run schedule`, c'è il cron.
+# Ogni 10 minuti il runner fa la stessa domanda: "qual è la sveglia dovuta di oggi,
+# più nuova dell'ultimo testimone?" Se c'è, la lancia; se no, esce in un minuto.
+# Lo stato vive nel repository: testimone, history e pagina di stato si committano a ogni sveglia.
+
+name: sveglia
+
+on:
+  schedule:
+    # Finestra del briefing (09:00 ora di Roma): 06–08 UTC copre ora legale e solare.
+    - cron: "*/10 6-8 * * *"
+    # Finestra di mercato (15:40, 18:30, 21:40 ora di Roma): 13–20 UTC copre sia l'estate che l'inverno.
+    - cron: "*/10 13-20 * * *"
+  workflow_dispatch: {} # per farla partire a mano
+
+concurrency:
+  group: tarantola
+  cancel-in-progress: false # una sveglia alla volta, sempre in fila, mai in parallelo
+
+permissions:
+  contents: write # per committare lo stato
+  pages: write # per la pagina di stato
+  id-token: write # per la pagina di stato
+
+jobs:
+  sveglia:
+    runs-on: ubuntu-latest
+    outputs:
+      cambiate: ${{ steps.stato.outputs.cambiate }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: svoglita la sveglia dovuta (il codice decide se è l'ora)
+        env:
+          ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: bun run once
+
+      - name: persisti il testimone e i log nel repository
+        id: stato
+        run: |
+          git config user.name "tarantola"
+          git config user.email "tarantola@users.noreply.github.com"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
+          git add -A state logs
+          if git diff --cached --quiet || [ ! -f state/baton.json ]; then
+            echo "cambiate=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "stato sveglia $(date -u +%FT%TZ)"
+            git push
+            echo "cambiate=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: prepara la pagina di stato
+        if: steps.stato.outputs.cambiate == 'true'
+        run: cp state/status.html state/index.html
+
+      - name: carica la pagina di stato
+        if: steps.stato.outputs.cambiate == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: state
+
+  pagina:
+    needs: sveglia
+    if: needs.sveglia.outputs.cambiate == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
