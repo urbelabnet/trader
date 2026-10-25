@@ -1,16 +1,28 @@
 # La sveglia di GitHub Actions: non c'è `bun run schedule`, c'è il cron.
-# Ogni 10 minuti il runner fa la stessa domanda: "qual è la sveglia dovuta di oggi,
-# più nuova dell'ultimo testimone?" Se c'è, la lancia; se no, esce in un minuto.
-# Lo stato vive nel repository: testimone, history e pagina di stato si committano a ogni sveglia.
+# Il codice dentro `bun run once` fa la domanda: "qual è la sveglia dovuta di oggi,
+# più recente dell'ultimo testimone?" Se c'è, la lancia; se no, esce in un minuto.
+# Lo stato vive nel repository: testimone e log si committano a ogni sveglia.
+#
+# Repo PRIVATO: i minuti Actions sono quotati (2.000/mese sul piano gratis), quindi
+# il cron controlla solo attorno alle 4 sveglie vere invece che ogni 10 minuti tutto il giorno.
+# ~11 controlli al giorno nei feriali, ~6 nel weekend: circa 290 run/mese, ben sotto quota.
+# Il ritardo massimo da orario dovuto a sveglia effettiva resta ~5–15 minuti (vedi i commenti UTC).
 
 name: sveglia
 
 on:
   schedule:
-    # Finestra del briefing (09:00 ora di Roma): 06–08 UTC copre ora legale e solare.
-    - cron: "*/10 6-8 * * *"
-    # Finestra di mercato (15:40, 18:30, 21:40 ora di Roma): 13–20 UTC copre sia l'estate che l'inverno.
-    - cron: "*/10 13-20 * * *"
+    # Briefing delle 09:00 Roma: controlli ogni 10 minuti, 09:05–09:55 ora legale e ora solare,
+    # entrambe coperte dai controlli nell'ora 07 UTC (07:05–07:55 legale, 08:05–08:55 solare).
+    - cron: "5-55/10 7 * * *"
+    # Mercato 15:40 Roma: controlli alle 13:45 UTC (15:45 ora legale) e 14:45 UTC (15:45 ora solare).
+    - cron: "45 13,14 * * 1-5"
+    # Mercato 18:30 Roma: controllo alle 16:35 UTC (18:35 legale) e 17:45 UTC (18:45 solare).
+    - cron: "35 16 * * 1-5"
+    - cron: "45 17 * * 1-5"
+    # Mercato 21:40 Roma: controlli alle 19:45 UTC (21:45 legale) e 20:45 UTC (21:45 solare),
+    # sempre dentro l'orario di Borsa (chiude alle 22:00 Roma).
+    - cron: "45 19,20 * * 1-5"
   workflow_dispatch: {} # per farla partire a mano
 
 concurrency:
@@ -19,8 +31,6 @@ concurrency:
 
 permissions:
   contents: write # per committare lo stato
-  pages: write # per la pagina di stato
-  id-token: write # per la pagina di stato
 
 jobs:
   sveglia:
@@ -34,7 +44,7 @@ jobs:
         with:
           bun-version: latest
 
-      - name: svoglita la sveglia dovuta (il codice decide se è l'ora)
+      - name: svolgi la sveglia dovuta (il codice decide se è l'ora)
         env:
           ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
@@ -58,23 +68,6 @@ jobs:
             echo "cambiate=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: prepara la pagina di stato
-        if: steps.stato.outputs.cambiate == 'true'
-        run: cp state/status.html state/index.html
-
-      - name: carica la pagina di stato
-        if: steps.stato.outputs.cambiate == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: state
-
-  pagina:
-    needs: sveglia
-    if: needs.sveglia.outputs.cambiate == 'true'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+# La «pagina di stato» su GitHub Pages richiede un piano a pagamento sui repository privati.
+# La pagina resta comunque generata e committata in state/status.html: si apre dal
+# pulsante «Raw» del file, da GitHub, dopo il login.
