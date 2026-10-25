@@ -2,7 +2,7 @@
 // In sola lettura, chiavi mai dentro. In locale anche servita sulla porta 8787;
 // su GitHub Actions è solo un file (state/status.html) che va su GitHub Pages.
 
-import { leggiTestimone, DIR_STATE } from "./baton";
+import { leggiTestimone, DIR_STATE, DIR_HISTORY } from "./baton";
 import { SVEGLIE } from "./config";
 import { oraRoma } from "./roma";
 import { existsSync, mkdirSync } from "node:fs";
@@ -25,12 +25,17 @@ export type Verita = {
 export async function leggiVerita(): Promise<Verita> {
   const baton = await leggiTestimone();
   const righe: RigaStoria[] = [];
+  // I testimoni storici stanno tutti in state/history, uno per sveglia: lì si cerca,
+  // non alla radice (difetto visto il 25/10/2026: lo Storico della pagina vuoto).
   const glob = new Bun.Glob("*.json");
   const file: string[] = [];
-  for await (const f of glob.scan(".")) file.push(f);
+  if (existsSync(DIR_HISTORY)) {
+    for await (const f of glob.scan(DIR_HISTORY)) file.push(f);
+  }
+  // il glob restituisce i nomi relativi alla cartella: va riappiccicato il percorso
   for (const f of file.sort().reverse()) {
     try {
-      const t = JSON.parse(await Bun.file(f).text());
+      const t = JSON.parse(await Bun.file(`${DIR_HISTORY}/${f}`).text());
       if (t.sveglia && t.runId) {
         righe.push({
           runId: t.runId,

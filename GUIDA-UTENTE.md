@@ -154,7 +154,7 @@ o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina P
 
 ## ✔ Checklist finale
 
-- [ ] `bun test` → 19 pass, 0 fail
+- [ ] `bun test` → 20 pass, 0 fail
 - [ ] `bun run once --fake --slot 15:40` → gabbia, ordini, testimone su schermo
 - [ ] `bun run once --slot 15:40` → ▶ e ✅ sul telefono (anche a mercato chiuso)
 - [ ] Il file di testo delle chiavi non esiste più

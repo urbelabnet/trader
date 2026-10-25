@@ -11,6 +11,7 @@ import { attraversa, stopSulCarico } from "../src/cage";
 import { garantisciPaper } from "../src/config";
 import { validaDecisione } from "../src/llm";
 import type { Testimone } from "../src/baton";
+import { leggiVerita, paginaStato } from "../src/statuspage";
 import { epochDi, oraRoma } from "../src/roma";
 import { BrokerFinto } from "../src/fakebroker";
 
@@ -215,5 +216,28 @@ describe("il contratto sul serio", () => {
   test("7. la guardia del paper: si rifiuta di girare sull'endpoint vero", () => {
     expect(() => garantisciPaper("https://api.alpaca.markets")).toThrow();
     expect(() => garantisciPaper("https://paper-api.alpaca.markets")).not.toThrow();
+  });
+
+  test("8. lo Storico della pagina di stato legge state/history, non la radice", async () => {
+    const ora = oraRoma();
+    const t: Testimone = {
+      runId: `${ora.data}-1530`,
+      sveglia: "briefing",
+      quando: `${ora.data} 15:30`,
+      epoch: epochDi({ data: ora.data, hhmm: "15:30" }),
+      ordini: [],
+      rifiutati: [],
+      conto: 100_000,
+      piano: "Il piano di prova dello Storico.",
+      perLaProssima: "",
+      note: "",
+      equityGiorno: 100_000,
+    };
+    await scriviTestimone(t); // scrive baton.json E la copia in state/history/
+    const v = await leggiVerita();
+    expect(v.righe.map((r) => r.runId)).toContain(t.runId);
+    const html = await paginaStato();
+    expect(html).toContain(t.runId);
+    expect(html).toContain("Il piano di prova dello Storico.");
   });
 });
