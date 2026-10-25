@@ -1,5 +1,6 @@
-# Le chiavi: mai nel repository
-secrets.ts
+# Le chiavi: mai nel repository. Lo slash iniziale: solo il secrets.ts alla radice,
+# NON src/secrets.ts (il caricatore, che va pubblicato: non contiene chiavi).
+/secrets.ts
 
 # Lo stato di prova (broker finto): di ogni macchina il suo
 state/fakebroker.json
