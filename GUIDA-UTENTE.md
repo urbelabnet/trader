@@ -139,11 +139,14 @@ git push -u origin master
 - sul telefono arrivano ▶ e ✅;
 - nel repository appare il commit «stato sveglia …» col testimone.
 
-**5.** Attiva la pagina di stato: pagina del repo → *Settings* → *Pages* → *Build and deployment* →
-*Source*: **GitHub Actions**. Alla sveglia dopo, la URL che trovi lì mostra la pagina di Tarantola.
+**5.** La pagina di stato NON usa GitHub Pages: sui repository privati serve un piano a pagamento.
+Lo stato di Tarantola resta comunque aggiornato nel repository: apri il file `state/status.html`
+e premi il pulsante **Raw** (dentro GitHub, dopo il login) per vederlo nel browser.
 
-**Verifica:** *Actions* è tutto verde sui run del cron (`*/10 6-8`, `*/10 13-20` UTC), e la pagina
-di stato mostra l'ultimo testimone col suo «Perché».
+**Verifica:** *Actions* è tutto verde sui run, e il file `state/status.html` mostra l'ultimo
+testimone col suo «Perché». Il cron è tarato per stare sotto i 2.000 minuti/mese del piano
+gratuito: controlli attorno alle 4 sveglie vere (~11 al giorno nei feriali, ~6 nel weekend),
+non ogni 10 minuti tutto il giorno.
 **Prova al contrario:** un run *rosso* con «Broker non disponibile» vuol dire chiavi sbagliate
 o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina Paper (parte 1).
 
@@ -156,7 +159,7 @@ o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina P
 - [ ] `bun run once --slot 15:40` → ▶ e ✅ sul telefono (anche a mercato chiuso)
 - [ ] Il file di testo delle chiavi non esiste più
 - [ ] Su GitHub: run verde del workflow, commit «stato sveglia» nel repo
-- [ ] La pagina di stato è raggiungibile sulla URL di Pages
+- [ ] La pagina di stato (`state/status.html`) si apre dal pulsante Raw su GitHub
 - [ ] `secrets.ts` non è mai apparso in un commit (`git log --stat | findstr secrets`)
 
 E poi: `bun run schedule` resta acceso sul tuo PC se vuoi girare anche in locale
