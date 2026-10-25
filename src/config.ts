@@ -40,8 +40,10 @@ export const STOP_LOSS = -0.03;
 /** Massimo 60 minuti di ritardo per una sveglia ancora recuperabile a risveglio del processo. */
 export const MAX_RITARDO_SVEGLIA = 60; // minuti
 
-/** Il modello del cervello: si cambia da ambiente (GEMINI_MODEL), si tocca un file solo. */
-export const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+/** Il modello del cervello: si cambia da ambiente (GEMINI_MODEL), si tocca un file solo.
+ *  Di default uso l'alias «latest»: punta sempre al flash stabile più recente,
+ *  così se Google ritira un modello la sveglia non resta a naso (404 visto il 25/10/2026 con gemini-2.5-flash). */
+export const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-latest";
 
 /** Porta della pagina di stato quando gira in locale con `bun run schedule`. */
 export const PORTA_STATO = 8787;
