@@ -1,0 +1,13 @@
+{
+  "runId": "2026-10-26-0900",
+  "sveglia": "briefing",
+  "quando": "2026-10-26 09:00",
+  "epoch": 1793001600000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 100000,
+  "piano": "cervello non disponibile: gestito solo lo stop loss",
+  "perLaProssima": "cervello assente alla sveglia scorsa: controllare che il mercato sia regolare",
+  "note": "Cervello non disponibile: applico solo lo stop loss. (il cervello non risponde: Gemini 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n)",
+  "equityGiorno": 100000
+}
