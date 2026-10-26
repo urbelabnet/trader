@@ -8,8 +8,8 @@ import { join } from "node:path";
 import { alzaSveglia } from "../src/wake";
 import { leggiTestimone, leggiLock, scriviTestimone, CAM_LOCK } from "../src/baton";
 import { attraversa, stopSulCarico } from "../src/cage";
-import { garantisciPaper } from "../src/config";
-import { validaDecisione } from "../src/llm";
+import { garantisciPaper, GEMINI_MODEL } from "../src/config";
+import { validaDecisione, GeminiCervello } from "../src/llm";
 import type { Testimone } from "../src/baton";
 import { leggiVerita, paginaStato } from "../src/statuspage";
 import { epochDi, oraRoma } from "../src/roma";
@@ -240,4 +240,65 @@ describe("il contratto sul serio", () => {
     expect(html).toContain(t.runId);
     expect(html).toContain("Il piano di prova dello Storico.");
   });
+
+  test("9. modello di testa sopraffatto (503): il cervello scende alla riserva e decide", async () => {
+    process.env.GEMINI_API_KEY = "chiave-di-prova";
+    const url_chiamate: string[] = [];
+    const fetchOriginale = globalThis.fetch;
+    let fatte = 0;
+    globalThis.fetch = (async (url: unknown) => {
+      url_chiamate.push(String(url));
+      fatte++;
+      if (fatte <= 3) {
+        return new Response(
+          JSON.stringify({ error: { code: 503, message: "This model is currently experiencing high demand." } }),
+          { status: 503 },
+        );
+      }
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      orders: [],
+                      reasoning: "Portafoglio vuoto a mercato chiuso: attendo la prossima seduta.",
+                      planNext: "Alla sveglia di apertura guardare SPY.",
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        { status: 200 },
+      );
+    }) as typeof fetch;
+    try {
+      const c = new GeminiCervello();
+      const r = await c.decide({
+        runId: "prova-riserva",
+        sveglia: "meta",
+        quando: "2026-10-26 18:30",
+        mercatoAperto: false,
+        conto: { equity: 100_000, cash: 100_000 },
+        posizioni: [],
+        ordiniRecenti: [],
+        ultimoPiano: null,
+        prossimaMossa: null,
+        note: "",
+      });
+      expect(r.fatto).toBe(true);
+      if (r.fatto) expect(r.decisione.planNext).toContain("SPY");
+      // le prime tre chiamate al modello di testa (503), la quarta a una riserva
+      expect(url_chiamate[0]).toContain(`/${GEMINI_MODEL}:`);
+      expect(url_chiamate[3]).not.toContain(`/${GEMINI_MODEL}:`);
+      expect(url_chiamate[3]).toContain("/gemini-");
+    } finally {
+      globalThis.fetch = fetchOriginale;
+      delete process.env.GEMINI_API_KEY;
+    }
+  }, 20_000); // i ritenti con attesa reale: il tetto di default (5s) non basta
 });

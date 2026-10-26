@@ -1,5 +1,6 @@
 // Il cervello: un LLM via API REST, isolato qui. Cambiare provider deve toccare un file solo.
 // Il modello propone; la risposta è JSON a schema fisso. Nessuno strumento, nessuna chat.
+// Se il modello di testa non risponde, si scende alle riserve (vedi RISERVE sotto).
 
 import { GEMINI_MODEL } from "./config";
 import { chiavi } from "./secrets";
@@ -68,6 +69,10 @@ function contestoInTesto(c: ContestoCervello): string {
 
 const URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
+/** Le riserve: se il modello di testa non risponde (ritirato: 404, o sopraffatto: 5xx/429,
+ *  oppure tempo scaduto), si prova queste, in fila, senza che la sveglia resti a naso. */
+const RISERVE = ["gemini-3.6-flash", "gemini-flash-latest"];
+
 /** La decisione a schema fisso: i nomi dei campi sono quelli del contratto. */
 const SCHEMA_DECISIONE = {
   type: "OBJECT",
@@ -100,15 +105,21 @@ class ErroreGemini extends Error {
   }
 }
 
-async function geminiChiamata(testo: string, tentativi = 3): Promise<string> {
-  const k = chiavi();
+/** Una tentata con un modello preciso: 3 tentativi, attesa crescente fra i tentativi.
+ *  Buon fine = il testo; mala fine = l'ultimo errore. È il chiamante a decidere se
+ *  passare alla riserva. */
+async function tentativoConModello(
+  modello: string,
+  chiaveApi: string,
+  corpo: string,
+): Promise<string> {
   const esegui = async (): Promise<string> => {
-    const r = await fetch(`${URL_BASE}/${GEMINI_MODEL}:generateContent`, {
+    const r = await fetch(`${URL_BASE}/${modello}:generateContent`, {
       method: "POST",
-      headers: { "content-type": "application/json", "x-goog-api-key": k.GEMINI_API_KEY },
+      headers: { "content-type": "application/json", "x-goog-api-key": chiaveApi },
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: SISTEMA }] },
-        contents: [{ role: "user", parts: [{ text: testo }] }],
+        contents: [{ role: "user", parts: [{ text: corpo }] }],
         generationConfig: {
           responseMimeType: "application/json",
           responseSchema: SCHEMA_DECISIONE,
@@ -131,13 +142,27 @@ async function geminiChiamata(testo: string, tentativi = 3): Promise<string> {
   };
 
   let ultimo: unknown = null;
-  for (let t = 1; t <= tentativi; t++) {
+  for (let t = 1; t <= 3; t++) {
     try {
       return await esegui();
     } catch (e) {
       ultimo = e;
-      if (e instanceof ErroreGemini && !e.ritentabile) break;
-      if (t < tentativi) await new Promise((f) => setTimeout(f, 1000 * t * t));
+      if (e instanceof ErroreGemini && !e.ritentabile) break; // questo modello non lo recuperi: si passa alla riserva
+      if (t < 3) await new Promise((f) => setTimeout(f, 1000 * t * t));
+    }
+  }
+  throw ultimo;
+}
+
+/** La chiamata al cervello: il modello di testa, e se non risponde le riserve in fila. */
+async function geminiChiamata(testo: string): Promise<string> {
+  const k = chiavi();
+  let ultimo: unknown = null;
+  for (const modello of [GEMINI_MODEL, ...RISERVE]) {
+    try {
+      return await tentativoConModello(modello, k.GEMINI_API_KEY, testo);
+    } catch (e) {
+      ultimo = e;
     }
   }
   throw ultimo;

@@ -71,7 +71,8 @@ Nel file di testo delle chiavi.
 **Prova al contrario:** se la pagina chiede un abbonamento o dati di pagamento, sei su un pannello
 sbagliato: la chiave gratuita non li chiede.
 
-*(Extra, facoltativo)* Vuoi un modello diverso? Metti l'ambiente `GEMINI_MODEL` (es. `gemini-2.5-flash-lite`)
+*(Extra, facoltativo)* Vuoi un modello diverso? Metti l'ambiente `GEMINI_MODEL` (es. `gemini-flash-lite-latest`:
+il default usa l'alias lite, meno affollato; se non risponde il codice prova da solo anche le riserve)
 o cambia l'adattatore: `src/llm.ts` è un file solo proprio per questo.
 
 ---
@@ -154,7 +155,7 @@ o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina P
 
 ## ✔ Checklist finale
 
-- [ ] `bun test` → 20 pass, 0 fail
+- [ ] `bun test` → 21 pass, 0 fail
 - [ ] `bun run once --fake --slot 15:40` → gabbia, ordini, testimone su schermo
 - [ ] `bun run once --slot 15:40` → ▶ e ✅ sul telefono (anche a mercato chiuso)
 - [ ] Il file di testo delle chiavi non esiste più

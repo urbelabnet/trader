@@ -41,9 +41,10 @@ export const STOP_LOSS = -0.03;
 export const MAX_RITARDO_SVEGLIA = 60; // minuti
 
 /** Il modello del cervello: si cambia da ambiente (GEMINI_MODEL), si tocca un file solo.
- *  Di default uso l'alias «latest»: punta sempre al flash stabile più recente,
- *  così se Google ritira un modello la sveglia non resta a naso (404 visto il 25/10/2026 con gemini-2.5-flash). */
-export const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-latest";
+ *  Di default l'alias «flash-lite-latest»: meno attracco dai picchi di domanda dei modelli grandi
+ *  (il 26/10/2026 gemini-flash-latest/3.8 son stati impraticabili per 503 tutta la giornata).
+ *  Se un modello un domani viene ritirato, la denuncia arriva dritta nel baton e si cambia qui. */
+export const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-lite-latest";
 
 /** Porta della pagina di stato quando gira in locale con `bun run schedule`. */
 export const PORTA_STATO = 8787;
