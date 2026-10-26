@@ -1,8 +1,8 @@
 {
-  "runId": "2026-10-26-0900",
-  "sveglia": "briefing",
-  "quando": "2026-10-26 09:00",
-  "epoch": 1793001600000,
+  "runId": "2026-10-26-1540",
+  "sveglia": "apertura",
+  "quando": "2026-10-26 15:40",
+  "epoch": 1793025600000,
   "ordini": [],
   "rifiutati": [],
   "conto": 100000,
