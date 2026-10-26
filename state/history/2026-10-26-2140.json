@@ -1,0 +1,13 @@
+{
+  "runId": "2026-10-26-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-10-26 21:40",
+  "epoch": 1793047200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 100000,
+  "piano": "Il mercato è attualmente chiuso, quindi non è possibile inviare ordini di compravendita in questo momento. Il portafoglio è interamente in liquidità e non ci sono posizioni aperte da gestire. Questa fase di chiusura serve unicamente a pianificare le mosse future senza rischiare esecuzioni a mercato chiuso. Valuterò l'ingresso su SPY e QQQ non appena la borsa riaprirà.",
+  "perLaProssima": "Verificare lo stato di apertura del mercato alla prossima sveglia e valutare l'inserimento dei primi ordini di acquisto su SPY e QQQ rispettando i limiti di allocazione del capitale.",
+  "note": "",
+  "equityGiorno": 100000
+}
