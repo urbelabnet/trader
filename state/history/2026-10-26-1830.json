@@ -1,0 +1,22 @@
+{
+  "runId": "2026-10-26-1830",
+  "sveglia": "meta",
+  "quando": "2026-10-26 18:30",
+  "epoch": 1793035800000,
+  "ordini": [],
+  "rifiutati": [
+    {
+      "simbolo": "SPY",
+      "motivo": "prezzo di mercato indisponibile"
+    },
+    {
+      "simbolo": "QQQ",
+      "motivo": "prezzo di mercato indisponibile"
+    }
+  ],
+  "conto": 100000,
+  "piano": "Il conto e interamente in liquidita e il mercato e regolarmente aperto. Decido di entrare gradualmente su SPY e QQQ per iniziare a costruire il portafoglio. Questa mossa rispetta la regola di massimo 20% del conto per singolo titolo. Resto prudente inserendo solo due posizioni per valutare la volatilita.",
+  "perLaProssima": "Controllare l'andamento dei due acquisti e verificare la tenuta dei livelli chiave di SPY e QQQ alla prossima sveglia.",
+  "note": "",
+  "equityGiorno": 100000
+}
