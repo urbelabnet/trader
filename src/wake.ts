@@ -314,19 +314,20 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
   const cervello = mod.cervelloMorto ? new CervelloMorto() : scegliCervello(mod.fake);
   const stessoGiorno = ultimo && ultimo.quando.startsWith(ora.data);
   const equityGiorno = stessoGiorno ? (ultimo!.equityGiorno ?? ultimo!.conto) : conto.equity;
+  const posizioniFoto = posizioni.map((p) => ({
+    simbolo: p.simbolo,
+    qty: p.qty,
+    prezzoCarico: p.prezzoCarico,
+    prezzo: p.prezzo,
+    pnlPerc: p.pnlPerc,
+  }));
   const contesto: ContestoCervello = {
     runId,
     sveglia: dovuta!.nome,
     quando,
     mercatoAperto: mercato.open,
     conto,
-    posizioni: posizioni.map((p) => ({
-      simbolo: p.simbolo,
-      qty: p.qty,
-      prezzoCarico: p.prezzoCarico,
-      prezzo: p.prezzo,
-      pnlPerc: p.pnlPerc,
-    })),
+    posizioni: posizioniFoto,
     ordiniRecenti: ordini.slice(0, 20).map((o) => ({
       simbolo: o.simbolo,
       lato: o.lato,
@@ -387,6 +388,8 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
     perLaProssima,
     note: allarmi.join(" | "),
     equityGiorno,
+    posizioni: posizioniFoto,
+    quotazioni,
   };
   await scriviTestimone(testimone);
   // L'istantanea della pagina di stato: su GitHub Pages si aggiorna a ogni sveglia.

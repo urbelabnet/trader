@@ -1,10 +1,11 @@
-// La pagina di stato: conto, prossime sveglie, ultima decisione, storico.
-// In sola lettura, chiavi mai dentro. In locale anche servita sulla porta 8787;
-// su GitHub Actions è solo un file (state/status.html) che va su GitHub Pages.
+// La pagina di stato: la dashboard di Tarantola.
+// In sola lettura, chiavi mai dentro. Un solo file HTML statico con i dati incorporati
+// (state/status.html): aprilo dal pulsante Raw su GitHub o in locale sulla porta 8787.
+// Il grafico confronta il conto con l'S&P 500 usando SPY del feed dati (proxy, detta chiara).
 
-import { leggiTestimone, DIR_STATE, DIR_HISTORY } from "./baton";
-import { SVEGLIE } from "./config";
-import { oraRoma } from "./roma";
+import { leggiTestimone, DIR_STATE, DIR_HISTORY, type Testimone } from "./baton";
+import { SVEGLIE, UNIVERSO } from "./config";
+import { oraRoma, sveglieDelGiorno, testoRoma, epochDi } from "./roma";
 import { existsSync, mkdirSync } from "node:fs";
 
 export type RigaStoria = {
@@ -19,12 +20,15 @@ export type RigaStoria = {
 export type Verita = {
   baton: Awaited<ReturnType<typeof leggiTestimone>>;
   righe: RigaStoria[];
+  /** Tutta la storia in ordine cronologico: è la materia del grafico. */
+  grezzi: Testimone[];
   lock: boolean;
 };
 
 export async function leggiVerita(): Promise<Verita> {
   const baton = await leggiTestimone();
   const righe: RigaStoria[] = [];
+  const grezzi: Testimone[] = [];
   // I testimoni storici stanno tutti in state/history, uno per sveglia: lì si cerca,
   // non alla radice (difetto visto il 25/10/2026: lo Storico della pagina vuoto).
   const glob = new Bun.Glob("*.json");
@@ -33,17 +37,18 @@ export async function leggiVerita(): Promise<Verita> {
     for await (const f of glob.scan(DIR_HISTORY)) file.push(f);
   }
   // il glob restituisce i nomi relativi alla cartella: va riappiccicato il percorso
-  for (const f of file.sort().reverse()) {
+  for (const f of file.sort()) {
     try {
-      const t = JSON.parse(await Bun.file(`${DIR_HISTORY}/${f}`).text());
-      if (t.sveglia && t.runId) {
+      const t = JSON.parse(await Bun.file(`${DIR_HISTORY}/${f}`).text()) as Testimone;
+      if (t && typeof t.runId === "string" && typeof t.sveglia === "string") {
+        grezzi.push(t);
         righe.push({
           runId: t.runId,
           sveglia: t.sveglia,
           quando: t.quando,
           ordini:
             (t.ordini ?? [])
-              .map((e: { simbolo: string; lato: string; qty: number }) => `${e.lato} ${e.qty} ${e.simbolo}`)
+              .map((e) => `${e.lato} ${e.qty} ${e.simbolo}`)
               .join(", ") || "nessuno",
           piano: t.piano ?? "",
           prossimaMossa: t.perLaProssima ?? "",
@@ -52,72 +57,644 @@ export async function leggiVerita(): Promise<Verita> {
     } catch {
       // la storia corrotta non ferma la pagina
     }
-    if (righe.length >= 40) break;
   }
+  grezzi.sort((a, b) => a.epoch - b.epoch);
   const lock = await Bun.file("state/run.lock").exists();
-  return { baton, righe, lock };
+  return { baton, righe, grezzi, lock };
 }
 
+/** Le prossime sveglie da adesso in poi (epoch inclusi). */
+function prossime(max: number): Array<{ epoch: number; nome: string; hhmm: string; label: string; quando: string }> {
+  const elenco: Array<{ epoch: number; nome: string; hhmm: string; label: string; quando: string }> = [];
+  const adesso = Date.now();
+  const oggi = oraRoma();
+  for (let g = 0; g <= 9 && elenco.length < max; g++) {
+    const data = testoRoma(oraRoma(new Date(adesso + g * 86_400_000))).slice(0, 10);
+    for (const s of sveglieDelGiorno(data)) {
+      if (s.ts <= adesso) continue;
+      const etichetta =
+        data === oggi.data
+          ? `oggi alle ${s.hhmm}`
+          : g === 1
+            ? `domani alle ${s.hhmm}`
+            : (() => {
+                const f = new Intl.DateTimeFormat("it-IT", {
+                  timeZone: "Europe/Rome",
+                  weekday: "short",
+                  day: "numeric",
+                  month: "short",
+                }).format(new Date(s.ts));
+                return `${f} · ${s.hhmm}`;
+              })();
+      elenco.push({ epoch: s.ts, nome: s.nome, hhmm: s.hhmm, label: etichetta, quando: `${data} ${s.hhmm}` });
+      if (elenco.length >= max) break;
+    }
+  }
+  return elenco;
+}
+
+const esc = (t: unknown): string =>
+  String(t ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 export async function paginaStato(): Promise<string> {
-  const { baton, righe, lock } = await leggiVerita();
+  const { baton, grezzi, lock, righe } = await leggiVerita();
   const adesso = oraRoma();
+  const adessoEpoch = Date.now();
 
-  const esc = (t: string): string =>
-    String(t ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const rigaE = (label: string, valore: string): string =>
-    `<tr><td>${esc(label)}</td><td>${esc(valore)}</td></tr>`;
-  const vuoto = "—";
+  const num = (x: number, dec = 2): string =>
+    x.toLocaleString("it-IT", { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
-  const stato = [
-    rigaE("Adesso", `${adesso.data} ${adesso.hhmm} (ora di Roma)`),
-    rigaE("Lucchetto", lock ? "presente: sveglia in corso o interrotta" : "nessuno"),
-    rigaE("Ultimo testimone", baton ? `${baton.quando} · ${baton.sveglia} · ${baton.runId}` : vuoto),
-    rigaE("Conto", baton ? `${baton.conto.toFixed(2).replace(".", ",")} $` : vuoto),
-    rigaE("Ultima decisione (Perché)", baton?.piano ?? vuoto),
-    rigaE("Prossima mossa", baton?.perLaProssima ?? vuoto),
-    rigaE(
-      "Ultimi ordini",
-      (baton?.ordini ?? []).map((e) => `${e.lato} ${e.qty} ${e.simbolo}: ${e.esito}`).join("; ") || "nessuno",
-    ),
-    rigaE(
-      "Ultimi rifiuti",
-      (baton?.rifiutati ?? []).map((r) => `${r.simbolo}: ${r.motivo}`).join("; ") || "nessuno",
-    ),
-  ].join("\n");
+  const conto = baton?.conto ?? 0;
+  const baseGiorno = baton?.equityGiorno ?? conto;
+  const deltaGiorno = conto - baseGiorno;
+  const deltaPerc = baseGiorno > 0 ? (deltaGiorno / baseGiorno) * 100 : 0;
 
-  const sveglie = SVEGLIE.map((s) => `<li>${s.hhmm} · ${s.nome}</li>`).join("\n");
+  // la serie per il grafico: witness in fila, con il valore SPY dell'istante (proxy dell'S&P)
+  const serieBuffere = grezzi
+    .filter((t) => Number.isFinite(t.epoch) && t.epoch > 0)
+    .map((t) => ({
+      t: t.epoch,
+      v: t.conto,
+      spy: typeof t.quotazioni?.SPY === "number" ? (t.quotazioni.SPY as number) : null,
+      quando: t.quando,
+      runId: t.runId,
+      sveglia: t.sveglia,
+      ordiniN: (t.ordini ?? []).length,
+    }));
+
+  // vs S&P 500: differenza dei rendimenti del giorno, in punti sul conto
+  const giorno = baton?.quando?.slice(0, 10) ?? "";
+  const delGiornoConSpy = serieBuffere.filter((s) => s.quando.startsWith(giorno) && s.spy && s.spy > 0);
+  const spyAdesso = baton?.quotazioni?.SPY ?? delGiornoConSpy.at(-1)?.spy ?? null;
+  const spyBase = delGiornoConSpy[0]?.spy ?? null;
+  let vs = null as number | null;
+  let spyPerc = null as number | null;
+  if (spyAdesso && spyBase && baseGiorno > 0) {
+    spyPerc = ((spyAdesso - spyBase) / spyBase) * 100;
+    vs = ((deltaPerc - spyPerc) * baseGiorno) / 100;
+  }
+
+  // le posizioni dell'ultimo testimone (dalla sveglia in poi esistono nel baton)
+  const posizioni = baton?.posizioni ?? [];
+  const valoreFigli = posizioni.reduce((s, p) => s + p.prezzo * p.qty, 0);
+  const investito = conto > 0 ? (valoreFigli / conto) * 100 : 0;
+
+  // gli ordini contati su tutta la storia
+  const ordiniTotale = grezzi.reduce((s, t) => s + (t.ordini ?? []).length, 0);
+  const sveglieConOrdini = grezzi.filter((t) => (t.ordini ?? []).length > 0).length;
+
+  // ministilografato della giornata per la schedina «Oggi»
+  const delGiorno = serieBuffere.filter((s) => s.quando.startsWith(giorno));
+  const mini = (() => {
+    if (delGiorno.length < 2) return "";
+    const w = 120;
+    const h = 34;
+    const vmin = Math.min(...delGiorno.map((s) => s.v));
+    const vmax = Math.max(...delGiorno.map((s) => s.v));
+    const span = vmax - vmin || 1;
+    const punti = delGiorno.map((s, i) => {
+      const x = (i / (delGiorno.length - 1)) * w;
+      const y = h - 3 - ((s.v - vmin) / span) * (h - 8);
+      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+    });
+    return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+      <path d="${punti.join(" ")}" fill="none" stroke="#34d985" stroke-width="2" stroke-linejoin="round"/>
+    </svg>`;
+  })();
+
+  // le prossime sveglie, con il passo prima (per l'anello del conto)
+  const pross = prossime(9);
+  const crono = (() => {
+    // la sveglia subito prima di adesso: si cerca nell'elenco dei giorni passati recenti
+    for (let g = 0; g >= -4; g--) {
+      const data = testoRoma(oraRoma(new Date(adessoEpoch + g * 86_400_000))).slice(0, 10);
+      const elenco = sveglieDelGiorno(data).filter((s) => s.ts <= adessoEpoch);
+      if (elenco.length) return { prev: elenco.at(-1)!.ts, next: pross[0]?.epoch ?? adessoEpoch };
+    }
+    return { prev: adessoEpoch, next: adessoEpoch };
+  })();
+
+  const DATI = {
+    adesso: adessoEpoch,
+    adessoData: `${adesso.data} ${adesso.hhmm}`,
+    lock,
+    conto,
+    baseGiorno,
+    giorno,
+    serie: serieBuffere,
+    possun: posizioni,
+    quotazioni: baton?.quotazioni ?? {},
+    universo: UNIVERSO,
+    pross: pross,
+    crono,
+    sveglie: SVEGLIE,
+    // vs S&P: la differenza dei rendimenti e i due rendimenti separati
+    vs,
+    percConto: deltaPerc,
+    percSpy: spyPerc,
+    // i pallini dei passi: le quattro sveglie di OGGI con l'epoch vero di Roma
+    mezzanotte: epochDi({ data: adesso.data, hhmm: "00:00" }),
+    oggiPassi: sveglieDelGiorno(adesso.data).map((s) => ({ hhmm: s.hhmm, epoch: s.ts })),
+  };
+  // il JSON va dentro un <script>: la sua barra di chiusura va fermata
+  const datiJson = JSON.stringify(DATI).replace(/<\//g, "<\\/");
+
+  // ---- le tabelle statiche di ottemperanza che non dimentichiamo mai ----
   const storia = righe
+    .slice(-20)
+    .reverse()
     .map(
       (h) =>
-        `<tr><td>${esc(h.runId)}</td><td>${esc(h.sveglia)}</td><td>${esc(h.ordini)}</td><td>${esc(h.piano)}</td><td>${esc(h.prossimaMossa)}</td></tr>`,
+        `<tr><td>${esc(h.runId)}</td><td>${esc(h.sveglia)}</td><td>${esc(h.ordini)}</td><td>${esc(
+          h.piano.length > 160 ? `${h.piano.slice(0, 160)}…` : h.piano,
+        )}</td></tr>`,
     )
     .join("\n");
 
+  const rifiuti = (baton?.rifiutati ?? []).map((r) => `<span class="chip cattivo">${esc(r.simbolo)}</span>`).join(" ");
+  const ordiniBaton = (baton?.ordini ?? [])
+    .map((e) => `<span class="chip">${esc(`${e.lato} ${e.qty} ${e.simbolo} · ${e.esito}`)}</span>`)
+    .join(" ");
+
   return `<!doctype html>
 <html lang="it">
-<head><meta charset="utf-8"><title>Tarantola · stato</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarantola · la cruscotto</title>
 <style>
-body { font-family: system-ui, sans-serif; margin: 2rem; color:#222; max-width: 1100px; }
-h1 { font-size: 1.4rem } h2 { font-size: 1.1rem; margin-top: 2rem }
-table { border-collapse: collapse; width: 100%; }
-td { border: 1px solid #ddd; padding: 6px 10px; vertical-align: top; }
-td:first-child { white-space: nowrap; font-weight: 600; }
-small { color:#777 }
-</style></head>
+  :root {
+    --sfondo:#0a0a0e; --carta:#14141a; --carta2:#191921; --bordo:rgba(255,255,255,.07);
+    --testo:#f2f2f5; --grigio:#8a8a96; --grigio2:#5b5b66;
+    --rosa:#ff2e88; --verde:#34d985; --rosso:#ff5c5c;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--sfondo); color:var(--testo); font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+         padding:18px; font-feature-settings:"tnum"; }
+  .cruscotto { max-width:980px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+  .carta { background:var(--carta); border:1px solid var(--bordo); border-radius:22px; padding:20px 22px; }
+  .carta2 { background:var(--carta2); border:1px solid var(--bordo); border-radius:16px; padding:14px 16px; }
+  .etichetta { color:var(--grigio); font-size:13px; letter-spacing:.02em; display:flex; align-items:center; gap:6px; }
+  .grande { font-size:64px; font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+  .grande .dec { color:var(--grigio); font-size:.55em; font-weight:600; }
+  .sopra { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .badge { display:inline-flex; gap:8px; align-items:center; background:rgba(52,217,133,.12); color:var(--verde);
+           border-radius:999px; padding:5px 12px; font-size:13px; font-weight:600; }
+  .badge.rosso { background:rgba(255,92,92,.12); color:var(--rosso); }
+  .quando-vista { color:var(--grigio); font-size:13px; }
+  .pillole { display:flex; gap:6px; background:#0e0e13; border:1px solid var(--bordo); border-radius:999px; padding:4px; }
+  .pillole button { all:unset; cursor:pointer; color:var(--grigio); font-size:13px; font-weight:600;
+                    padding:5px 14px; border-radius:999px; }
+  .pillole button.attiva { background:var(--rosa); color:#fff; }
+  #grafico { width:100%; height:330px; position:relative; cursor:crosshair; }
+  #grafico svg { display:block; }
+  .passatempo { position:absolute; pointer-events:none; background:#08080b; border:1px solid var(--bordo);
+                border-radius:10px; padding:8px 12px; font-size:12.5px; line-height:1.5; display:none; z-index:5;
+                white-space:nowrap; }
+  .passatempo .n { font-weight:700; font-size:14px; }
+  .legenda { display:flex; gap:18px; color:var(--grigio); font-size:12.5px; margin-top:4px; }
+  .legenda i { display:inline-block; width:18px; height:2px; vertical-align:middle; margin-right:6px; border-radius:2px; }
+  .riquadri { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .riquadri .carta2 { display:flex; flex-direction:column; gap:8px; }
+  .rumore { font-size:32px; font-weight:800; letter-spacing:-.01em; }
+  .rumore buono { color:var(--verde); } .rumore cattivo { color:var(--rosso); }
+  .piccolo { font-size:12px; color:var(--grigio); }
+  .griglia-due { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  h3 { font-size:14px; font-weight:700; display:flex; align-items:center; gap:8px; }
+  h3 .dir { margin-left:auto; color:var(--grigio); font-size:13px; font-weight:600; }
+  .posizione { display:flex; gap:18px; align-items:flex-start; margin-top:14px; }
+  .elenco-posizioni { flex:1; display:flex; flex-direction:column; gap:10px; }
+  .posizione-riga { display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center; }
+  .ticker { width:34px; height:34px; border-radius:50%; background:#0e0e13; border:1px solid var(--bordo);
+            display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:700; }
+  .riscontro { height:4px; border-radius:4px; background:#0e0e13; margin-top:5px; overflow:hidden; }
+  .riscontro i { display:block; height:100%; background:var(--rosa); border-radius:4px; }
+  .destra { text-align:right; }
+  .valore-destra { font-weight:700; font-size:15px; }
+  .pnl { font-size:12.5px; font-weight:600; }
+  .pnl.buono { color:var(--verde); } .pnl.cattivo { color:var(--rosso); }
+  .anello-vuoto { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .info-finanza { color:var(--grigio); font-size:11px; display:flex; align-items:center; gap:4px; justify-content:center; }
+  .crono-grande { font-size:44px; font-weight:800; letter-spacing:.01em; line-height:1.1; }
+  .crono-rossore { color:var(--grigio); font-size:13px; margin-top:2px; }
+  .passi { position:relative; height:6px; border-radius:3px; background:#0e0e13; margin:14px 6px 26px; }
+  .passi .ombra { position:absolute; top:0; height:100%; background:#1d1d26; border-radius:3px; }
+  .passi i { position:absolute; top:-4px; width:14px; height:14px; border-radius:50%; background:#26262e;
+             border:3px solid var(--carta2); transform:translateX(-50%); }
+  .passi i.preceduto { background:#3a3a44; }
+  .passi i.corrente { background:var(--rosa); box-shadow:0 0 0 3px rgba(255,46,136,.25); }
+  .passi i.mercato-ok { background:var(--verde); }
+  .lista-passi { display:flex; flex-direction:column; }
+  .passo { display:grid; grid-template-columns:52px 1fr auto; gap:10px; padding:9px 0;
+           border-top:1px solid var(--bordo); align-items:baseline; }
+  .passo:first-child { border-top:none; }
+  .passo .orenya { font-weight:700; font-size:14.5px; }
+  .passo .nome { font-size:13.5px; color:var(--testo); }
+  .passo .di-su { font-size:12px; color:var(--grigio); }
+  .passo .fra { font-size:12.5px; color:var(--grigio); font-variant-numeric:tabular-nums; }
+  .decisone-titolo { display:flex; align-items:center; gap:8px; }
+  .chip { display:inline-flex; align-items:center; background:#0e0e13; border:1px solid var(--bordo);
+          border-radius:999px; padding:4px 10px; font-size:12px; color:var(--testo); }
+  .chip.cattivo { color:var(--rosso); border-color:rgba(255,92,92,.3); }
+  .chip.meraviglioso { color:var(--verde); border-color:rgba(52,217,133,.3); }
+  .piano { margin-top:12px; font-size:14.5px; line-height:1.65; color:var(--testo); }
+  .mossa { margin-top:10px; font-size:13.5px; line-height:1.6; color:var(--grigio); }
+  .allarme { margin-top:10px; font-size:12.5px; color:var(--rosso); }
+  table.storia { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.storia td { border:1px solid var(--bordo); padding:6px 10px; vertical-align:top; }
+  table.storia td:first-child { white-space:nowrap; color:var(--grigio); }
+  .avviso { color:var(--grigio2); font-size:11px; margin-top:2px; }
+  @media (max-width:900px) {
+    .grande { font-size:42px; }
+    .riquadri { grid-template-columns:repeat(2,1fr); }
+    .griglia-due { grid-template-columns:1fr; }
+    #grafico { height:260px; }
+  }
+</style>
+</head>
 <body>
-<h1>Tarantola · paper trading a orari fissi</h1>
-<p><small>Pagina di stato, in sola lettura. Soldi finti, prezzi veri.</small></p>
-<h2>Ora</h2>
-<table>${stato}</table>
-<h2>Sveglie (ora di Roma, borsa USA 15:30–22:00)</h2>
-<ol>${sveglie}</ol>
-<h2>Storico</h2>
-<table>${storia}</table>
+<div class="cruscotto">
+
+  <section class="carta">
+    <div class="sopra">
+      <div>
+        <div class="etichetta">Valore del conto</div>
+        <div class="grande" style="margin-top:10px" id="valoreConto"></div>
+        <div style="margin-top:12px; display:flex; align-items:center; gap:10px" id="rigaDelta"></div>
+      </div>
+      <div class="pillole" id="pillole">
+        <button data-p="1g" class="attiva">1G</button><button data-p="1s">1S</button><button data-p="1m">1M</button><button data-p="tt">Tutto</button>
+      </div>
+    </div>
+    <div id="grafico" class="carta2" style="padding:8px 10px 4px; margin-top:16px"></div>
+    <div class="legenda">
+      <span><i style="background:var(--rosa)"></i>Conto</span>
+      <span><i style="background:#9a9aa5"></i>S&amp;P 500 (SPY)</span>
+      <span><i style="background:transparent;width:10px;height:10px;border:2px solid var(--rosa);border-radius:50%"></i>Sveglia</span>
+    </div>
+  </section>
+
+  <section class="riquadri">
+    <div class="carta2">
+      <div class="etichetta">☀ Oggi</div>
+      <div><span class="rumore" id="oggiDelta"></span></div>
+      <div class="piccolo" id="oggiPerc"></div>
+      <div id="miniOggi">${mini}</div>
+    </div>
+    <div class="carta2">
+      <div class="etichetta" id="etSp">↗ vs S&amp;P 500</div>
+      <div><span class="rumore" id="vsValue"></span></div>
+      <div id="vsBarre"></div>
+    </div>
+    <div class="carta2">
+      <div class="etichetta">◐ Investito</div>
+      <div class="rumore">${conto > 0 ? investito.toFixed(0) + "%" : "n.d."}</div>
+      <div class="riscontro"><i style="width:${Math.min(100, investito).toFixed(1)}%"></i></div>
+      <div class="piccolo">${posizioni.length ? posizioni.map((p) => esc(p.simbolo)).join(" · ") : "tutto in liquidità"}</div>
+      <div class="info-finanza">◎ ${num(valoreFigli)} $</div>
+    </div>
+    <div class="carta2">
+      <div class="etichetta">▤ Ordini eseguiti</div>
+      <div class="rumore">${ordiniTotale}</div>
+      <div class="piccolo">${sveglieConOrdini ? `in ${sveglieConOrdini} sveglie` : "nessun ordine ancora"}</div>
+    </div>
+  </section>
+
+  <section class="griglia-due">
+    <div class="carta">
+      <h3><span style="color:var(--grigio)">◧</span> Posizioni <span class="dir" id="posizioniPnl"></span></h3>
+      <div class="posizione">
+        <div class="anello-vuoto">
+          <svg id="ciambella" width="150" height="150" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#0e0e13" stroke-width="13"/>
+          </svg>
+          <div>
+            <div style="font-size:26px;font-weight:800;text-align:center">${conto > 0 ? investito.toFixed(0) + "%" : "—"}</div>
+            <div class="piccolo" style="text-align:center">investito</div>
+          </div>
+        </div>
+        <div class="elenco-posizioni" id="elencoPosizioni"></div>
+      </div>
+    </div>
+    <div class="carta">
+      <h3><span style="color:var(--grigio)">◔</span> Prossime sveglie</h3>
+      <div style="display:flex;gap:18px;align-items:center;margin-top:10px">
+        <svg id="cronoAnello" width="64" height="64" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="#0e0e13" stroke-width="7"/>
+          <circle id="cronoArc" cx="32" cy="32" r="26" fill="none" stroke="#ff2e88" stroke-width="7"
+                  stroke-linecap="round" transform="rotate(-90 32 32)"/>
+        </svg>
+        <div>
+          <div class="crono-grande" id="cronoGrande">—</div>
+        </div>
+      </div>
+      <div class="crono-rossore" id="cronoNomi"></div>
+      <div class="passi" id="passi"></div>
+      <div class="lista-passi" id="listaPassi"></div>
+    </div>
+  </section>
+
+  <section class="griglia-due">
+    <div class="carta">
+      <div class="decisone-titolo">
+        <h3><span style="color:var(--grigio)">✦</span> Ultima decisione</h3>
+        <span class="dir" style="color:var(--grigio);font-size:12.5px">${baton ? esc(`${baton.sveglia} · ${baton.quando?.slice(11) ?? ""}`) : "—"}</span>
+      </div>
+      <div class="piano">${baton?.piano ? esc(baton.piano) : "nessun testimone: nessuna decisione"}</div>
+      <div class="mossa">→ <em>${baton?.perLaProssima ? esc(baton.perLaProssima) : "—"}</em></div>
+      ${rifiuti ? `<div class="allarme">Rifiutati dalla gabbia: ${rifiuti}</div>` : ""}
+      ${lock ? `<div class="allarme">Lucchetto presente: una sveglia è in corso o è stata interrotta.</div>` : ""}
+    </div>
+    <div class="carta">
+      <div class="decisone-titolo">
+        <h3><span style="color:var(--grigio)">▤</span> Ordini in sospeso</h3>
+      </div>
+      <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px" id="ordiniAperti">
+        ${ordiniBaton || '<span class="piccolo">Nessun ordine in sospeso: tutto in liquidità o in esecuzione.</span>'}
+      </div>
+    </div>
+  </section>
+
+  <section class="carta">
+    <h3><span style="color:var(--grigio)">≡</span> Storico delle sveglie</h3>
+    <table class="storia" style="margin-top:12px">${storia}</table>
+    <div class="avviso">Pagina generata ${esc(DATI.adessoData)} (ora di Roma) · soldi finti, prezzi veri · regole nel codice: 20% per titolo, −3% stop loss</div>
+  </section>
+
+</div>
+<script>
+"use strict";
+var DATI = ${datiJson};
+var fmtN = new Intl.NumberFormat("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+var fmtL = new Intl.NumberFormat("it-IT", { maximumFractionDigits: 0 });
+var PERIODI = { "1g": 24*3600*1000, "1s": 7*24*3600*1000, "1m": 30*24*3600*1000, "tt": 1e15 };
+var periodo = "1g";
+
+function grande(v) {
+  var s = fmtN.format(v);
+  var i = s.lastIndexOf(",");
+  return i < 0 ? s + ' <span class="dec">$</span>' :
+    s.slice(0, i) + '<span class="dec">' + s.slice(i) + ' $</span>';
+}
+function fra(dSec) {
+  var s = Math.max(0, Math.round(dSec));
+  var d = Math.floor(s / 86400); s -= d*86400;
+  var h = Math.floor(s / 3600); s -= h*3600;
+  var m = Math.floor(s / 60); s -= m*60;
+  var t = (h + (d ? d*24 : 0)) + "h " + m + "m";
+  if (!d && !m) t = s + "s";
+  return t + (d ? " (" + d + " g)" : "");
+}
+
+// ---- la testa e le schedine ----
+function stampaTesta() {
+  document.getElementById("valoreConto").innerHTML = grande(DATI.conto);
+  var d = DATI.conto - DATI.baseGiorno;
+  var p = DATI.baseGiorno ? (d / DATI.baseGiorno) * 100 : 0;
+  var buono = d >= 0;
+  document.getElementById("rigaDelta").innerHTML =
+    '<span class="badge' + (buono ? '' : ' rosso') + '">' + (buono ? "▲" : "▼") + " " +
+    (buono ? "+" : "−") + fmtN.format(Math.abs(d)) + " $" +
+    "&nbsp;<span style='opacity:.7'>" + (buono ? "+" : "−") + Math.abs(p).toFixed(2).replace(".", ",") + "%</span></span>" +
+    '<span class="quando-vista">' + DATI.adessoData + "</span>";
+  document.getElementById("oggiDelta").innerHTML =
+    '<span class="' + (buono ? 'buono' : 'cattivo') + '">' + (buono ? "+" : "−") + fmtN.format(Math.abs(d)) + " $" + "</span>";
+  document.getElementById("oggiPerc").textContent = (buono ? "+" : "−") + Math.abs(p).toFixed(2).replace(".", ",") + "%";
+  var vs = DATI.vs;
+  var elVs = document.getElementById("vsValue");
+  if (vs === null) {
+    elVs.innerHTML = '<span style="color:var(--grigio)">n.d.</span>';
+    document.getElementById("vsBarre").innerHTML = '<div class="piccolo">quotazioni SPY non disponibili nel baton</div>';
+  } else {
+    var brace = vs >= 0;
+    elVs.innerHTML = '<span class="' + (brace ? 'buono' : 'cattivo') + '">' + (brace ? "+" : "−") + fmtN.format(Math.abs(vs)) + " pt</span>";
+    var pc = DATI.percConto, ps = DATI.percSpy;
+    document.getElementById("vsBarre").innerHTML =
+      '<div class="piccolo" style="margin-top:4px">Conto <span style="float:right;color:var(--verde)">' + (pc >= 0 ? "+" : "−") + Math.abs(pc).toFixed(2).replace(".", ",") + '%</span></div>' +
+      '<div class="riscontro"><i style="width:' + Math.min(100, Math.abs(pc) * 8) + '%;background:var(--verde)"></i></div>' +
+      '<div class="piccolo">S&amp;P <span style="float:right;color:var(--verde)">' + (ps >= 0 ? "+" : "−") + Math.abs(ps).toFixed(2).replace(".", ",") + "%</span></div>" +
+      '<div class="riscontro"><i style="width:' + Math.min(100, Math.abs(ps) * 8) + '%;background:var(--verde)"></i></div>';
+  }
+}
+
+// ---- le posizioni ----
+function stampaPosizioni() {
+  var el = document.getElementById("elencoPosizioni");
+  var tot = 0, pnl = 0;
+  DATI.possun.forEach(function (p) { tot += p.prezzo * p.qty; pnl += (p.prezzo - p.prezzoCarico) * p.qty; });
+  document.getElementById("posizioniPnl").innerHTML = DATI.possun.length
+    ? '<span class="pnl ' + (pnl >= 0 ? 'buono' : 'cattivo') + '">' + (pnl >= 0 ? "+" : "−") + fmtN.format(Math.abs(pnl)) + " $</span>"
+    : "";
+  if (!DATI.possun.length) {
+    el.innerHTML = '<div class="piccolo" style="padding:14px 0">Nessuna posizione: tutto in liquidità.</div>';
+    return;
+  }
+  el.innerHTML = DATI.possun.map(function (p) {
+    var valore = p.prezzo * p.qty;
+    var peso = DATI.conto ? (valore / DATI.conto) * 100 : 0;
+    var guadagno = (p.prezzo - p.prezzoCarico) * p.qty;
+    var perc = p.prezzoCarico ? ((p.prezzo - p.prezzoCarico) / p.prezzoCarico) * 100 : 0;
+    var b = guadagno >= 0;
+    return '<div class="posizione-riga">' +
+      '<div class="ticker">' + p.simbolo.slice(0, 4) + "</div>" +
+      "<div><div class='orenya'>" + p.simbolo + "</div>" +
+      '<div class="piccolo">' + fmtL.format(peso) + "% · " + p.qty + " × " + fmtN.format(p.prezzoCarico) + "</div>" +
+      '<div class="riscontro"><i style="width:' + Math.min(100, (peso / 20) * 100).toFixed(1) + '%"></i></div></div>' +
+      '<div class="destra"><div class="valore-destra">' + fmtN.format(valore) + " $" + "</div>" +
+      '<div class="pnl ' + (b ? 'buono' : 'cattivo') + '">' + (b ? "+" : "−") + fmtN.format(Math.abs(guadagno)) + " $ · " +
+      (b ? "+" : "−") + Math.abs(perc).toFixed(2).replace(".", ",") + "%" + "</div></div></div>";
+  }).join("");
+  // la ciambella
+  var C = 2 * Math.PI * 48;
+  var parti = DATI.possun.map(function (p, i) {
+    var valore = p.prezzo * p.qty;
+    var fraz = tot ? valore / tot : 0;
+    var lunghezza = fraz * C;
+    var partenza = DATI.possun.slice(0, i).reduce(function (s, q) { return s + (q.prezzo * q.qty) / tot * C; }, 0);
+    var colori = ["#ff2e88", "#34d985", "#7aa2ff", "#ffb84d", "#b085ff", "#4dd7d0"];
+    return '<circle cx="60" cy="60" r="48" fill="none" stroke="' + colori[i % colori.length] +
+      '" stroke-width="13" stroke-dasharray="' + lunghezza.toFixed(2) + " " + (C - lunghezza).toFixed(2) +
+      '" stroke-dashoffset="' + (-partenza).toFixed(2) + '" transform="rotate(-90 60 60)" stroke-linecap="butt"/>';
+  }).join("");
+  document.getElementById("ciambella").innerHTML =
+    '<circle cx="60" cy="60" r="48" fill="none" stroke="#0e0e13" stroke-width="13"/>' + parti;
+}
+
+// ---- il grafico ----
+var punti = [];
+function disegnaGrafico() {
+  var host = document.getElementById("grafico");
+  var W = host.clientWidth || 900, H = 330;
+  var PA = 16, PAX2 = 64, PTO = 14, PFO = 30;
+  var iw = W - PA - PAX2, ih = H - PTO - PFO;
+  var da = DATI.adesso - PERIODI[periodo];
+  var serie = DATI.serie.filter(function (s) { return s.t >= da; });
+  if (!serie.length) serie = DATI.serie.slice(-1);
+
+  var conSpy = serie.filter(function (s) { return s.spy && s.spy > 0; });
+  var baseC = serie.length ? serie[0].v : DATI.conto;
+  var baseSv = conSpy.length ? conSpy[0].spy : 0;
+  // le due serie: il conto è sé stesso; l'S&P/SPY si scala sulla testa del conto
+  var tuttiV = serie.map(function (s) { return s.v; });
+  conSpy.forEach(function (s) { tuttiV.push(baseC * (s.spy / baseSv)); });
+  if (!tuttiV.length) tuttiV = [baseC, baseC * 1.001];
+  var vmin = Math.min.apply(null, tuttiV), vmax = Math.max.apply(null, tuttiV);
+  var pad = ((vmax - vmin) * 0.08) || Math.max(1, Math.abs(vmin) * 0.0005);
+  vmin -= pad; vmax += pad;
+  var x = function (t) {
+    if (serie.length < 2) return PA + iw / 2;
+    return PA + ((t - serie[0].t) / (serie[serie.length - 1].t - serie[0].t)) * iw;
+  };
+  var y = function (v) { return PTO + ih - ((v - vmin) / (vmax - vmin)) * ih; };
+
+  var svg = ['<svg width="' + W + '" height="' + H + '">'];
+  // le linee di fondo e la scala a destra
+  var RIGHE = 4;
+  for (var r = 0; r <= RIGHE; r++) {
+    var v = vmin + ((vmax - vmin) * r) / RIGHE;
+    var yy = y(v).toFixed(1);
+    svg.push('<line x1="' + PA + '" y1="' + yy + '" x2="' + (W - PAX2) + '" y2="' + yy + '" stroke="rgba(255,255,255,.05)"/>');
+    svg.push('<text x="' + (W - PAX2 + 10) + '" y="' + (+yy + 4) + '" fill="#8a8a96" font-size="11">' + fmtL.format(v) + "</text>");
+  }
+  // il tempo sotto
+  if (serie.length > 1) {
+    [0, 0.33, 0.66, 1].forEach(function (f) {
+      var t = serie[0].t + f * (serie[serie.length - 1].t - serie[0].t);
+      var testo = new Date(t).toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Rome" });
+      svg.push('<text x="' + x(t).toFixed(0) + '" y="' + (H - 8) + '" fill="#5b5b66" font-size="11" text-anchor="' +
+        (f === 0 ? "start" : f === 1 ? "end" : "end") + '">' + testo + "</text>");
+    });
+  }
+  // S&P 500 puntinato (SPY scalato sulla testa del conto)
+  if (conSpy.length && baseSv) {
+    var lineS = conSpy.map(function (s, i) {
+      return (i ? "L" : "M") + x(s.t).toFixed(1) + "," + y(baseC * (s.spy / baseSv)).toFixed(1);
+    }).join(" ");
+    svg.push('<path d="' + lineS + '" fill="none" stroke="#9a9aa5" stroke-width="1.6" stroke-dasharray="5 5" opacity=".85"/>');
+  }
+  // il conto, con l'area al disotto
+  if (serie.length) {
+    var lineaC = serie.map(function (s, i) { return (i ? "L" : "M") + x(s.t).toFixed(1) + "," + y(s.v).toFixed(1); }).join(" ");
+    var areaC = lineaC + " L" + x(serie[serie.length - 1].t).toFixed(1) + "," + (PTO + ih) +
+      " L" + x(serie[0].t).toFixed(1) + "," + (PTO + ih) + " Z";
+    svg.push('<path d="' + areaC + '" fill="rgba(255,46,136,.15)"/>');
+    svg.push('<path d="' + lineaC + '" fill="none" stroke="#ff2e88" stroke-width="2.2" stroke-linejoin="round"/>');
+  }
+  // i pallini delle sveglie
+  serie.forEach(function (s) {
+    svg.push('<circle cx="' + x(s.t).toFixed(1) + '" cy="' + y(s.v).toFixed(1) + '" r="6" fill="#14141a" stroke="#ff2e88" stroke-width="2"/>');
+  });
+  svg.push("</svg>");
+  svg.push('<div class="passatempo" id="passatempo"></div>');
+  host.innerHTML = svg.join("");
+
+  // l'elenco dei punti per il passatempo
+  punti = serie.map(function (s) {
+    return { t: s.t, xv: x(s.t), v: s.v, spy: s.spy, quando: s.quando, sveglia: s.sveglia, runId: s.runId, ordiniN: s.ordiniN };
+  });
+}
+
+function attaccaPassatempo() {
+  var host = document.getElementById("grafico");
+  host.addEventListener("mousemove", function (e) {
+    if (!punti.length) return;
+    var vai = document.getElementById("passatempo");
+    var r = host.getBoundingClientRect();
+    var mx = e.clientX - r.left;
+    var migliore = punti[0], minD = 1e18;
+    punti.forEach(function (p) {
+      var d = Math.abs(p.xv - mx);
+      if (d < minD) { minD = d; migliore = p; }
+    });
+    vai.style.display = "block";
+    vai.style.left = Math.min(r.width - 180, Math.max(6, migliore.xv + 14)) + "px";
+    vai.style.top = "14px";
+    vai.innerHTML =
+      '<div class="n">' + fmtN.format(migliore.v) + " $" + "</div>" +
+      "<div>" + migliore.quando + " · " + migliore.sveglia + "</div>" +
+      (migliore.spy ? "<div>S&amp;P " + fmtN.format(migliore.spy) + " $" + "</div>" : "") +
+      (migliore.ordiniN ? "<div>" + migliore.ordiniN + " ordini</div>" : "");
+  });
+  host.addEventListener("mouseleave", function () {
+    var vai = document.getElementById("passatempo");
+    if (vai) vai.style.display = "none";
+  });
+}
+
+// ---- le prossime sveglie ----
+function giuPassi() {
+  var luogo = document.getElementById("passi");
+  // la barra 00→24 dell'ora di Roma: l'ombra è la borsa USA 15:30–22:00
+  var sito = function (t) { return ((t - DATI.mezzanotte) / 86400000) * 100; };
+  luogo.innerHTML =
+    '<span class="ombra" style="left:' + ((15.5 * 3600000) / 86400000) * 100 + '%;width:' + (((22 - 15.5) * 3600000) / 86400000) * 100 + '%"></span>';
+  var corrente = DATI.pross[0] ? DATI.pross[0].epoch : 0;
+  DATI.oggiPassi.forEach(function (s, i) {
+    var cls = "preceduto";
+    if (s.epoch === corrente) cls = "corrente";
+    else if (s.epoch >= 15.5 * 3600000 + DATI.mezzanotte && s.epoch < 22 * 3600000 + DATI.mezzanotte && s.epoch > Date.now()) cls = "mercato-ok";
+    luogo.insertAdjacentHTML("beforeend", '<i class="' + cls + '" style="left:' + sito(s.epoch).toFixed(1) + '%"></i>');
+  });
+}
+
+function stampalistoPassi() {
+  var luogo = document.getElementById("listaPassi");
+  luogo.innerHTML = DATI.pross.slice(0, 6).map(function (p) {
+    return '<div class="passo"><div class="orenya">' + p.hhmm + "</div>" +
+      '<div><div class="nome">' + p.nome.charAt(0).toUpperCase() + p.nome.slice(1) + "</div>" +
+      '<div class="di-su">' + p.label + "</div></div>" +
+      '<div class="fra" data-e="' + p.epoch + '"></div></div>';
+  }).join("");
+}
+function rondaCron() {
+  var FE = DATI.pross[0];
+  if (!FE) { document.getElementById("cronoGrande").textContent = "—"; return; }
+  var rimane = (FE.epoch - Date.now()) / 1000;
+  var s = Math.max(0, Math.round(rimane));
+  var h = Math.floor(s / 3600); s -= h * 3600;
+  var m = Math.floor(s / 60); s -= m * 60;
+  document.getElementById("cronoGrande").textContent =
+    (h > 24 ? Math.floor(h / 24) + " g " : "") + Std(h) + ":" + Std(m) + ":" + Std(s);
+  document.getElementById("cronoNomi").textContent = FE.nome.charAt(0).toUpperCase() + FE.nome.slice(1) + " · " + FE.label;
+  var C = 2 * Math.PI * 26;
+  var span = FE.epoch - DATI.crono.prev;
+  var camp = Math.min(1, Math.max(0, 1 - (FE.epoch - Date.now()) / Math.max(1, span)));
+  document.getElementById("cronoArc").setAttribute("stroke-dasharray", (C * camp).toFixed(2) + " " + C.toFixed(2));
+  document.querySelectorAll(".fra").forEach(function (n) {
+    var e = parseFloat(n.getAttribute("data-e"));
+    n.textContent = "tra " + fra((e - Date.now()) / 1000);
+  });
+}
+function Std(n) { return ("0" + n).slice(-2); }
+
+// ---- il regime ----
+document.querySelectorAll(".pillole button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll(".pillole button").forEach(function (x) { x.classList.remove("attiva"); });
+    b.classList.add("attiva");
+    periodo = b.getAttribute("data-p");
+    disegnaGrafico();
+  });
+});
+disegnaGrafico();
+stampaTesta();
+stampaPosizioni();
+giuPassi();
+stampalistoPassi();
+rondaCron();
+attaccaPassatempo();
+setInterval(rondaCron, 1000);
+window.addEventListener("resize", disegnaGrafico);
+</script>
 </body>
 </html>`;
 }
 
-/** L'istantanea che viene committata per GitHub Pages. */
+/** L'istantanea che viene committata nel repository a ogni sveglia. */
 export async function scriviIstantanea(): Promise<void> {
   if (!existsSync(DIR_STATE)) mkdirSync(DIR_STATE, { recursive: true });
   await Bun.write(`${DIR_STATE}/status.html`, await paginaStato());

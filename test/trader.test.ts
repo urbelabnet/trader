@@ -239,6 +239,10 @@ describe("il contratto sul serio", () => {
     const html = await paginaStato();
     expect(html).toContain(t.runId);
     expect(html).toContain("Il piano di prova dello Storico.");
+    // la pagina nuova: pannelli chiave e le posizioni/quotazioni del testimone
+    expect(html).toContain("Prossime sveglie");
+    expect(html).toContain("Storico delle sveglie");
+    expect(html).toContain("Investito");
   });
 
   test("9. modello di testa sopraffatto (503): il cervello scende alla riserva e decide", async () => {

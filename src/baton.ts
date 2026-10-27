@@ -27,6 +27,8 @@ export type Testimone = {
   perLaProssima: string; // cosa controllare alla sveglia dopo
   note: string; // allarmi e particolarità
   equityGiorno?: number; // equity alla prima sveglia della data
+  posizioni?: Array<{ simbolo: string; qty: number; prezzoCarico: number; prezzo: number; pnlPerc: number }>;
+  quotazioni?: Record<string, number>; // l'universo a quest'istante (per la pagina di stato)
 };
 
 export type OrdineRifiutatoTestone = { simbolo: string; motivo: string };
