@@ -1,0 +1,22 @@
+{
+  "runId": "2026-10-27-1830",
+  "sveglia": "meta",
+  "quando": "2026-10-27 18:30",
+  "epoch": 1793122200000,
+  "ordini": [],
+  "rifiutati": [
+    {
+      "simbolo": "SPY",
+      "motivo": "prezzo di mercato indisponibile"
+    },
+    {
+      "simbolo": "QQQ",
+      "motivo": "prezzo di mercato indisponibile"
+    }
+  ],
+  "conto": 100000,
+  "piano": "Il conto ha centomila dollari di liquidità e nessuna posizione aperta. Decido di entrare sul mercato acquistando due dei titoli consentiti, SPY e QQQ, per sfruttare l'andamento degli indici. Mantengo ogni singola posizione ben al di sotto del limite massimo del venti percento del capitale totale. Questa mossa mi permette di iniziare il trading con una esposizione prudente e bilanciata.",
+  "perLaProssima": "Verificare che gli ordini su SPY e QQQ siano stati eseguiti correttamente e controllare lo stato del portafoglio alla prossima sveglia.",
+  "note": "",
+  "equityGiorno": 100000
+}
