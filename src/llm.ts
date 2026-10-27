@@ -26,6 +26,8 @@ export type ContestoCervello = {
   conto: { equity: number; cash: number };
   posizioni: Array<{ simbolo: string; qty: number; prezzoCarico: number; prezzo: number; pnlPerc: number }>;
   ordiniRecenti: Array<{ simbolo: string; lato: string; qty: number; quando: string }>;
+  /** Quotazioni dell'universo in quest'istante: servono per dimensionare le quantità. */
+  quotazioni?: Record<string, number>;
   ultimoPiano: string | null; // il "Perché" della sveglia prima
   prossimaMossa: string | null; // il "Prossima mossa" della sveglia prima
   note: string; // allarmi, sveglie saltate, riconciliazioni
@@ -46,6 +48,8 @@ Non puoi usare strumenti e non vedi altro oltre il contesto che ti passa il prog
 Regole che non puoi violare (il programma le controlla comunque, ma non proporre ciò che verrebbe rifiutato):
 - solo titoli tra SPY QQQ IWM AAPL MSFT NVDA GLD TLT; azioni intere; niente short; niente leva
 - massimo 5 titoli contemporaneamente in portafoglio; massimo 20% del conto per titolo (posizione già aperta inclusa)
+- nel contesto trovi le quotazioni attuali dell'universo: per dimensionare una qty usa QUEI prezzi
+  (esempio: conto 100.000 $, tetto del 20% = 20.000 $; se SPY quota 600 $, il massimo sono 33 azioni).
 - a mercato chiuso o nel briefing nessun ordine: proponi solo il piano
 - una posizione venduta per stop non si riapre lo stesso giorno
 Scrivi in italiano semplice, come un trader che sa di non poter rileggere niente alla sveglia dopo.`;
@@ -57,6 +61,7 @@ function contestoInTesto(c: ContestoCervello): string {
       conto: c.conto,
       posizioni: c.posizioni,
       ordiniRecenti48h: c.ordiniRecenti,
+      quotazioniAttuali: c.quotazioni ?? {},
       svegliaPrecedente: { piano: c.ultimoPiano, prossimaMossa: c.prossimaMossa },
       avvisi: c.note,
     },

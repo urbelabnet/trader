@@ -6,11 +6,18 @@ export const BROKER_BASE = "https://paper-api.alpaca.markets";
 /** Dati di mercato Alpaca (prezzi reali via feed IEX). */
 export const DATA_BASE = "https://data.alpaca.markets";
 
-/** La guardia: l'endpoint deve rimanere quello del paper. Se qualcuno lo cambia, non parte. */
+/** La guardia: solo i due endpoint Alpaca ammessi (broker DEMO e feed dati).
+ *  Il trading DEVE restare su paper-api; qualunque altro endpoint (api.alpaca.markets vivo, o straniero)
+ *  non parte. È la protezione dei soldi veri. */
+const BASE_AMMESSE: ReadonlySet<string> = new Set([
+  "https://paper-api.alpaca.markets",
+  "https://data.alpaca.markets",
+]);
+
 export function garantisciPaper(base: string = BROKER_BASE): void {
-  if (base !== "https://paper-api.alpaca.markets") {
+  if (!BASE_AMMESSE.has(base)) {
     throw new Error(
-      `Rifiuto di partire: l'endpoint del broker non è quello del paper trading (${base}). Quella riga è l'unica che ti protegge.`,
+      `Rifiuto di partire: endpoint non ammesso (${base}). Il broker DEVE restare quello del paper trading (${BROKER_BASE}); l'unico altro ammesso è il feed dati di Alpaca (${DATA_BASE}). Quella riga è l'unica che ti protegge dai soldi veri.`,
     );
   }
 }

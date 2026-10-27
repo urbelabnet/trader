@@ -301,4 +301,66 @@ describe("il contratto sul serio", () => {
       delete process.env.GEMINI_API_KEY;
     }
   }, 20_000); // i ritenti con attesa reale: il tetto di default (5s) non basta
+
+  test("10. la guardia ammette paper-api e data.alpaca, rifiuta ogni altra base", () => {
+    expect(() => garantisciPaper()).not.toThrow();
+    expect(() => garantisciPaper("https://paper-api.alpaca.markets")).not.toThrow();
+    expect(() => garantisciPaper("https://data.alpaca.markets")).not.toThrow();
+    // il conto VIVO e qualunque altra base: buttate fuori, è la protezione dei soldi veri
+    expect(() => garantisciPaper("https://api.alpaca.markets")).toThrow(/Rifiuto di partire/);
+    expect(() => garantisciPaper("https://attaccante.example.com")).toThrow(/Rifiuto di partire/);
+  });
+
+  test("11. il cervello riceve le quotazioni nel contesto e può dimensionare gli ordini", async () => {
+    process.env.GEMINI_API_KEY = "chiave-di-prova";
+    let testoRicevuto = "";
+    const fetchOriginale = globalThis.fetch;
+    globalThis.fetch = (async (_url: unknown, init?: RequestInit) => {
+      const corpo = JSON.parse(String(init?.body));
+      testoRicevuto = corpo.contents[0].parts[0].text;
+      return new Response(
+        JSON.stringify({
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    text: JSON.stringify({
+                      orders: [],
+                      reasoning: "Tre frasi in italiano: vedo le quotazioni e il conto, aspetto.",
+                      planNext: "Domani controllo le quotazioni.",
+                    }),
+                  },
+                ],
+              },
+            },
+          ],
+        }),
+        { status: 200 },
+      );
+    }) as typeof fetch;
+    try {
+      const c = new GeminiCervello();
+      const r = await c.decide({
+        runId: "prova-quotazioni",
+        sveglia: "briefing",
+        quando: "2026-10-27 09:00",
+        mercatoAperto: false,
+        conto: { equity: 100_000, cash: 100_000 },
+        posizioni: [],
+        ordiniRecenti: [],
+        quotazioni: { SPY: 600, QQQ: 500 },
+        ultimoPiano: null,
+        prossimaMossa: null,
+        note: "",
+      });
+      expect(r.fatto).toBe(true);
+      expect(testoRicevuto).toContain("quotazioniAttuali");
+      expect(testoRicevuto).toContain('"SPY": 600');
+      expect(testoRicevuto).toContain('"QQQ": 500');
+    } finally {
+      globalThis.fetch = fetchOriginale;
+      delete process.env.GEMINI_API_KEY;
+    }
+  });
 });

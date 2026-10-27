@@ -1,7 +1,7 @@
 // Il giro di una sveglia, nell'ordine del contratto:
 // lock → testimone e sveglie saltate → broker → cervello → gabbia → ordini → testimone → Telegram.
 
-import { BROKER_BASE, garantisciPaper, SVEGLIE, type Sveglia } from "./config";
+import { BROKER_BASE, garantisciPaper, SVEGLIE, UNIVERSO, type Sveglia } from "./config";
 import { Alpaca, Broker, type OrdineBroker } from "./alpaca";
 import { BrokerFinto } from "./fakebroker";
 import type { Proposta } from "./cage";
@@ -296,6 +296,20 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
   // ▶ Primo messaggio: se il ✅ non arriva dopo, la sveglia è morta a metà, e lo capisci dal telefono.
   await telegram(`▶ Sveglia ${quando} · ${dovuta!.nome}\n· run ${runId}`);
 
+  // 3b. Le quotazioni dell'universo, PRIMA del cervello: senza prezzi l'ebbe non può sapere
+  //     quanto costa un titolo (e la gabbia rifiuterebbe ogni acquisto).
+  const quotazioni: Record<string, number> = {};
+  for (const s of UNIVERSO) {
+    try {
+      quotazioni[s] = await broker.prezzo(s);
+    } catch (e) {
+      // Non silenzioso: la causa finisce nel diario, dove si può leggere quando va male.
+      diario.scrivi("prezzi", `${s}: prezzo non disponibile (${(e as Error).message})`);
+    }
+  }
+  const haPrezzi = Object.keys(quotazioni).length;
+  diario.scrivi("prezzi", `${haPrezzi}/${UNIVERSO.length} quotazioni universe pronte`);
+
   // 4. Il cervello.
   const cervello = mod.cervelloMorto ? new CervelloMorto() : scegliCervello(mod.fake);
   const stessoGiorno = ultimo && ultimo.quando.startsWith(ora.data);
@@ -319,6 +333,7 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
       qty: o.qty,
       quando: o.creatoIl.slice(0, 16).replace("T", " "),
     })),
+    quotazioni,
     ultimoPiano: ultimo?.piano ?? null,
     prossimaMossa: ultimo?.perLaProssima ?? null,
     note: allarmi.join(" || "),
@@ -341,16 +356,7 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
     proposte = [];
     diario.scrivi("gabbia", dovuta!.nome === "briefing" ? "briefing: nessun ordine possibile" : "mercato chiuso");
   }
-  const simboli = [...proposte.map((p) => p.simbolo), ...posizioni.map((p) => p.simbolo)];
-  const prezzi: Record<string, number> = {};
-  for (const s of [...new Set(simboli)]) {
-    try {
-      prezzi[s] = await broker.prezzo(s);
-    } catch {
-      // senza prezzo la gabbia rifiuta l'acquisto, con il motivo giusto
-    }
-  }
-  const inGabbia = attraversa(proposte, posizioni, conto.equity, prezzi);
+  const inGabbia = attraversa(proposte, posizioni, conto.equity, quotazioni);
   for (const r of inGabbia.rifiutati) {
     diario.scrivi("gabbia", `rifiuto ${r.simbolo} ${r.lato} ${r.qty}: ${r.motivo}`);
   }

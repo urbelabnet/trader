@@ -37,7 +37,7 @@ Ogni messaggio Telegram porta `run AAAA-MM-GG-HHMM` (lo stesso id del file di lo
 ## I comandi
 
 ```bash
-bun test                        # 20 test: gabbia, i sei guasti avversari e la pagina di stato (broker e cervello finti)
+bun test                        # 23 test: gabbia, i sei guasti avversari e la pagina di stato (broker e cervello finti)
 bun run once --fake             # la sveglia dovuta, con broker e cervello finti (senza rete)
 bun run once --fake --slot 15:40 # una sveglia precisa, in modalità prova
 bun run once --slot 15:40 --force  # la sveglia vera (Alpaca paper + Telegram + cervello vero)
@@ -84,7 +84,7 @@ Se la cambi, il programma si rifiuta di partire — e se la sblocca qualcuno, qu
 - I test girano con **broker e cervello finti**: l'Alpaca vero è stato toccato solo per l'interfaccia
   documentata dell'API REST v2. La prima sveglia con le chiavi vere è la prova vera.
 - Prezzi del broker finto: repertorio fisso. Il peso degli ordini su Alpaca vero usa l'ultimo trade
-  del feed IEX: su titoli molto líquidi è abbastanza, ma il riempimento reale può differire.
+  del feed IEX: su titoli molto liquidi è abbastanza, ma il riempimento reale può differire.
 - `bun run schedule` non recupera sveglie perse: le segnala, per progetto del contratto.
 - La pagina di stato è un'istantanea: non è un pannello in tempo reale.
 - Il cron di Actions a volte è in ritardo di minuti: la sveglia tarda (es. 21:55) gira lo stesso,
