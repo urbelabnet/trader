@@ -9,3 +9,4 @@ state/fakebroker.json
 node_modules/
 .DS_Store
 logs/avviso.log
+logs/
