@@ -42,7 +42,9 @@ bun run once --fake             # la sveglia dovuta, con broker e cervello finti
 bun run once --fake --slot 15:40 # una sveglia precisa, in modalità prova
 bun run once --slot 15:40 --force  # la sveglia vera (Alpaca paper + Telegram + cervello vero)
 bun run schedule                # resta acceso: sveglie a orario, pagina di stato sulla porta 8787
-bun run status                  # testimone, lucchetto, conto
+bun run status                        # testimone, lucchetto, conto
+bun run cruscotto                     # la cruscotto in locale sulla porta 8789 (F5 = fotografia nuova)
+cruscotto.bat                         # la cruscotto con un doppio clic (avvia, poi apre il browser)
 bun run reconcile               # cosa è successo alla sveglia interrotta
 ```
 
@@ -106,8 +108,8 @@ src/llm.ts          il cervello: adattatore Gemini, schema JSON fisso, cervello 
 src/notify.ts       Telegram: ▶, ✅, ⚠; se non risponde si prosegue
 src/baton.ts        testimone, lucchetto, sveglie saltate
 src/wake.ts         il giro di una sveglia, nell'ordine del contratto
-src/statuspage.ts   la pagina di stato (8787 in locale, GitHub Pages in CI)
-src/cli.ts          once / schedule / status / reconcile
+src/statuspage.ts   la pagina di stato e la cruscotto (8787/8789 in locale, file su GitHub)
+src/cli.ts          once / schedule / status / cruscotto / reconcile
 test/trader.test.ts i sette test del contratto
 test/rompilo.test.ts i sei guasti avversari, con un kill vero incluso
 .github/workflows/trader.yml  le sveglie di GitHub Actions, lo stato, la pagina

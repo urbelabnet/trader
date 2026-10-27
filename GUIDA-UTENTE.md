@@ -143,6 +143,10 @@ git push -u origin master
 **5.** La pagina di stato NON usa GitHub Pages: sui repository privati serve un piano a pagamento.
 Lo stato di Tarantola resta comunque aggiornato nel repository: apri il file `state/status.html`
 e premi il pulsante **Raw** (dentro GitHub, dopo il login) per vederlo nel browser.
+In locale c'è di meglio: con un **doppio clic su `cruscotto.bat`** la cruscotto del conto
+(valore, grafico vs S&P 500, posizioni, prossime sveglie col conteggio) si apre nel browser
+alla porta 8789. Senza il .bat funziona uguale: `bun run cruscotto` nel terminale.
+Un F5 ricarica la fotografia più recente. Non viene toccato il broker: la cruscotto è solo lettura.
 
 **Verifica:** *Actions* è tutto verde sui run, e il file `state/status.html` mostra l'ultimo
 testimone col suo «Perché». Il cron è tarato per stare sotto i 2.000 minuti/mese del piano

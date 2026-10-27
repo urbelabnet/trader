@@ -8,6 +8,7 @@
     "once": "bun run src/cli.ts once",
     "schedule": "bun run src/cli.ts schedule",
     "status": "bun run src/cli.ts status",
+    "cruscotto": "bun run src/cli.ts cruscotto",
     "reconcile": "bun run src/cli.ts reconcile",
     "demo:1": "bun run src/cli.ts once --fake --slot 15:40",
     "test": "bun test"

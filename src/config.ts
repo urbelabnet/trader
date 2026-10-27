@@ -55,3 +55,5 @@ export const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-lite-lates
 
 /** Porta della pagina di stato quando gira in locale con `bun run schedule`. */
 export const PORTA_STATO = 8787;
+/** Porta della cruscotto in locale con `bun run cruscotto` (o doppio clic su cruscotto.bat). */
+export const PORTA_CRUSCOTTO = 8789;

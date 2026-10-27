@@ -3,7 +3,7 @@
 
 import { alzaSveglia, riconcilia } from "./wake";
 import type { Modalita } from "./wake";
-import { PORTA_STATO, garantisciPaper, BROKER_BASE } from "./config";
+import { PORTA_STATO, PORTA_CRUSCOTTO, garantisciPaper, BROKER_BASE } from "./config";
 import { leggiLock } from "./baton";
 import { leggiVerita, paginaStato, scriviIstantanea } from "./statuspage";
 import { Alpaca } from "./alpaca";
@@ -11,6 +11,7 @@ import { Alpaca } from "./alpaca";
 const uso = `Uso:
   bun run once [--fake] [--slot 15:40] [--force]     una sveglia (la dovuta, o quella scelta)
   bun run schedule [--fake]                          resta acceso: sveglie a orario, pagina di stato sulla porta ${PORTA_STATO}
+  bun run cruscotto                                  la cruscotto in locale sulla porta ${PORTA_CRUSCOTTO} (F5 = fotografia nuova)
   bun run status                                     testimone, lucchetto, conto
   bun run reconcile                                  cosa è successo alla sveglia interrotta
   bun test                                           i test (broker e cervello finti)`;
@@ -80,6 +81,21 @@ async function main(): Promise<number> {
       console.log(`[reconcile] sveglia interrotta: ${lock.sveglia} (${lock.runId})`);
       console.log(await riconcilia(broker, lock.runId));
       return 0;
+    }
+
+    case "cruscotto": {
+      // La cruscotto in locale: a ogni richiesta la pagina si rigenera dallo stato,
+      // quindi un ricaricare (F5) è una fotografia nuova. Nessun ordine, nulla che tocca il broker.
+      Bun.serve({
+        port: PORTA_CRUSCOTTO,
+        fetch: async () =>
+          new Response(await paginaStato(), {
+            headers: { "content-type": "text/html; charset=utf-8" },
+          }),
+      });
+      console.log(`[cruscotto] in ascolto sulla porta ${PORTA_CRUSCOTTO} · http://localhost:${PORTA_CRUSCOTTO}/`);
+      console.log(`[cruscotto] premi Ctrl+C per fermare`);
+      for (;;) await Bun.sleep(30_000);
     }
 
     default:
