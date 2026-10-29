@@ -250,7 +250,7 @@ describe("il contratto sul serio", () => {
     ];
     await scriviTestimone(t);
     const html2 = await paginaStato();
-    expect(html2).toContain("Operazioni (48 ore, verità del broker)");
+    expect(html2).toContain("Operazioni recenti (verità del broker)");
     expect(html2).toContain("SPY · 25 az.");
     expect(html2).toContain("a 771,50 $");
   });

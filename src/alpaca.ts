@@ -121,18 +121,17 @@ export class Alpaca implements Broker {
       BROKER_BASE,
       "/v2/orders?status=all&limit=100&direction=desc",
     )) as Array<Record<string, string>>;
-    const limite = new Date(Date.now() - 48 * 3600_000);
-    return raw
-      .filter((o) => new Date(o.created_at) >= limite)
-      .map((o) => ({
-        clientOrderId: o.client_order_id ?? "",
-        simbolo: o.symbol,
-        lato: o.side as "buy" | "sell",
-        qty: Number(o.qty),
-        stato: o.status,
-        creatoIl: o.created_at,
-        prezzoMed: o.filled_avg_price ? Number(o.filled_avg_price) : undefined,
-      }));
+    const dentro = raw.filter((o) => new Date(o.created_at) >= new Date(Date.now() - 48 * 3600_000));
+    const scelta = dentro.length > 0 ? dentro : raw.slice(0, 10);
+    return scelta.map((o) => ({
+      clientOrderId: o.client_order_id ?? "",
+      simbolo: o.symbol,
+      lato: o.side as "buy" | "sell",
+      qty: Number(o.qty),
+      stato: o.status,
+      creatoIl: o.created_at,
+      prezzoMed: o.filled_avg_price ? Number(o.filled_avg_price) : undefined,
+    }));
   }
 
   async orologio(): Promise<Orologio> {

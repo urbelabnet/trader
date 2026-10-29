@@ -447,7 +447,7 @@ export async function paginaStato(vivo?: Vivo): Promise<string> {
     </div>
     <div class="carta">
       <div class="decisone-titolo">
-        <h3><span style="color:var(--grigio)">⇄</span> Operazioni (48 ore, verità del broker)</h3>
+        <h3><span style="color:var(--grigio)">⇄</span> Operazioni recenti (verità del broker)</h3>
       </div>
       <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px">${operazioni}</div>
       <div class="avviso" style="margin-top:10px">Ordini di questa sveglia: ${ordiniBaton || "nessuno"}</div>
