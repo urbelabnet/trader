@@ -1,12 +1,11 @@
 # La sveglia di GitHub Actions: non c'è `bun run schedule`, c'è il cron.
 # Il codice dentro `bun run once` fa la domanda: "qual è la sveglia dovuta di oggi,
 # più recente dell'ultimo testimone?" Se c'è, la lancia; se no, esce in un minuto.
-# Lo stato vive nel repository: testimone e log si committano a ogni sveglia.
+# Lo stato vive nel repository: il testimone si commette a ogni sveglia.
 #
-# Repo PRIVATO: i minuti Actions sono quotati (2.000/mese sul piano gratis), quindi
-# il cron controlla solo attorno alle 4 sveglie vere invece che ogni 10 minuti tutto il giorno.
-# ~11 controlli al giorno nei feriali, ~6 nel weekend: circa 290 run/mese, ben sotto quota.
-# Il ritardo massimo da orario dovuto a sveglia effettiva resta ~5–15 minuti (vedi i commenti UTC).
+# Il repo è PUBBLICO: Pages e minuti Actions gratuiti senza soffocamento.
+# Ogni sveglia ha due fuochi di controlli (ora legale e ora solare, ±jitter di coda)
+# così una sveglia mancata non aspetta mai il pomeriggio.
 
 name: sveglia
 
@@ -30,7 +29,9 @@ concurrency:
   cancel-in-progress: false # una sveglia alla volta, sempre in fila, mai in parallelo
 
 permissions:
-  contents: write # per committare lo stato
+  contents: write   # per committare lo stato
+  pages: write      # per pubblicare la cruscotto su Pages
+  id-token: write   # autenticazione richiesta dal deploy Pages
 
 jobs:
   sveglia:
@@ -83,6 +84,30 @@ jobs:
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="⚠ La sveglia ha girato ma il suo stato NON è arrivato nel repository: la cruscotto è ferma finché non passa il nostro passo (vedi Actions). Riscontro e ordini al broker restano buoni." || true
 
-# La «pagina di stato» su GitHub Pages richiede un piano a pagamento sui repository privati.
-# La pagina resta comunque generata e committata in state/status.html: si apre dal
-# pulsante «Raw» del file, da GitHub, dopo il login.
+  # La cruscotto su Pages: a ogni sveglia che cambia lo stato la pagina viene ripubblicata.
+  # Pubblico = Pages gratis e minuti Actions illimitati: la cruscotto è sempre raggiungibile
+  # da smartphone, senza login, all'indirizzo https://urbelabnet.github.io/trader/status.html
+  cruscotto:
+    needs: sveglia
+    # pubblica se lo stato è cambiato, oppure sempre quando la sveglia è partita a mano
+    # (workflow_dispatch): serve anche solo per ripubblicare il presente.
+    if: needs.sveglia.outputs.cambiate == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pubblica.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # l'SHA del run è quello PRIMA delle commmessa di stato del job sveglia:
+          # prendo la punta corrente del ramo, con il testimone di ora.
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: state
+
+      - id: pubblica
+        uses: actions/deploy-pages@v4
