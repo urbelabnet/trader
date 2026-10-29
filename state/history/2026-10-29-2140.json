@@ -1,0 +1,57 @@
+{
+  "runId": "2026-10-29-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-10-29 21:40",
+  "epoch": 1793306400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 99501.99,
+  "piano": "Il mercato è attualmente chiuso e la sessione odierna si è conclusa con lievi ribassi sulle nostre posizioni aperte in SPY e QQQ. Questa fluttuazione rientra nella normale volatilità giornaliera e non richiede alcuna azione correttiva d'urgenza. La liquidità disponibile è adeguata e la gestione del rischio complessiva rimane sotto stretto controllo. Trattandosi della chiusura serale, non possiamo inserire ordini operativi.",
+  "perLaProssima": "Verificare l'apertura dei mercati nella prossima sessione per valutare la tenuta dei supporti su SPY e QQQ e controllare l'andamento generale dell'equity.",
+  "note": "",
+  "equityGiorno": 99742.49,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 25,
+      "prezzoCarico": 720.76,
+      "prezzo": 705.48,
+      "pnlPerc": -0.021199844608468802
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 764.62,
+      "pnlPerc": -0.006031770792709859
+    }
+  ],
+  "quotazioni": {
+    "SPY": 765.26,
+    "QQQ": 707.35,
+    "IWM": 284.01,
+    "AAPL": 349.94,
+    "MSFT": 530.39,
+    "NVDA": 210.9,
+    "GLD": 368.6,
+    "TLT": 81.48
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
