@@ -103,6 +103,9 @@ jobs:
           # prendo la punta corrente del ramo, con il testimone di ora.
           ref: ${{ github.ref_name }}
 
+      - name: copia la cruscotto come indice del sito
+        run: cp state/status.html state/index.html
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v4
