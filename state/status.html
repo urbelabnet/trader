@@ -101,7 +101,7 @@
     <div class="sopra">
       <div>
         <div class="etichetta">Valore del conto</div>
-        <div class="grande" style="margin-top:10px" id="valoreConto"></div>
+        <div class="grande" style="margin-top:10px" id="valoreConto">99.742,49 <span class="dec">$</span></div>
         <div style="margin-top:12px; display:flex; align-items:center; gap:10px" id="rigaDelta"></div>
       </div>
       <div class="pillole" id="pillole">
@@ -121,9 +121,7 @@
       <div class="etichetta">☀ Oggi</div>
       <div><span class="rumore" id="oggiDelta"></span></div>
       <div class="piccolo" id="oggiPerc"></div>
-      <div id="miniOggi"><svg width="120" height="34" viewBox="0 0 120 34">
-      <path d="M0.0,31.0 L60.0,31.0 L120.0,31.0" fill="none" stroke="#34d985" stroke-width="2" stroke-linejoin="round"/>
-    </svg></div>
+      <div id="miniOggi"></div>
     </div>
     <div class="carta2">
       <div class="etichetta" id="etSp">↗ vs S&amp;P 500</div>
@@ -132,15 +130,15 @@
     </div>
     <div class="carta2">
       <div class="etichetta">◐ Investito</div>
-      <div class="rumore">0%</div>
-      <div class="riscontro"><i style="width:0.0%"></i></div>
-      <div class="piccolo">tutto in liquidità</div>
-      <div class="info-finanza">◎ 0,00 $</div>
+      <div class="rumore">37%</div>
+      <div class="riscontro"><i style="width:37.1%"></i></div>
+      <div class="piccolo">QQQ · SPY</div>
+      <div class="info-finanza">◎ 36.993,00 $</div>
     </div>
     <div class="carta2">
       <div class="etichetta">▤ Ordini eseguiti</div>
-      <div class="rumore">0</div>
-      <div class="piccolo">nessun ordine ancora</div>
+      <div class="rumore">2</div>
+      <div class="piccolo">riempiti nelle ultime 48 h</div>
     </div>
   </section>
 
@@ -153,7 +151,7 @@
             <circle cx="60" cy="60" r="48" fill="none" stroke="#0e0e13" stroke-width="13"/>
           </svg>
           <div>
-            <div style="font-size:26px;font-weight:800;text-align:center">0%</div>
+            <div style="font-size:26px;font-weight:800;text-align:center">37%</div>
             <div class="piccolo" style="text-align:center">investito</div>
           </div>
         </div>
@@ -184,24 +182,41 @@
         <h3><span style="color:var(--grigio)">✦</span> Ultima decisione</h3>
         <span class="dir" style="color:var(--grigio);font-size:12.5px">meta · 18:30</span>
       </div>
-      <div class="piano">Il conto ha centomila dollari di liquidità e nessuna posizione aperta. Decido di entrare sul mercato acquistando due dei titoli consentiti, SPY e QQQ, per sfruttare l'andamento degli indici. Mantengo ogni singola posizione ben al di sotto del limite massimo del venti percento del capitale totale. Questa mossa mi permette di iniziare il trading con una esposizione prudente e bilanciata.</div>
-      <div class="mossa">→ <em>Verificare che gli ordini su SPY e QQQ siano stati eseguiti correttamente e controllare lo stato del portafoglio alla prossima sveglia.</em></div>
-      <div class="allarme">Rifiutati dalla gabbia: <span class="chip cattivo">SPY</span> <span class="chip cattivo">QQQ</span></div>
+      <div class="piano">Osservo che il portafoglio detiene già due posizioni aperte su SPY e QQQ con un leggero calo percentuale iniziale ma del tutto normale. La liquidità residua è buona e le posizioni rientrano ampiamente nei limiti di rischio consentiti. In questa fase non è necessario effettuare ulteriori acquisti o vendite, preferisco mantenere la struttura attuale senza forzare l'operatività. Lascio quindi il portafoglio invariato per permettere ai titoli di sviluppare il movimento.</div>
+      <div class="mossa">→ <em>Monitorare l'andamento di SPY e QQQ alla prossima sveglia e verificare se ci sono segnali per incrementare o chiudere le posizioni.</em></div>
       
+      <div class="allarme">Lucchetto presente: una sveglia è in corso o è stata interrotta.</div>
     </div>
     <div class="carta">
       <div class="decisone-titolo">
-        <h3><span style="color:var(--grigio)">▤</span> Ordini in sospeso</h3>
+        <h3><span style="color:var(--grigio)">⇄</span> Operazioni recenti (verità del broker)</h3>
       </div>
-      <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px" id="ordiniAperti">
-        <span class="piccolo">Nessun ordine in sospeso: tutto in liquidità o in esecuzione.</span>
+      <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px"><div class="posizione-riga" style="grid-template-columns:34px 1fr auto">
+        <div class="ticker" style="color:var(--verde)">▲</div>
+        <div><div class="orenya">QQQ · 25 az.</div>
+          <div class="piccolo">2026-10-27 18:53</div></div>
+        <div class="destra">
+          <div class="pnl buono">filled</div>
+          <div class="piccolo">a 720,76 $</div>
+        </div>
       </div>
+<div class="posizione-riga" style="grid-template-columns:34px 1fr auto">
+        <div class="ticker" style="color:var(--verde)">▲</div>
+        <div><div class="orenya">SPY · 25 az.</div>
+          <div class="piccolo">2026-10-27 18:53</div></div>
+        <div class="destra">
+          <div class="pnl buono">filled</div>
+          <div class="piccolo">a 769,26 $</div>
+        </div>
+      </div></div>
+      <div class="avviso" style="margin-top:10px">Ordini di questa sveglia: nessuno</div>
     </div>
   </section>
 
   <section class="carta">
     <h3><span style="color:var(--grigio)">≡</span> Storico delle sveglie</h3>
-    <table class="storia" style="margin-top:12px"><tr><td>2026-10-27-1830</td><td>meta</td><td>nessuno</td><td>Il conto ha centomila dollari di liquidità e nessuna posizione aperta. Decido di entrare sul mercato acquistando due dei titoli consentiti, SPY e QQQ, per sfrut…</td></tr>
+    <table class="storia" style="margin-top:12px"><tr><td>2026-10-29-1830</td><td>meta</td><td>nessuno</td><td>Osservo che il portafoglio detiene già due posizioni aperte su SPY e QQQ con un leggero calo percentuale iniziale ma del tutto normale. La liquidità residua è b…</td></tr>
+<tr><td>2026-10-27-1830</td><td>meta</td><td>nessuno</td><td>Il conto ha centomila dollari di liquidità e nessuna posizione aperta. Decido di entrare sul mercato acquistando due dei titoli consentiti, SPY e QQQ, per sfrut…</td></tr>
 <tr><td>2026-10-27-1540</td><td>apertura</td><td>nessuno</td><td>Il mercato è finalmente aperto e la liquidità disponibile è interamente intatta a centomila dollari. Non avendo posizioni aperte, posso procedere con i primi du…</td></tr>
 <tr><td>2026-10-27-0900</td><td>briefing</td><td>nessuno</td><td>Il mercato risulta ancora chiuso in questo momento di briefing mattutino. Non posso inviare alcun ordine operativo finché le borse non apriranno ufficialmente. …</td></tr>
 <tr><td>2026-10-26-2140</td><td>chiusura</td><td>nessuno</td><td>Il mercato è attualmente chiuso, quindi non è possibile inviare ordini di compravendita in questo momento. Il portafoglio è interamente in liquidità e non ci so…</td></tr>
@@ -209,13 +224,13 @@
 <tr><td>2026-10-26-1540</td><td>apertura</td><td>nessuno</td><td>cervello non disponibile: gestito solo lo stop loss</td></tr>
 <tr><td>2026-10-26-0900</td><td>briefing</td><td>nessuno</td><td>cervello non disponibile: gestito solo lo stop loss</td></tr>
 <tr><td>2026-10-25-0900</td><td>briefing</td><td>nessuno</td><td>cervello non disponibile: gestito solo lo stop loss</td></tr></table>
-    <div class="avviso">Pagina generata 2026-10-27 20:10 (ora di Roma) · soldi finti, prezzi veri · regole nel codice: 20% per titolo, −3% stop loss</div>
+    <div class="avviso">Pagina generata 2026-10-29 19:04 (ora di Roma) · soldi finti, prezzi veri · regole nel codice: 20% per titolo, −3% stop loss</div>
   </section>
 
 </div>
 <script>
 "use strict";
-var DATI = {"adesso":1793128212083,"adessoData":"2026-10-27 20:10","lock":false,"conto":100000,"baseGiorno":100000,"giorno":"2026-10-27","serie":[{"t":1792915200000,"v":100000,"spy":null,"quando":"2026-10-25 09:00","runId":"2026-10-25-0900","sveglia":"briefing","ordiniN":0},{"t":1793001600000,"v":100000,"spy":null,"quando":"2026-10-26 09:00","runId":"2026-10-26-0900","sveglia":"briefing","ordiniN":0},{"t":1793025600000,"v":100000,"spy":null,"quando":"2026-10-26 15:40","runId":"2026-10-26-1540","sveglia":"apertura","ordiniN":0},{"t":1793035800000,"v":100000,"spy":null,"quando":"2026-10-26 18:30","runId":"2026-10-26-1830","sveglia":"meta","ordiniN":0},{"t":1793047200000,"v":100000,"spy":null,"quando":"2026-10-26 21:40","runId":"2026-10-26-2140","sveglia":"chiusura","ordiniN":0},{"t":1793088000000,"v":100000,"spy":null,"quando":"2026-10-27 09:00","runId":"2026-10-27-0900","sveglia":"briefing","ordiniN":0},{"t":1793112000000,"v":100000,"spy":null,"quando":"2026-10-27 15:40","runId":"2026-10-27-1540","sveglia":"apertura","ordiniN":0},{"t":1793122200000,"v":100000,"spy":null,"quando":"2026-10-27 18:30","runId":"2026-10-27-1830","sveglia":"meta","ordiniN":0}],"possun":[],"quotazioni":{},"universo":["SPY","QQQ","IWM","AAPL","MSFT","NVDA","GLD","TLT"],"pross":[{"epoch":1793133600000,"nome":"chiusura","hhmm":"21:40","label":"oggi alle 21:40","quando":"2026-10-27 21:40"},{"epoch":1793174400000,"nome":"briefing","hhmm":"09:00","label":"domani alle 09:00","quando":"2026-10-28 09:00"},{"epoch":1793198400000,"nome":"apertura","hhmm":"15:40","label":"domani alle 15:40","quando":"2026-10-28 15:40"},{"epoch":1793208600000,"nome":"meta","hhmm":"18:30","label":"domani alle 18:30","quando":"2026-10-28 18:30"},{"epoch":1793220000000,"nome":"chiusura","hhmm":"21:40","label":"domani alle 21:40","quando":"2026-10-28 21:40"},{"epoch":1793260800000,"nome":"briefing","hhmm":"09:00","label":"gio 29 ott · 09:00","quando":"2026-10-29 09:00"},{"epoch":1793284800000,"nome":"apertura","hhmm":"15:40","label":"gio 29 ott · 15:40","quando":"2026-10-29 15:40"},{"epoch":1793295000000,"nome":"meta","hhmm":"18:30","label":"gio 29 ott · 18:30","quando":"2026-10-29 18:30"},{"epoch":1793306400000,"nome":"chiusura","hhmm":"21:40","label":"gio 29 ott · 21:40","quando":"2026-10-29 21:40"}],"crono":{"prev":1793122200000,"next":1793133600000},"sveglie":[{"hhmm":"09:00","nome":"briefing"},{"hhmm":"15:40","nome":"apertura"},{"hhmm":"18:30","nome":"meta"},{"hhmm":"21:40","nome":"chiusura"}],"vs":null,"percConto":0,"percSpy":null,"mezzanotte":1793055600000,"oggiPassi":[{"hhmm":"09:00","epoch":1793088000000},{"hhmm":"15:40","epoch":1793112000000},{"hhmm":"18:30","epoch":1793122200000},{"hhmm":"21:40","epoch":1793133600000}]};
+var DATI = {"adesso":1793297087706,"adessoData":"2026-10-29 19:04","lock":true,"conto":99742.49,"baseGiorno":99742.49,"giorno":"2026-10-29","serie":[{"t":1792915200000,"v":100000,"spy":null,"quando":"2026-10-25 09:00","runId":"2026-10-25-0900","sveglia":"briefing","ordiniN":0},{"t":1793001600000,"v":100000,"spy":null,"quando":"2026-10-26 09:00","runId":"2026-10-26-0900","sveglia":"briefing","ordiniN":0},{"t":1793025600000,"v":100000,"spy":null,"quando":"2026-10-26 15:40","runId":"2026-10-26-1540","sveglia":"apertura","ordiniN":0},{"t":1793035800000,"v":100000,"spy":null,"quando":"2026-10-26 18:30","runId":"2026-10-26-1830","sveglia":"meta","ordiniN":0},{"t":1793047200000,"v":100000,"spy":null,"quando":"2026-10-26 21:40","runId":"2026-10-26-2140","sveglia":"chiusura","ordiniN":0},{"t":1793088000000,"v":100000,"spy":null,"quando":"2026-10-27 09:00","runId":"2026-10-27-0900","sveglia":"briefing","ordiniN":0},{"t":1793112000000,"v":100000,"spy":null,"quando":"2026-10-27 15:40","runId":"2026-10-27-1540","sveglia":"apertura","ordiniN":0},{"t":1793122200000,"v":100000,"spy":null,"quando":"2026-10-27 18:30","runId":"2026-10-27-1830","sveglia":"meta","ordiniN":0},{"t":1793295000000,"v":99742.49,"spy":767.08,"quando":"2026-10-29 18:30","runId":"2026-10-29-1830","sveglia":"meta","ordiniN":0}],"possun":[{"simbolo":"QQQ","qty":25,"prezzoCarico":720.76,"prezzo":712.67,"pnlPerc":-0.011224263277651412},{"simbolo":"SPY","qty":25,"prezzoCarico":769.26,"prezzo":767.05,"pnlPerc":-0.0028728908301485015}],"quotazioni":{"SPY":767.08,"QQQ":712.68,"IWM":283.35,"AAPL":349.75,"MSFT":526.625,"NVDA":212.75,"GLD":367.19,"TLT":81.325},"universo":["SPY","QQQ","IWM","AAPL","MSFT","NVDA","GLD","TLT"],"pross":[{"epoch":1793306400000,"nome":"chiusura","hhmm":"21:40","label":"oggi alle 21:40","quando":"2026-10-29 21:40"},{"epoch":1793347200000,"nome":"briefing","hhmm":"09:00","label":"domani alle 09:00","quando":"2026-10-30 09:00"},{"epoch":1793371200000,"nome":"apertura","hhmm":"15:40","label":"domani alle 15:40","quando":"2026-10-30 15:40"},{"epoch":1793381400000,"nome":"meta","hhmm":"18:30","label":"domani alle 18:30","quando":"2026-10-30 18:30"},{"epoch":1793392800000,"nome":"chiusura","hhmm":"21:40","label":"domani alle 21:40","quando":"2026-10-30 21:40"},{"epoch":1793433600000,"nome":"briefing","hhmm":"09:00","label":"sab 31 ott · 09:00","quando":"2026-10-31 09:00"},{"epoch":1793457600000,"nome":"apertura","hhmm":"15:40","label":"sab 31 ott · 15:40","quando":"2026-10-31 15:40"},{"epoch":1793467800000,"nome":"meta","hhmm":"18:30","label":"sab 31 ott · 18:30","quando":"2026-10-31 18:30"},{"epoch":1793479200000,"nome":"chiusura","hhmm":"21:40","label":"sab 31 ott · 21:40","quando":"2026-10-31 21:40"}],"crono":{"prev":1793295000000,"next":1793306400000},"sveglie":[{"hhmm":"09:00","nome":"briefing"},{"hhmm":"15:40","nome":"apertura"},{"hhmm":"18:30","nome":"meta"},{"hhmm":"21:40","nome":"chiusura"}],"vs":0,"percConto":0,"percSpy":0,"mezzanotte":1793228400000,"oggiPassi":[{"hhmm":"09:00","epoch":1793260800000},{"hhmm":"15:40","epoch":1793284800000},{"hhmm":"18:30","epoch":1793295000000},{"hhmm":"21:40","epoch":1793306400000}]};
 var fmtN = new Intl.NumberFormat("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 var fmtL = new Intl.NumberFormat("it-IT", { maximumFractionDigits: 0 });
 var PERIODI = { "1g": 24*3600*1000, "1s": 7*24*3600*1000, "1m": 30*24*3600*1000, "tt": 1e15 };
