@@ -37,7 +37,7 @@ Ogni messaggio Telegram porta `run AAAA-MM-GG-HHMM` (lo stesso id del file di lo
 ## I comandi
 
 ```bash
-bun test                        # 23 test: gabbia, i sei guasti avversari e la pagina di stato (broker e cervello finti)
+bun test                        # 24 test: gabbia, i sei guasti avversari e la pagina di stato (broker e cervello finti)
 bun run once --fake             # la sveglia dovuta, con broker e cervello finti (senza rete)
 bun run once --fake --slot 15:40 # una sveglia precisa, in modalità prova
 bun run once --slot 15:40 --force  # la sveglia vera (Alpaca paper + Telegram + cervello vero)

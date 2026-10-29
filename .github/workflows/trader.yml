@@ -12,17 +12,17 @@ name: sveglia
 
 on:
   schedule:
-    # Briefing delle 09:00 Roma: controlli ogni 10 minuti, 09:05–09:55 ora legale e ora solare,
-    # entrambe coperte dai controlli nell'ora 07 UTC (07:05–07:55 legale, 08:05–08:55 solare).
-    - cron: "5-55/10 7 * * *"
-    # Mercato 15:40 Roma: controlli alle 13:45 UTC (15:45 ora legale) e 14:45 UTC (15:45 ora solare).
-    - cron: "45 13,14 * * 1-5"
-    # Mercato 18:30 Roma: controllo alle 16:35 UTC (18:35 legale) e 17:45 UTC (18:45 solare).
-    - cron: "35 16 * * 1-5"
-    - cron: "45 17 * * 1-5"
-    # Mercato 21:40 Roma: controlli alle 19:45 UTC (21:45 legale) e 20:45 UTC (21:45 solare),
-    # sempre dentro l'orario di Borsa (chiude alle 22:00 Roma).
-    - cron: "45 19,20 * * 1-5"
+    # Briefing delle 09:00 Roma: controlli nell'ora 07 UTC (09:05–09:55 ora legale)
+    # e nell'ora 08 UTC (09:05–09:55 ora solare): il cambio ora copre ambo i fuochi
+    # (i controlli dell'ora sbagliata semplicemente escono: «niente da fare»).
+    - cron: "5-55/10 7,8 * * *"
+    # Mercato 15:40 Roma: minuti 45 e 55 delle ore 13 e 14 UTC; il secondo fuoco
+    # tiene conto del ritardo/anticipo del cron di Actions (~10 minuti di gioco).
+    - cron: "45,55 13,14 * * 1-5"
+    # Mercato 18:30 Roma: stessi criteri (ore 16 e 17 UTC).
+    - cron: "45,55 16,17 * * 1-5"
+    # Mercato 21:40 Roma (borsa chiude alle 22:00: dentro i termini anche se il cron è in ritardo).
+    - cron: "45,55 19,20 * * 1-5"
   workflow_dispatch: {} # per farla partire a mano
 
 concurrency:
@@ -53,13 +53,16 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: bun run once
 
-      - name: persisti il testimone e i log nel repository
+      - name: persisti il testimone nel repository
         id: stato
         run: |
           git config user.name "tarantola"
           git config user.email "tarantola@users.noreply.github.com"
           git pull --rebase --autostash origin "$GITHUB_REF_NAME" || true
-          git add -A state logs
+          # Solo state/: i log di processo restano locali. Il `--` evita che un
+          # percorso assente faccia fallire il passo (difetto visto il 27/10: la
+          # sveglia girava ma lo stato non arrivava più nel repository).
+          git add -A -- state
           if git diff --cached --quiet || [ ! -f state/baton.json ]; then
             echo "cambiate=false" >> "$GITHUB_OUTPUT"
           else
@@ -67,6 +70,18 @@ jobs:
             git push
             echo "cambiate=true" >> "$GITHUB_OUTPUT"
           fi
+
+      # Il passo di sopra è rotto? La sveglia comunque parla: correggi il codice, non il test —
+      # ma l'utente deve SAPERLO, altrimenti lo stato resta fermo senza che nessuno lo veda.
+      - name: avvisa su Telegram se il passo di persistenza è caduto
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            -d text="⚠ La sveglia ha girato ma il suo stato NON è arrivato nel repository: la cruscotto è ferma finché non passa il nostro passo (vedi Actions). Riscontro e ordini al broker restano buoni." || true
 
 # La «pagina di stato» su GitHub Pages richiede un piano a pagamento sui repository privati.
 # La pagina resta comunque generata e committata in state/status.html: si apre dal

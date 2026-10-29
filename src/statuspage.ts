@@ -63,6 +63,21 @@ export async function leggiVerita(): Promise<Verita> {
   return { baton, righe, grezzi, lock };
 }
 
+/** La fotografia che la cruscotto LIVE chiede al broker ad ogni F5 (solo letture). */
+export type Vivo = {
+  conto?: number;
+  posizioni?: Array<{ simbolo: string; qty: number; prezzoCarico: number; prezzo: number; pnlPerc: number }>;
+  quotazioni?: Record<string, number>;
+  ordini48h?: Array<{
+    simbolo: string;
+    lato: "buy" | "sell";
+    qty: number;
+    stato: string;
+    creatoIl: string;
+    prezzoMed?: number;
+  }>;
+};
+
 /** Le prossime sveglie da adesso in poi (epoch inclusi). */
 function prossime(max: number): Array<{ epoch: number; nome: string; hhmm: string; label: string; quando: string }> {
   const elenco: Array<{ epoch: number; nome: string; hhmm: string; label: string; quando: string }> = [];
@@ -100,7 +115,7 @@ const esc = (t: unknown): string =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-export async function paginaStato(): Promise<string> {
+export async function paginaStato(vivo?: Vivo): Promise<string> {
   const { baton, grezzi, lock, righe } = await leggiVerita();
   const adesso = oraRoma();
   const adessoEpoch = Date.now();
@@ -108,10 +123,13 @@ export async function paginaStato(): Promise<string> {
   const num = (x: number, dec = 2): string =>
     x.toLocaleString("it-IT", { minimumFractionDigits: dec, maximumFractionDigits: dec });
 
-  const conto = baton?.conto ?? 0;
-  const baseGiorno = baton?.equityGiorno ?? conto;
+  const conto = vivo?.conto ?? baton?.conto ?? 0;
+  const baseGiorno = vivo?.conto ? (baton?.equityGiorno ?? vivo.conto) : (baton?.equityGiorno ?? conto ?? 0);
   const deltaGiorno = conto - baseGiorno;
   const deltaPerc = baseGiorno > 0 ? (deltaGiorno / baseGiorno) * 100 : 0;
+  const posizioni = vivo?.posizioni ?? baton?.posizioni ?? [];
+  const quotazioni = vivo?.quotazioni ?? baton?.quotazioni ?? {};
+  const ordini48h = vivo?.ordini48h ?? baton?.ordini48h ?? [];
 
   // la serie per il grafico: witness in fila, con il valore SPY dell'istante (proxy dell'S&P)
   const serieBuffere = grezzi
@@ -129,7 +147,7 @@ export async function paginaStato(): Promise<string> {
   // vs S&P 500: differenza dei rendimenti del giorno, in punti sul conto
   const giorno = baton?.quando?.slice(0, 10) ?? "";
   const delGiornoConSpy = serieBuffere.filter((s) => s.quando.startsWith(giorno) && s.spy && s.spy > 0);
-  const spyAdesso = baton?.quotazioni?.SPY ?? delGiornoConSpy.at(-1)?.spy ?? null;
+  const spyAdesso = quotazioni?.SPY ?? delGiornoConSpy.at(-1)?.spy ?? null;
   const spyBase = delGiornoConSpy[0]?.spy ?? null;
   let vs = null as number | null;
   let spyPerc = null as number | null;
@@ -139,13 +157,13 @@ export async function paginaStato(): Promise<string> {
   }
 
   // le posizioni dell'ultimo testimone (dalla sveglia in poi esistono nel baton)
-  const posizioni = baton?.posizioni ?? [];
   const valoreFigli = posizioni.reduce((s, p) => s + p.prezzo * p.qty, 0);
   const investito = conto > 0 ? (valoreFigli / conto) * 100 : 0;
 
   // gli ordini contati su tutta la storia
   const ordiniTotale = grezzi.reduce((s, t) => s + (t.ordini ?? []).length, 0);
   const sveglieConOrdini = grezzi.filter((t) => (t.ordini ?? []).length > 0).length;
+  const riempiti48 = ordini48h.filter((o) => o.stato === "filled").length;
 
   // ministilografato della giornata per la schedina «Oggi»
   const delGiorno = serieBuffere.filter((s) => s.quando.startsWith(giorno));
@@ -187,7 +205,7 @@ export async function paginaStato(): Promise<string> {
     giorno,
     serie: serieBuffere,
     possun: posizioni,
-    quotazioni: baton?.quotazioni ?? {},
+    quotazioni,
     universo: UNIVERSO,
     pross: pross,
     crono,
@@ -216,6 +234,24 @@ export async function paginaStato(): Promise<string> {
     .join("\n");
 
   const rifiuti = (baton?.rifiutati ?? []).map((r) => `<span class="chip cattivo">${esc(r.simbolo)}</span>`).join(" ");
+  // le operazioni vere: ordini48h del broker, le più nuove in cima; con l'esecuzione se noto
+  const ordiniVivi = vivo?.ordini48h ?? baton?.ordini48h ?? [];
+  const operazioni = [...ordiniVivi]
+    .sort((a, b) => b.creatoIl.localeCompare(a.creatoIl))
+    .map((o) => {
+      const statoBuono = o.stato === "filled";
+      const oraF = o.creatoIl.slice(0, 16).replace("T", " ");
+      return `<div class="posizione-riga" style="grid-template-columns:34px 1fr auto">
+        <div class="ticker" style="color:${o.lato === "buy" ? "var(--verde)" : "var(--rosso)"}">${o.lato === "buy" ? "▲" : "▼"}</div>
+        <div><div class="orenya">${esc(o.simbolo)} · ${o.qty} az.</div>
+          <div class="piccolo">${esc(oraF)}</div></div>
+        <div class="destra">
+          <div class="pnl ${statoBuono ? "buono" : ""}">${esc(o.stato)}</div>
+          ${o.prezzoMed ? `<div class="piccolo">a ${num(o.prezzoMed)} $</div>` : ""}
+        </div>
+      </div>`;
+    })
+    .join("\n") || '<div class="piccolo" style="padding:10px 0">Nessuna operazione nelle ultime 48 ore.</div>';
   const ordiniBaton = (baton?.ordini ?? [])
     .map((e) => `<span class="chip">${esc(`${e.lato} ${e.qty} ${e.simbolo} · ${e.esito}`)}</span>`)
     .join(" ");
@@ -323,7 +359,7 @@ export async function paginaStato(): Promise<string> {
     <div class="sopra">
       <div>
         <div class="etichetta">Valore del conto</div>
-        <div class="grande" style="margin-top:10px" id="valoreConto"></div>
+        <div class="grande" style="margin-top:10px" id="valoreConto">${num(conto)} <span class="dec">$</span></div>
         <div style="margin-top:12px; display:flex; align-items:center; gap:10px" id="rigaDelta"></div>
       </div>
       <div class="pillole" id="pillole">
@@ -359,8 +395,8 @@ export async function paginaStato(): Promise<string> {
     </div>
     <div class="carta2">
       <div class="etichetta">▤ Ordini eseguiti</div>
-      <div class="rumore">${ordiniTotale}</div>
-      <div class="piccolo">${sveglieConOrdini ? `in ${sveglieConOrdini} sveglie` : "nessun ordine ancora"}</div>
+      <div class="rumore">${riempiti48 > 0 ? riempiti48 : ordiniTotale}</div>
+      <div class="piccolo">${riempiti48 > 0 ? "riempiti nelle ultime 48 h" : sveglieConOrdini ? `in ${sveglieConOrdini} sveglie` : "nessun ordine ancora"}</div>
     </div>
   </section>
 
@@ -411,11 +447,10 @@ export async function paginaStato(): Promise<string> {
     </div>
     <div class="carta">
       <div class="decisone-titolo">
-        <h3><span style="color:var(--grigio)">▤</span> Ordini in sospeso</h3>
+        <h3><span style="color:var(--grigio)">⇄</span> Operazioni (48 ore, verità del broker)</h3>
       </div>
-      <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px" id="ordiniAperti">
-        ${ordiniBaton || '<span class="piccolo">Nessun ordine in sospeso: tutto in liquidità o in esecuzione.</span>'}
-      </div>
+      <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px">${operazioni}</div>
+      <div class="avviso" style="margin-top:10px">Ordini di questa sveglia: ${ordiniBaton || "nessuno"}</div>
     </div>
   </section>
 

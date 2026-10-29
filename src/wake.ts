@@ -390,6 +390,14 @@ export async function alzaSveglia(mod: Modalita, oraForzata?: Ora | null): Promi
     equityGiorno,
     posizioni: posizioniFoto,
     quotazioni,
+    ordini48h: ordini.map((o) => ({
+      simbolo: o.simbolo,
+      lato: o.lato,
+      qty: o.qty,
+      stato: o.stato,
+      creatoIl: o.creatoIl,
+      prezzoMed: o.prezzoMed,
+    })),
   };
   await scriviTestimone(testimone);
   // L'istantanea della pagina di stato: su GitHub Pages si aggiorna a ogni sveglia.

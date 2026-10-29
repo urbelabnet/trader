@@ -131,6 +131,7 @@ export class Alpaca implements Broker {
         qty: Number(o.qty),
         stato: o.status,
         creatoIl: o.created_at,
+        prezzoMed: o.filled_avg_price ? Number(o.filled_avg_price) : undefined,
       }));
   }
 

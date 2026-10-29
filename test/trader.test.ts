@@ -243,6 +243,21 @@ describe("il contratto sul serio", () => {
     expect(html).toContain("Prossime sveglie");
     expect(html).toContain("Storico delle sveglie");
     expect(html).toContain("Investito");
+
+    // le operazioni vere (48h dal broker) compaiono con prezzo se noto
+    t.ordini48h = [
+      { simbolo: "SPY", lato: "buy", qty: 25, stato: "filled", creatoIl: `${ora.data}T15:41:10Z`, prezzoMed: 771.5 },
+    ];
+    await scriviTestimone(t);
+    const html2 = await paginaStato();
+    expect(html2).toContain("Operazioni (48 ore, verità del broker)");
+    expect(html2).toContain("SPY · 25 az.");
+    expect(html2).toContain("a 771,50 $");
+  });
+
+  test("8b. la cruscotto LIVE mostra l'istantanea del broker sopra lo stato", async () => {
+    const html = await paginaStato({ conto: 123_456.78, quotazioni: { SPY: 600 } });
+    expect(html).toContain("123.456,78");
   });
 
   test("9. modello di testa sopraffatto (503): il cervello scende alla riserva e decide", async () => {

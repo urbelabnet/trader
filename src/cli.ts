@@ -3,7 +3,7 @@
 
 import { alzaSveglia, riconcilia } from "./wake";
 import type { Modalita } from "./wake";
-import { PORTA_STATO, PORTA_CRUSCOTTO, garantisciPaper, BROKER_BASE } from "./config";
+import { PORTA_STATO, PORTA_CRUSCOTTO, garantisciPaper, BROKER_BASE, UNIVERSO } from "./config";
 import { leggiLock } from "./baton";
 import { leggiVerita, paginaStato, scriviIstantanea } from "./statuspage";
 import { Alpaca } from "./alpaca";
@@ -84,17 +84,54 @@ async function main(): Promise<number> {
     }
 
     case "cruscotto": {
-      // La cruscotto in locale: a ogni richiesta la pagina si rigenera dallo stato,
-      // quindi un ricaricare (F5) è una fotografia nuova. Nessun ordine, nulla che tocca il broker.
+      // La cruscotto in locale: a ogni richiesta la foto è NUOVA, non solo dallo stato:
+      // conto, posizioni, ordini 48h e quotazioni arrivano dal broker (solo letture, mai ordini).
+      // Se il broker non risponde (o le chiavi mancano), si scende sullo stato committato.
+      const broker = new Alpaca();
       Bun.serve({
         port: PORTA_CRUSCOTTO,
-        fetch: async () =>
-          new Response(await paginaStato(), {
+        fetch: async () => {
+          let vivo;
+          try {
+            const [conto, posizioni, ordini] = await Promise.all([
+              broker.conto(),
+              broker.posizioni(),
+              broker.ordini48h(),
+            ]);
+            const quotazioni: Record<string, number> = {};
+            for (const s of UNIVERSO) {
+              try { quotazioni[s] = await broker.prezzo(s); } catch { // singolo titolo guasto: la pagina lo mostra
+              }
+            }
+            vivo = {
+              conto: conto.equity,
+              quotazioni,
+              posizioni: posizioni.map((p) => ({
+                simbolo: p.simbolo,
+                qty: p.qty,
+                prezzoCarico: p.prezzoCarico,
+                prezzo: p.prezzo,
+                pnlPerc: p.pnlPerc,
+              })),
+              ordini48h: ordini.map((o) => ({
+                simbolo: o.simbolo,
+                lato: o.lato,
+                qty: o.qty,
+                stato: o.stato,
+                creatoIl: o.creatoIl,
+                prezzoMed: o.prezzoMed,
+              })),
+            };
+          } catch (e) {
+            console.log(`[cruscotto] broker non raggiunto, uso lo stato committato: ${(e as Error).message}`);
+          }
+          return new Response(await paginaStato(vivo), {
             headers: { "content-type": "text/html; charset=utf-8" },
-          }),
+          });
+        },
       });
       console.log(`[cruscotto] in ascolto sulla porta ${PORTA_CRUSCOTTO} · http://localhost:${PORTA_CRUSCOTTO}/`);
-      console.log(`[cruscotto] premi Ctrl+C per fermare`);
+      console.log(`[cruscotto] F5 = fotografia fresca dal broker · premi Ctrl+C per fermare`);
       for (;;) await Bun.sleep(30_000);
     }
 

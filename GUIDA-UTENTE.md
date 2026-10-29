@@ -146,7 +146,9 @@ e premi il pulsante **Raw** (dentro GitHub, dopo il login) per vederlo nel brows
 In locale c'è di meglio: con un **doppio clic su `cruscotto.bat`** la cruscotto del conto
 (valore, grafico vs S&P 500, posizioni, prossime sveglie col conteggio) si apre nel browser
 alla porta 8789. Senza il .bat funziona uguale: `bun run cruscotto` nel terminale.
-Un F5 ricarica la fotografia più recente. Non viene toccato il broker: la cruscotto è solo lettura.
+Un F5 ricarica la fotografia più recente, e non solo dallo stato: a ogni richiesta il
+serverino rilegge conto, posizioni, ordini e quotazioni direttamente dal broker.
+La cruscotto resta solo lettura: nessun ordine parte da qui.
 
 **Verifica:** *Actions* è tutto verde sui run, e il file `state/status.html` mostra l'ultimo
 testimone col suo «Perché». Il cron è tarato per stare sotto i 2.000 minuti/mese del piano
@@ -159,7 +161,7 @@ o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina P
 
 ## ✔ Checklist finale
 
-- [ ] `bun test` → 23 pass, 0 fail
+- [ ] `bun test` → 24 pass, 0 fail
 - [ ] `bun run once --fake --slot 15:40` → gabbia, ordini, testimone su schermo
 - [ ] `bun run once --slot 15:40` → ▶ e ✅ sul telefono (anche a mercato chiuso)
 - [ ] Il file di testo delle chiavi non esiste più

@@ -29,6 +29,17 @@ export type Testimone = {
   equityGiorno?: number; // equity alla prima sveglia della data
   posizioni?: Array<{ simbolo: string; qty: number; prezzoCarico: number; prezzo: number; pnlPerc: number }>;
   quotazioni?: Record<string, number>; // l'universo a quest'istante (per la pagina di stato)
+  /** La verità del broker sugli ordini delle ultime 48 ore, con l'esecuzione se noto.
+   *  È la fotografia di cui la cruscotto può fidarsi anche se il testimone scritto
+   *  alla sveglia ha gap (difetto visto il 27/10: i primi acquisti mai nel baton). */
+  ordini48h?: Array<{
+    simbolo: string;
+    lato: "buy" | "sell";
+    qty: number;
+    stato: string;
+    creatoIl: string;
+    prezzoMed?: number;
+  }>;
 };
 
 export type OrdineRifiutatoTestone = { simbolo: string; motivo: string };
