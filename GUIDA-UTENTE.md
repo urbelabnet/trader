@@ -121,7 +121,9 @@ catena. Per un test con ordini veri (finti), riprova tra le 15:40 e le 21:30 di 
 
 ## ✋ PARTE 5 · GitHub Actions: le sveglie senza PC acceso (10 minuti)
 
-**1.** Crea un **repository vuoto** su https://github.com/new (anche privato va bene).
+**1.** Crea un **repository vuoto** su https://github.com/new — consiglio **pubblico**:
+Pages gratis e minuti Actions illimitati senza code, e la cruscotto è online sul telefono.
+Con il privato funziona tutto uguale, solo senza pagina web.
 Consiglio: chiamalo `tarantola`. Niente README (ce l'abbiamo già) e niente gitignore per ora.
 
 **2.** Nel terminale, dentro la cartella del progetto:
@@ -140,9 +142,11 @@ git push -u origin master
 - sul telefono arrivano ▶ e ✅;
 - nel repository appare il commit «stato sveglia …» col testimone.
 
-**5.** La pagina di stato NON usa GitHub Pages: sui repository privati serve un piano a pagamento.
-Lo stato di Tarantola resta comunque aggiornato nel repository: apri il file `state/status.html`
-e premi il pulsante **Raw** (dentro GitHub, dopo il login) per vederlo nel browser.
+**5.** La cruscotto vive su **GitHub Pages** (il repository è pubblico e Pages è gratis):
+apri **https://urbelabnet.github.io/trader/status.html** — dal telefono anche, senza
+login. La pagina viene ripubblicata a ogni sveglia che cambia lo stato; un dispatch
+manuale (*Run workflow*) la ripubblica comunque. Vuoi guardarla come file? È nel
+repository come `state/status.html`.
 In locale c'è di meglio: con un **doppio clic su `cruscotto.bat`** la cruscotto del conto
 (valore, grafico vs S&P 500, posizioni, prossime sveglie col conteggio) si apre nel browser
 alla porta 8789. Senza il .bat funziona uguale: `bun run cruscotto` nel terminale.
@@ -166,7 +170,7 @@ o chiavi del conto vero rimaste nell'ambiente: rigenera le chiavi dalla pagina P
 - [ ] `bun run once --slot 15:40` → ▶ e ✅ sul telefono (anche a mercato chiuso)
 - [ ] Il file di testo delle chiavi non esiste più
 - [ ] Su GitHub: run verde del workflow, commit «stato sveglia» nel repo
-- [ ] La pagina di stato (`state/status.html`) si apre dal pulsante Raw su GitHub
+- [ ] La cruscotto si apre su https://urbelabnet.github.io/trader/status.html
 - [ ] `secrets.ts` non è mai apparso in un commit (`git log --stat | findstr secrets`)
 
 E poi: `bun run schedule` resta acceso sul tuo PC se vuoi girare anche in locale

@@ -43,7 +43,8 @@ bun run once --fake --slot 15:40 # una sveglia precisa, in modalità prova
 bun run once --slot 15:40 --force  # la sveglia vera (Alpaca paper + Telegram + cervello vero)
 bun run schedule                # resta acceso: sveglie a orario, pagina di stato sulla porta 8787
 bun run status                        # testimone, lucchetto, conto
-bun run cruscotto                     # la cruscotto in locale sulla porta 8789 (F5 = fotografia nuova)
+bun run cruscotto                     # la cruscotto in locale, porta 8789 (F5 = lettura nuova dal broker)
+cruscotto online                      # https://urbelabnet.github.io/trader/status.html (GitHub Pages, anche dal telefono)
 cruscotto.bat                         # la cruscotto con un doppio clic (avvia, poi apre il browser)
 bun run reconcile               # cosa è successo alla sveglia interrotta
 ```
