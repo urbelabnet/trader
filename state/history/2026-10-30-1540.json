@@ -1,0 +1,64 @@
+{
+  "runId": "2026-10-30-1540",
+  "sveglia": "apertura",
+  "quando": "2026-10-30 15:40",
+  "epoch": 1793371200000,
+  "ordini": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "esito": "accettato"
+    }
+  ],
+  "rifiutati": [],
+  "conto": 99091.62,
+  "piano": "Osservo che le posizioni aperte su SPY e QQQ sono in leggero calo ma senza segnali di panico o violazione dei nostri limiti di rischio. La liquidità è ancora abbondante e non superiamo il tetto del 20% per singolo titolo in portafoglio. Decido di mantenere le posizioni attuali senza effettuare nuovi acquisti o vendite in questa fase di apertura. Preferisco attendere una maggiore stabilizzazione dei prezzi prima di impiegare ulteriore capitale.",
+  "perLaProssima": "Monitorare l'andamento intraday di SPY e QQQ per verificare se la pressione di vendita si esaurisce o se richiede interventi di gestione del rischio.",
+  "note": "",
+  "equityGiorno": 99378.74,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 25,
+      "prezzoCarico": 720.76,
+      "prezzo": 695.065,
+      "pnlPerc": -0.03564986958210769
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 758.62,
+      "pnlPerc": -0.013831474403972631
+    }
+  ],
+  "quotazioni": {
+    "SPY": 758.625,
+    "QQQ": 695.165,
+    "IWM": 279.71,
+    "AAPL": 348.17,
+    "MSFT": 522.12,
+    "NVDA": 206.355,
+    "GLD": 358.2,
+    "TLT": 81.505
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
