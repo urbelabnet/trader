@@ -1,29 +1,29 @@
 {
-  "runId": "2026-10-29-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-10-29 21:40",
-  "epoch": 1793306400000,
+  "runId": "2026-10-30-0900",
+  "sveglia": "briefing",
+  "quando": "2026-10-30 09:00",
+  "epoch": 1793347200000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 99501.99,
-  "piano": "Il mercato è attualmente chiuso e la sessione odierna si è conclusa con lievi ribassi sulle nostre posizioni aperte in SPY e QQQ. Questa fluttuazione rientra nella normale volatilità giornaliera e non richiede alcuna azione correttiva d'urgenza. La liquidità disponibile è adeguata e la gestione del rischio complessiva rimane sotto stretto controllo. Trattandosi della chiusura serale, non possiamo inserire ordini operativi.",
-  "perLaProssima": "Verificare l'apertura dei mercati nella prossima sessione per valutare la tenuta dei supporti su SPY e QQQ e controllare l'andamento generale dell'equity.",
+  "conto": 99378.74,
+  "piano": "Il mercato è attualmente chiuso e ci troviamo nel briefing mattutino, quindi non è possibile inserire ordini operativi. Le posizioni aperte in SPY e QQQ mostrano lievi perdite non realizzate che rientrano nella normale volatilità. La liquidità disponibile è ampia e rispettiamo ampiamente i limiti di concentrazione del portafoglio. Monitoriamo la situazione in attesa dell'apertura delle borse per valutare eventuali sviluppi.",
+  "perLaProssima": "Controllare l'apertura dei mercati nella prossima sveglia per verificare la reazione dei prezzi sui livelli attuali di SPY e QQQ e decidere se mantenere o adeguare la strategia.",
   "note": "",
-  "equityGiorno": 99742.49,
+  "equityGiorno": 99378.74,
   "posizioni": [
     {
       "simbolo": "QQQ",
       "qty": 25,
       "prezzoCarico": 720.76,
-      "prezzo": 705.48,
-      "pnlPerc": -0.021199844608468802
+      "prezzo": 701.66,
+      "pnlPerc": -0.02649980576058608
     },
     {
       "simbolo": "SPY",
       "qty": 25,
       "prezzoCarico": 769.26,
-      "prezzo": 764.62,
-      "pnlPerc": -0.006031770792709859
+      "prezzo": 763.51,
+      "pnlPerc": -0.00747471596079349
     }
   ],
   "quotazioni": {
