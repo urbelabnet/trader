@@ -1,13 +1,13 @@
 {
-  "runId": "2026-10-30-1830",
-  "sveglia": "meta",
-  "quando": "2026-10-30 18:30",
-  "epoch": 1793381400000,
+  "runId": "2026-10-30-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-10-30 21:40",
+  "epoch": 1793392800000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 98916.74,
-  "piano": "Osservo che la posizione su SPY è ancora in flessione negativa ma non ha raggiunto soglie di stop loss critiche. Il saldo di cassa rimane solido e la concentrazione di portafoglio rispetta ampiamente i limiti stabiliti. Poiché il mercato mostra una fase di consolidamento incerta, preferisco non aggiungere nuove esposizioni. Decido di mantenere la posizione attuale e monitorare l'evoluzione della seduta senza forzare operazioni.",
-  "perLaProssima": "Verificare la chiusura giornaliera di SPY e controllare se la pressione ribassista persiste anche nella prossima sessione.",
+  "conto": 99024.74,
+  "piano": "La borsa è attualmente chiusa e le regole vietano l'inserimento di ordini al di fuori dell'orario di contrattazione. Osservo che la posizione aperta su SPY registra una flessione non critica ma persistente. Mantengo l'esposizione esistente rispettando i limiti prudenziali di portafoglio. Alla prossima riapertura valuteremo eventuali azioni correttive.",
+  "perLaProssima": "Controllare l'apertura della prossima seduta di mercato per verificare la tenuta del supporto di SPY e valutare se mantenere o alleggerire la posizione.",
   "note": "",
   "equityGiorno": 99378.74,
   "posizioni": [
@@ -15,19 +15,19 @@
       "simbolo": "SPY",
       "qty": 25,
       "prezzoCarico": 769.26,
-      "prezzo": 751.65,
-      "pnlPerc": -0.022892130099056253
+      "prezzo": 755.97,
+      "pnlPerc": -0.017276343498946994
     }
   ],
   "quotazioni": {
-    "SPY": 751.69,
-    "QQQ": 684.98,
-    "IWM": 277.35,
-    "AAPL": 343.06,
-    "MSFT": 520.415,
-    "NVDA": 201.66,
-    "GLD": 355.43,
-    "TLT": 81.68
+    "SPY": 756,
+    "QQQ": 690.71,
+    "IWM": 279.75,
+    "AAPL": 344.89,
+    "MSFT": 521.85,
+    "NVDA": 204.74,
+    "GLD": 355.81,
+    "TLT": 81.63
   },
   "ordini48h": [
     {

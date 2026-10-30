@@ -1,0 +1,42 @@
+{
+  "runId": "2026-10-30-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-10-30 21:40",
+  "epoch": 1793392800000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 99024.74,
+  "piano": "La borsa è attualmente chiusa e le regole vietano l'inserimento di ordini al di fuori dell'orario di contrattazione. Osservo che la posizione aperta su SPY registra una flessione non critica ma persistente. Mantengo l'esposizione esistente rispettando i limiti prudenziali di portafoglio. Alla prossima riapertura valuteremo eventuali azioni correttive.",
+  "perLaProssima": "Controllare l'apertura della prossima seduta di mercato per verificare la tenuta del supporto di SPY e valutare se mantenere o alleggerire la posizione.",
+  "note": "",
+  "equityGiorno": 99378.74,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 755.97,
+      "pnlPerc": -0.017276343498946994
+    }
+  ],
+  "quotazioni": {
+    "SPY": 756,
+    "QQQ": 690.71,
+    "IWM": 279.75,
+    "AAPL": 344.89,
+    "MSFT": 521.85,
+    "NVDA": 204.74,
+    "GLD": 355.81,
+    "TLT": 81.63
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544442Z",
+      "prezzoMed": 695.04
+    }
+  ]
+}
