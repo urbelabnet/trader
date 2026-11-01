@@ -1,13 +1,13 @@
 {
-  "runId": "2026-10-31-0900",
+  "runId": "2026-11-01-0900",
   "sveglia": "briefing",
-  "quando": "2026-10-31 09:00",
-  "epoch": 1793433600000,
+  "quando": "2026-11-01 09:00",
+  "epoch": 1793520000000,
   "ordini": [],
   "rifiutati": [],
   "conto": 99018.12,
-  "piano": "La borsa è attualmente chiusa e le regole impongono di non inserire ordini durante il briefing mattutino. Vedo che il mercato è chiuso e la posizione su SPY mostra una performance negativa ma sotto controllo. Mantengo il portafoglio invariato senza compiere azioni. Alla prossima apertura valuterò l'andamento dei prezzi.",
-  "perLaProssima": "Controllare l'apertura del mercato per monitorare il comportamento di SPY e valutare se intervenire sulla posizione esistente.",
+  "piano": "La borsa è attualmente chiusa in quanto ci troviamo nel briefing mattutino delle nove. Le regole del conto demo impediscono tassativamente l'inserimento di ordini quando il mercato non è aperto. La posizione esistente su SPY rimane invariata e monitorata. Analizzerò i dati all'apertura ufficiale per decidere eventuali mosse.",
+  "perLaProssima": "Controllare l'apertura della borsa per valutare la tenuta di SPY e l'eventuale reazione degli altri titoli dell'universo.",
   "note": "",
   "equityGiorno": 99018.12,
   "posizioni": [
