@@ -1,22 +1,22 @@
 {
-  "runId": "2026-11-01-0900",
+  "runId": "2026-11-02-0900",
   "sveglia": "briefing",
-  "quando": "2026-11-01 09:00",
-  "epoch": 1793520000000,
+  "quando": "2026-11-02 09:00",
+  "epoch": 1793606400000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 99018.12,
-  "piano": "La borsa è attualmente chiusa in quanto ci troviamo nel briefing mattutino delle nove. Le regole del conto demo impediscono tassativamente l'inserimento di ordini quando il mercato non è aperto. La posizione esistente su SPY rimane invariata e monitorata. Analizzerò i dati all'apertura ufficiale per decidere eventuali mosse.",
+  "conto": 99091.12,
+  "piano": "La borsa è attualmente chiusa in quanto ci troviamo nel briefing mattutino delle nove. Le regole del conto demo impediscono tassativamente l'inserimento di ordini quando il mercato non è aperto. La posizione esistente su SPY rimane invariata e monitorata con attenzione. Analizzerò i dati all'apertura ufficiale per decidere eventuali mosse.",
   "perLaProssima": "Controllare l'apertura della borsa per valutare la tenuta di SPY e l'eventuale reazione degli altri titoli dell'universo.",
   "note": "",
-  "equityGiorno": 99018.12,
+  "equityGiorno": 99091.12,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 25,
       "prezzoCarico": 769.26,
-      "prezzo": 755.72,
-      "pnlPerc": -0.017601331149416276
+      "prezzo": 758.64,
+      "pnlPerc": -0.013805475391935112
     }
   ],
   "quotazioni": {
@@ -37,6 +37,22 @@
       "stato": "filled",
       "creatoIl": "2026-10-30T15:28:46.897544Z",
       "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
     }
   ]
 }
