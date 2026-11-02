@@ -1,0 +1,58 @@
+{
+  "runId": "2026-11-02-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-02 21:40",
+  "epoch": 1793652000000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98956.62,
+  "piano": "Il mercato è attualmente chiuso e la sessione è terminata, quindi non posso inserire alcun ordine. La mia posizione aperta su SPY registra una perdita non realizzata di circa il due percento, ma il controvalore rimane inferiore al limite del venti percento del conto. Non ci sono urgenze di gestione in questo momento di chiusura. Perciò attendo la riapertura dei mercati per rivalutare l'andamento.",
+  "perLaProssima": "Alla prossima apertura verificherò la tenuta del supporto di SPY e la direzione generale dei mercati.",
+  "note": "",
+  "equityGiorno": 99091.12,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 753.26,
+      "pnlPerc": -0.02079920963003406
+    }
+  ],
+  "quotazioni": {
+    "SPY": 753.02,
+    "QQQ": 681.22,
+    "IWM": 279.33,
+    "AAPL": 337.68,
+    "MSFT": 507.59,
+    "NVDA": 202.205,
+    "GLD": 361.595,
+    "TLT": 81.58
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
