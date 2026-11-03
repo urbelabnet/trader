@@ -1,0 +1,58 @@
+{
+  "runId": "2026-11-03-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-03 09:00",
+  "epoch": 1793692800000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98898.62,
+  "piano": "Siamo in fase di briefing con il mercato chiuso, per cui non è possibile inserire alcun ordine operativo in questo momento. Osservo la posizione aperta su SPY, che mostra una flessione temporanea ma si mantiene ampiamente entro i limiti di rischio del venti percento del portafoglio. La liquidità disponibile è buona e mi permette di mantenere il controllo del rischio complessivo senza forzare la mano. Attendo l'effettiva apertura delle contrattazioni per valutare il comportamento dei prezzi in tempo reale.",
+  "perLaProssima": "Verificare l'apertura dei mercati, controllare l'andamento di SPY rispetto ai livelli di chiusura ed eventualmente pianificare nuovi ingressi se la volatilità offre buone opportunità.",
+  "note": "",
+  "equityGiorno": 98898.62,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 750.94,
+      "pnlPerc": -0.023815095026388913
+    }
+  ],
+  "quotazioni": {
+    "SPY": 753.17,
+    "QQQ": 683.26,
+    "IWM": 279.33,
+    "AAPL": 338.95,
+    "MSFT": 507.59,
+    "NVDA": 202.205,
+    "GLD": 361.595,
+    "TLT": 81.6
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
