@@ -1,0 +1,58 @@
+{
+  "runId": "2026-11-03-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-03 15:40",
+  "epoch": 1793716800000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98974.37,
+  "piano": "Osservo che i mercati sono aperti e la nostra posizione su SPY registra una perdita non realizzata di circa il due percento. Il capitale investito su SPY rispetta i limiti di rischio previsti in quanto inferiore al venti percento del totale dell'equity. Abbiamo un'ottima liquidità disponibile ma preferisco non effettuare nuovi acquisti in questo momento di avvio di seduta per attendere maggiore stabilità. Decido di mantenere la posizione attuale e monitorare l'evoluzione della giornata.",
+  "perLaProssima": "Controllare se SPY recupera terreno o se la pressione di vendita aumenta, valutando eventuali livelli di stop loss o la possibilità di incrementare la diversificazione con un altro titolo se la situazione si stabilizza.",
+  "note": "",
+  "equityGiorno": 98898.62,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 753.97,
+      "pnlPerc": -0.01987624470270125
+    }
+  ],
+  "quotazioni": {
+    "SPY": 754.01,
+    "QQQ": 685.12,
+    "IWM": 280.93,
+    "AAPL": 331.495,
+    "MSFT": 514.16,
+    "NVDA": 207.5,
+    "GLD": 360.06,
+    "TLT": 81.12
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
