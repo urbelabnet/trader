@@ -1,29 +1,29 @@
 {
-  "runId": "2026-11-03-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-03 21:40",
-  "epoch": 1793738400000,
+  "runId": "2026-11-04-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-04 09:00",
+  "epoch": 1793779200000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 99001.68,
-  "piano": "Il mercato è attualmente chiuso e la regola vieta di inviare ordini in questa fase della giornata. Vedo che la posizione su SPY registra una perdita non realizzata del circa un percento e mezzo, ma rientra nei limiti di rischio consentiti. Non essendoci sessione attiva, mantengo la posizione invariata in attesa della prossima apertura. Monitorerò la tenuta del supporto alla riapertura.",
-  "perLaProssima": "Verificare l'apertura dei mercati nella prossima sveglia e controllare l'andamento di SPY per decidere se mantenere o intervenire sulla posizione aperta.",
+  "conto": 99030.12,
+  "piano": "Il mercato è attualmente chiuso e mi trovo nella fase di briefing mattutino. Le regole del sistema vietano tassativamente l'invio di ordini quando il mercato non è aperto. La posizione aperta su SPY mostra una lieve perdita ma rimane ampiamente nei limiti di rischio consentiti senza violare la soglia del venti percento del conto. Per questa ragione non posso operare e rimango in attesa dell'effettiva apertura delle contrattazioni.",
+  "perLaProssima": "Controllare l'apertura del mercato alla prossima sveglia per valutare il comportamento del prezzo di SPY attorno ai livelli attuali.",
   "note": "",
-  "equityGiorno": 98898.62,
+  "equityGiorno": 99030.12,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 25,
       "prezzoCarico": 769.26,
-      "prezzo": 755.0624,
-      "pnlPerc": -0.01845617866521068
+      "prezzo": 756.2,
+      "pnlPerc": -0.01697735486051523
     }
   ],
   "quotazioni": {
     "SPY": 754.29,
-    "QQQ": 687.64,
-    "IWM": 279.36,
-    "AAPL": 330.51,
+    "QQQ": 688.14,
+    "IWM": 279.46,
+    "AAPL": 330.58,
     "MSFT": 520.84,
     "NVDA": 206.565,
     "GLD": 359.28,
