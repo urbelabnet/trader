@@ -1,0 +1,58 @@
+{
+  "runId": "2026-11-04-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-04 15:40",
+  "epoch": 1793803200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 99283.87,
+  "piano": "Osservo che il mercato è aperto e la posizione attuale su SPY registra una minusvalenza contenuta attorno allo zero virgola quattro per cento. Il controvalore totale della posizione su SPY è inferiore al limite massimo del venti percento del conto. Non vedo motivi di urgenza per liquidare o incrementare la posizione in questo momento di avvio di seduta. Decido quindi di mantenere l'esposizione attuale lasciando respirare il mercato.",
+  "perLaProssima": "Controllare l'andamento di SPY e verificare se la volatilità intraday offre occasioni di incremento o se sarà necessario impostare livelli di stop loss.",
+  "note": "",
+  "equityGiorno": 99030.12,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 25,
+      "prezzoCarico": 769.26,
+      "prezzo": 766.35,
+      "pnlPerc": -0.0037828562514624032
+    }
+  ],
+  "quotazioni": {
+    "SPY": 766.33,
+    "QQQ": 697.25,
+    "IWM": 281.89,
+    "AAPL": 353.89,
+    "MSFT": 552.645,
+    "NVDA": 204.485,
+    "GLD": 369.73,
+    "TLT": 81.05
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
