@@ -1,0 +1,50 @@
+{
+  "runId": "2026-11-05-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-05 21:40",
+  "epoch": 1793911200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98480.34,
+  "piano": "Il mercato è attualmente chiuso e la sessione odierna si è conclusa con le posizioni attuali tra cui GLD in lieve correzione e la chiusura della posizione su SPY avvenuta nel corso della giornata. Il conto mantiene una buona liquidità e un'esposizione contenuta ed equilibrata. Non essendo possibile operare a mercati chiusi, rimango in attesa della prossima riapertura senza inviare nuovi ordini.",
+  "perLaProssima": "Verificare la tenuta dei prezzi in apertura della prossima sessione e monitorare l'evoluzione di GLD e l'eventuale stabilità del mercato azionario per valutare possibili nuovi ingressi.",
+  "note": "",
+  "equityGiorno": 99292.87,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 374.6182,
+      "pnlPerc": -0.004206205669907859
+    }
+  ],
+  "quotazioni": {
+    "SPY": 731,
+    "QQQ": 648.05,
+    "IWM": 271.01,
+    "AAPL": 344.6,
+    "MSFT": 536.29,
+    "NVDA": 181.77,
+    "GLD": 375.55,
+    "TLT": 81.97
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253837945Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    }
+  ]
+}
