@@ -1,0 +1,50 @@
+{
+  "runId": "2026-11-06-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-06 21:40",
+  "epoch": 1793997600000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98371.36,
+  "piano": "Il mercato è attualmente chiuso, quindi non è possibile inserire nuovi ordini operativi. La sessione si conclude con una sola posizione aperta in GLD, che registra una leggera perdita non preoccupante e ben entro i limiti di rischio consentiti. La liquidità è elevata e la struttura del portafoglio risulta stabile. Rimango in attesa dell'apertura del mercato per valutare nuove opportunità.",
+  "perLaProssima": "Controllare l'apertura del mercato alla prossima sveglia e verificare la tenuta del supporto su GLD e l'andamento generale degli indici.",
+  "note": "",
+  "equityGiorno": 98344.32,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 372.53,
+      "pnlPerc": -0.009756968022938564
+    }
+  ],
+  "quotazioni": {
+    "SPY": 735.61,
+    "QQQ": 656.31,
+    "IWM": 273.64,
+    "AAPL": 342.41,
+    "MSFT": 530.58,
+    "NVDA": 186.7,
+    "GLD": 372.55,
+    "TLT": 81.9
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    }
+  ]
+}
