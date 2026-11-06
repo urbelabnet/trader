@@ -1,0 +1,50 @@
+{
+  "runId": "2026-11-06-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-06 18:30",
+  "epoch": 1793986200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98355.25,
+  "piano": "Osservo il portafoglio e noto che l'unica posizione aperta su GLD registra una modesta flessione negativa ma rimane ben sotto la soglia massima del venti percento del conto. La liquidità disponibile è ampia, superando i settantanove mila dollari su novantotto mila di equity totale. Avendo chiuso SPY di recente, rispetto la regola che vieta di riaprirlo nella stessa giornata. Decido quindi di rimanere in attesa senza effettuare nuovi ordini, lasciando lavorare la posizione attuale.",
+  "perLaProssima": "Verificare la chiusura giornaliera di GLD e monitorare il comportamento dei titoli tecnologici come NVDA e MSFT per individuare eventuali nuove opportunità di ingresso.",
+  "note": "",
+  "equityGiorno": 98344.32,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 372.2201,
+      "pnlPerc": -0.010580730714828243
+    }
+  ],
+  "quotazioni": {
+    "SPY": 738.49,
+    "QQQ": 658.2,
+    "IWM": 273.68,
+    "AAPL": 343.54,
+    "MSFT": 533.81,
+    "NVDA": 187.69,
+    "GLD": 372.22,
+    "TLT": 82.14
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    }
+  ]
+}
