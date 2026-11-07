@@ -1,31 +1,31 @@
 {
-  "runId": "2026-11-06-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-06 21:40",
-  "epoch": 1793997600000,
+  "runId": "2026-11-07-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-07 09:00",
+  "epoch": 1794038400000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 98371.36,
-  "piano": "Il mercato è attualmente chiuso, quindi non è possibile inserire nuovi ordini operativi. La sessione si conclude con una sola posizione aperta in GLD, che registra una leggera perdita non preoccupante e ben entro i limiti di rischio consentiti. La liquidità è elevata e la struttura del portafoglio risulta stabile. Rimango in attesa dell'apertura del mercato per valutare nuove opportunità.",
-  "perLaProssima": "Controllare l'apertura del mercato alla prossima sveglia e verificare la tenuta del supporto su GLD e l'andamento generale degli indici.",
+  "conto": 98370.84,
+  "piano": "Siamo in fase di briefing e il mercato è attualmente chiuso, pertanto non è possibile inviare ordini operativi. La nostra unica posizione aperta è GLD, che mostra un piccolo calo ma rimane ampiamente nei limiti di rischio consentiti. La liquidità disponibile è molto alta, superando i 78000 dollari. Valuteremo la situazione all'apertura effettiva delle negoziazioni.",
+  "perLaProssima": "Controllare l'apertura dei mercati azionari, monitorare il comportamento di GLD in prossimità dei livelli attuali e valutare se impiegare parte della liquidità su altri asset consentiti.",
   "note": "",
-  "equityGiorno": 98344.32,
+  "equityGiorno": 98370.84,
   "posizioni": [
     {
       "simbolo": "GLD",
       "qty": 52,
       "prezzoCarico": 376.200577,
-      "prezzo": 372.53,
-      "pnlPerc": -0.009756968022938564
+      "prezzo": 372.52,
+      "pnlPerc": -0.00978354958769781
     }
   ],
   "quotazioni": {
-    "SPY": 735.61,
-    "QQQ": 656.31,
-    "IWM": 273.64,
+    "SPY": 736.07,
+    "QQQ": 656.87,
+    "IWM": 273.67,
     "AAPL": 342.41,
     "MSFT": 530.58,
-    "NVDA": 186.7,
+    "NVDA": 187.62,
     "GLD": 372.55,
     "TLT": 81.9
   },

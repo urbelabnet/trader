@@ -1,0 +1,50 @@
+{
+  "runId": "2026-11-07-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-07 09:00",
+  "epoch": 1794038400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98370.84,
+  "piano": "Siamo in fase di briefing e il mercato è attualmente chiuso, pertanto non è possibile inviare ordini operativi. La nostra unica posizione aperta è GLD, che mostra un piccolo calo ma rimane ampiamente nei limiti di rischio consentiti. La liquidità disponibile è molto alta, superando i 78000 dollari. Valuteremo la situazione all'apertura effettiva delle negoziazioni.",
+  "perLaProssima": "Controllare l'apertura dei mercati azionari, monitorare il comportamento di GLD in prossimità dei livelli attuali e valutare se impiegare parte della liquidità su altri asset consentiti.",
+  "note": "",
+  "equityGiorno": 98370.84,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 372.52,
+      "pnlPerc": -0.00978354958769781
+    }
+  ],
+  "quotazioni": {
+    "SPY": 736.07,
+    "QQQ": 656.87,
+    "IWM": 273.67,
+    "AAPL": 342.41,
+    "MSFT": 530.58,
+    "NVDA": 187.62,
+    "GLD": 372.55,
+    "TLT": 81.9
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    }
+  ]
+}
