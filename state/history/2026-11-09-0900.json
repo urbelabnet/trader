@@ -1,0 +1,74 @@
+{
+  "runId": "2026-11-09-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-09 09:00",
+  "epoch": 1794211200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98509.16,
+  "piano": "Siamo in fase di briefing mattutino con il mercato ancora chiuso, quindi non possiamo inviare ordini in questo momento. Attualmente abbiamo in portafoglio solo GLD con un piccolo calo non preoccupante e una forte liquidità disponibile. Osserviamo la situazione generale dei prezzi prima dell'apertura ufficiale. Valuteremo la conformità ai limiti di rischio prima di qualsiasi nuova operazione.",
+  "perLaProssima": "Controllare l'apertura del mercato e verificare la tenuta della posizione su GLD, valutando l'impiego di parte della liquidità su altri titoli dell'universo consentito.",
+  "note": "",
+  "equityGiorno": 98509.16,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 375.18,
+      "pnlPerc": -0.0027128533617320925
+    }
+  ],
+  "quotazioni": {
+    "SPY": 736.07,
+    "QQQ": 656.87,
+    "IWM": 273.67,
+    "AAPL": 342.41,
+    "MSFT": 530.58,
+    "NVDA": 187.62,
+    "GLD": 372.55,
+    "TLT": 81.9
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
