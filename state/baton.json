@@ -1,13 +1,13 @@
 {
-  "runId": "2026-11-10-1540",
-  "sveglia": "apertura",
-  "quando": "2026-11-10 15:40",
-  "epoch": 1794321600000,
+  "runId": "2026-11-10-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-10 18:30",
+  "epoch": 1794331800000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 98311.3,
-  "piano": "Osservo il portafoglio attuale composto da GLD e SPY, con una leggera flessione su GLD e una stabilizzazione su SPY. Il conto dispone di una liquidità adeguata ma rispetto i limiti di concentrazione del capitale per ciascuna posizione. Non ci sono segnali urgenti di chiusura o accumulo per questa apertura di seduta. Decido quindi di mantenere l'attuale esposizione senza inserire nuovi ordini.",
-  "perLaProssima": "Verificare la tenuta dei prezzi di carico e l'evoluzione dei volumi su SPY e GLD alla prossima sveglia.",
+  "conto": 98108.49,
+  "piano": "Osservo il portafoglio che attualmente detiene posizioni su GLD e SPY, entrambi leggermente in territorio negativo ma senza segnali di inversione drastica o violazione dei limiti di rischio. Il conto ha una buona liquidita disponibile, ma preferisco non sovraesporre il capitale in questa fase di mercato laterale. Valuto che la situazione attuale sia stabile e non richieda interventi immediati di acquisto o vendita. Mantengo quindi le posizioni aperte monitorandone la tenuta.",
+  "perLaProssima": "Verificare la tenuta dei livelli di supporto attuali per SPY e GLD e monitorare l'evoluzione della liquidita in vista di eventuali nuove opportunita.",
   "note": "",
   "equityGiorno": 98750.69,
   "posizioni": [
@@ -15,26 +15,26 @@
       "simbolo": "GLD",
       "qty": 52,
       "prezzoCarico": 376.200577,
-      "prezzo": 370.94,
-      "pnlPerc": -0.013983436819662326
+      "prezzo": 368.49,
+      "pnlPerc": -0.02049592018568329
     },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 750.2202,
-      "pnlPerc": 0.001161273103356181
+      "prezzo": 747.32,
+      "pnlPerc": -0.0027090144792152834
     }
   ],
   "quotazioni": {
-    "SPY": 750.14,
-    "QQQ": 677.59,
-    "IWM": 280.235,
-    "AAPL": 347.11,
-    "MSFT": 542.29,
-    "NVDA": 172.16,
-    "GLD": 370.94,
-    "TLT": 80.855
+    "SPY": 747.355,
+    "QQQ": 670.875,
+    "IWM": 279.61,
+    "AAPL": 348.055,
+    "MSFT": 537.32,
+    "NVDA": 167.97,
+    "GLD": 368.465,
+    "TLT": 80.6
   },
   "ordini48h": [
     {
