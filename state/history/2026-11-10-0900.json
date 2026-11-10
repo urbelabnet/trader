@@ -1,0 +1,49 @@
+{
+  "runId": "2026-11-10-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-10 09:00",
+  "epoch": 1794297600000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98750.69,
+  "piano": "Il mercato è attualmente chiuso poiché ci troviamo nella fase di briefing mattutino. Le regole del sistema vietano tassativamente l'invio di ordini quando il mercato non è aperto. Il portafoglio attuale mostra posizioni aperte sane su GLD e SPY, entrambe in territorio positivo e nel rispetto dei limiti di allocazione del capitale. Continuo quindi a monitorare la situazione senza effettuare alcuna operazione in questa fase.",
+  "perLaProssima": "Controllare l'apertura delle contrattazioni alla prossima sveglia per valutare la tenuta dei livelli chiave su SPY e GLD e decidere eventuali aggiustamenti operativi.",
+  "note": "",
+  "equityGiorno": 98750.69,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 377.07,
+      "pnlPerc": 0.0023110623777697803
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 754.86,
+      "pnlPerc": 0.007353039300727285
+    }
+  ],
+  "quotazioni": {
+    "SPY": 752.72,
+    "QQQ": 679.76,
+    "IWM": 282.3,
+    "AAPL": 350.87,
+    "MSFT": 544.59,
+    "NVDA": 178.24,
+    "GLD": 379.56,
+    "TLT": 81.96
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-09T15:36:11.147742Z",
+      "prezzoMed": 749.35
+    }
+  ]
+}
