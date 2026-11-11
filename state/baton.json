@@ -1,13 +1,13 @@
 {
-  "runId": "2026-11-11-1540",
-  "sveglia": "apertura",
-  "quando": "2026-11-11 15:40",
-  "epoch": 1794408000000,
+  "runId": "2026-11-11-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-11 18:30",
+  "epoch": 1794418200000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 98261.37,
-  "piano": "Osservo il portafoglio che attualmente detiene posizioni su GLD, in leggero calo, e SPY, in moderato guadagno. Il capitale liquido è ampio, superando il 60 percento dell'equity totale. Non ci sono urgenze operative immediate e preferisco mantenere l'asset allocation attuale senza forzare nuovi ingressi. Valuto che la volatilità odierna non richiede interventi di emergenza o chiusure anticipate.",
-  "perLaProssima": "Verificare la tenuta dei supporti per GLD e la continuazione del trend rialzista su SPY alla prossima sveglia.",
+  "conto": 98374.21,
+  "piano": "Osservo il portafoglio che mostra SPY in positivo e GLD in fluttuazione negativa, ma senza segnali critici che richiedano azioni correttive urgenti. Il capitale liquido disponibile è ampio, superando il cinquanta percento dell'equity totale, il che lascia grande flessibilità. Non ci sono urgenze operative immediate e preferisco mantenere l'asset allocation attuale senza forzare nuovi ingressi. Valuto che la situazione di mercato sia stabile e che non sia necessario modificare le posizioni aperte in questo momento.",
+  "perLaProssima": "Controllare l'evoluzione della posizione su GLD per verificare se la discesa si arresta e monitorare la forza di SPY sui massimi.",
   "note": "",
   "equityGiorno": 98487.57,
   "posizioni": [
@@ -15,26 +15,26 @@
       "simbolo": "GLD",
       "qty": 52,
       "prezzoCarico": 376.200577,
-      "prezzo": 366.81,
-      "pnlPerc": -0.024961623065240558
+      "prezzo": 366.62,
+      "pnlPerc": -0.02546667279566667
     },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 756.56,
-      "pnlPerc": 0.009621672115833618
+      "prezzo": 761.28,
+      "pnlPerc": 0.015920464402482085
     }
   ],
   "quotazioni": {
-    "SPY": 756.575,
-    "QQQ": 687.65,
-    "IWM": 281.96,
-    "AAPL": 353.655,
-    "MSFT": 519.255,
-    "NVDA": 174.18,
-    "GLD": 366.9,
-    "TLT": 80.565
+    "SPY": 761.24,
+    "QQQ": 694.645,
+    "IWM": 283.455,
+    "AAPL": 354.2,
+    "MSFT": 521.48,
+    "NVDA": 176.96,
+    "GLD": 366.73,
+    "TLT": 80.885
   },
   "ordini48h": [
     {
@@ -44,6 +44,46 @@
       "stato": "filled",
       "creatoIl": "2026-11-09T15:36:11.147742Z",
       "prezzoMed": 749.35
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
     }
   ]
 }
