@@ -1,0 +1,49 @@
+{
+  "runId": "2026-11-11-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-11 15:40",
+  "epoch": 1794408000000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98261.37,
+  "piano": "Osservo il portafoglio che attualmente detiene posizioni su GLD, in leggero calo, e SPY, in moderato guadagno. Il capitale liquido è ampio, superando il 60 percento dell'equity totale. Non ci sono urgenze operative immediate e preferisco mantenere l'asset allocation attuale senza forzare nuovi ingressi. Valuto che la volatilità odierna non richiede interventi di emergenza o chiusure anticipate.",
+  "perLaProssima": "Verificare la tenuta dei supporti per GLD e la continuazione del trend rialzista su SPY alla prossima sveglia.",
+  "note": "",
+  "equityGiorno": 98487.57,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 366.81,
+      "pnlPerc": -0.024961623065240558
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 756.56,
+      "pnlPerc": 0.009621672115833618
+    }
+  ],
+  "quotazioni": {
+    "SPY": 756.575,
+    "QQQ": 687.65,
+    "IWM": 281.96,
+    "AAPL": 353.655,
+    "MSFT": 519.255,
+    "NVDA": 174.18,
+    "GLD": 366.9,
+    "TLT": 80.565
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-09T15:36:11.147742Z",
+      "prezzoMed": 749.35
+    }
+  ]
+}
