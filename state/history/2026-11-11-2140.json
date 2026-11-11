@@ -1,0 +1,89 @@
+{
+  "runId": "2026-11-11-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-11 21:40",
+  "epoch": 1794429600000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 98264.23,
+  "piano": "Il mercato è attualmente chiuso e la sessione è terminata senza la necessità di operare d'urgenza. La posizione su GLD registra una flessione negativa ma non tale da violare i parametri di rischio immediati, mentre SPY mantiene una buona tenuta in territorio positivo. La liquidità disponibile è ampia e copre oltre la metà del totale dell'equity. Per questa sveglia di chiusura non vengono proposti nuovi ordini operativi.",
+  "perLaProssima": "Controllare l'apertura della prossima sessione per verificare il recupero o l'ulteriore calo di GLD e l'andamento generale dei mercati.",
+  "note": "",
+  "equityGiorno": 98487.57,
+  "posizioni": [
+    {
+      "simbolo": "GLD",
+      "qty": 52,
+      "prezzoCarico": 376.200577,
+      "prezzo": 365.1,
+      "pnlPerc": -0.029507070639075567
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 760.09,
+      "pnlPerc": 0.014332421431907666
+    }
+  ],
+  "quotazioni": {
+    "SPY": 759.8,
+    "QQQ": 690.3,
+    "IWM": 283.11,
+    "AAPL": 355.78,
+    "MSFT": 520.63,
+    "NVDA": 173.85,
+    "GLD": 365.2,
+    "TLT": 80.935
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-09T15:36:11.147742Z",
+      "prezzoMed": 749.35
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
+    }
+  ]
+}
