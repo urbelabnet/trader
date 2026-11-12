@@ -1,38 +1,45 @@
 {
-  "runId": "2026-11-11-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-11 21:40",
-  "epoch": 1794429600000,
-  "ordini": [],
+  "runId": "2026-11-12-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-12 09:00",
+  "epoch": 1794470400000,
+  "ordini": [
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "esito": "mercato chiuso"
+    }
+  ],
   "rifiutati": [],
-  "conto": 98264.23,
-  "piano": "Il mercato è attualmente chiuso e la sessione è terminata senza la necessità di operare d'urgenza. La posizione su GLD registra una flessione negativa ma non tale da violare i parametri di rischio immediati, mentre SPY mantiene una buona tenuta in territorio positivo. La liquidità disponibile è ampia e copre oltre la metà del totale dell'equity. Per questa sveglia di chiusura non vengono proposti nuovi ordini operativi.",
-  "perLaProssima": "Controllare l'apertura della prossima sessione per verificare il recupero o l'ulteriore calo di GLD e l'andamento generale dei mercati.",
+  "conto": 98042.97,
+  "piano": "Il mercato è attualmente chiuso poiché ci troviamo nella fase di briefing mattutino. Le posizioni aperte su GLD e SPY rimangono stabili nei loro trend attuali, con GLD in lieve sofferenza e SPY in positivo. Poiché siamo a mercato chiuso, non è consentito inviare ordini operativi. Attendo l'apertura delle contrattazioni per valutare la direzione dei prezzi.",
+  "perLaProssima": "Verificare l'apertura del mercato e monitorare il comportamento di GLD e SPY rispetto ai prezzi di chiusura precedenti per eventuali decisioni di gestione del rischio.",
   "note": "",
-  "equityGiorno": 98487.57,
+  "equityGiorno": 98042.97,
   "posizioni": [
     {
       "simbolo": "GLD",
       "qty": 52,
       "prezzoCarico": 376.200577,
-      "prezzo": 365.1,
-      "pnlPerc": -0.029507070639075567
+      "prezzo": 362.72,
+      "pnlPerc": -0.03583348305178166
     },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 760.09,
-      "pnlPerc": 0.014332421431907666
+      "prezzo": 756.34,
+      "pnlPerc": 0.009328084339761138
     }
   ],
   "quotazioni": {
-    "SPY": 759.8,
-    "QQQ": 690.3,
-    "IWM": 283.11,
+    "SPY": 760.13,
+    "QQQ": 689.28,
+    "IWM": 283.05,
     "AAPL": 355.78,
     "MSFT": 520.63,
-    "NVDA": 173.85,
+    "NVDA": 168.27,
     "GLD": 365.2,
     "TLT": 80.935
   },
