@@ -1,0 +1,49 @@
+{
+  "runId": "2026-11-12-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-12 18:30",
+  "epoch": 1794504600000,
+  "ordini": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 28,
+      "esito": "accettato"
+    }
+  ],
+  "rifiutati": [],
+  "conto": 97718.75,
+  "piano": "Vedo che la posizione in essere su SPY è in guadagno dell'1.58% e il conto ha oltre 77.000 dollari di liquidità dopo la chiusura di GLD. Decido di impiegare parte della cassa disponibile per entrare su QQQ a 691 USD, acquistando 28 azioni per un controvalore di circa 19.348 USD. Questo acquisto rispetta rigorosamente il limite massimo del 20% di allocazione per singolo titolo su una liquidità totale di circa 97.718 USD. Manteniamo SPY in portafoglio senza apportare modifiche.",
+  "perLaProssima": "Alla prossima sveglia controllerò il comportamento di QQQ e l'andamento di SPY per verificare che entrambe le posizioni rimangano nei margini di rischio previsti.",
+  "note": "",
+  "equityGiorno": 98042.97,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 761.17,
+      "pnlPerc": 0.015773670514445767
+    }
+  ],
+  "quotazioni": {
+    "SPY": 761.195,
+    "QQQ": 691,
+    "IWM": 280.91,
+    "AAPL": 355.84,
+    "MSFT": 528.73,
+    "NVDA": 164.77,
+    "GLD": 354.78,
+    "TLT": 79.92
+  },
+  "ordini48h": [
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T15:36:28.919671518Z",
+      "prezzoMed": 354.07
+    }
+  ]
+}
