@@ -1,0 +1,57 @@
+{
+  "runId": "2026-11-13-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-13 21:40",
+  "epoch": 1794602400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 97014.54,
+  "piano": "Il mercato risulta chiuso in questo momento, quindi non è possibile inserire nuovi ordini a mercato. Osservo il portafoglio composto da QQQ e SPY, dove la posizione su QQQ accusa una perdita temporanea mentre SPY si muove in leggero territorio positivo. La liquidità residua è buona e la diversificazione rispetta i limiti stabiliti. Per questa sveglia di chiusura scelgo di non effettuare alcuna operazione e lasciare invariata l'esposizione.",
+  "perLaProssima": "Controllare l'apertura della prossima sessione per valutare l'andamento delle posizioni su QQQ e SPY e verificare eventuali segnali di inversione o continuazione.",
+  "note": "",
+  "equityGiorno": 97479.1,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 28,
+      "prezzoCarico": 691.185,
+      "prezzo": 675.52,
+      "pnlPerc": -0.022663975636045292
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 750.97,
+      "pnlPerc": 0.0021618736238073056
+    }
+  ],
+  "quotazioni": {
+    "SPY": 751.96,
+    "QQQ": 675.4,
+    "IWM": 277.55,
+    "AAPL": 356.4,
+    "MSFT": 524.19,
+    "NVDA": 162.44,
+    "GLD": 355.43,
+    "TLT": 79.38
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T17:38:18.040035Z",
+      "prezzoMed": 691.185
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T15:36:28.919672Z",
+      "prezzoMed": 354.07
+    }
+  ]
+}
