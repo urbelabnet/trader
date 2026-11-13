@@ -1,13 +1,13 @@
 {
-  "runId": "2026-11-13-0900",
-  "sveglia": "briefing",
-  "quando": "2026-11-13 09:00",
-  "epoch": 1794556800000,
+  "runId": "2026-11-13-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-13 15:40",
+  "epoch": 1794580800000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 97479.1,
-  "piano": "Mi trovo nella fase di briefing mattutino con il mercato ancora chiuso, quindi non è possibile inserire ordini operativi. Attualmente il portafoglio detiene posizioni su SPY in lieve guadagno e QQQ in leggero calo, entrambe ampiamente nei limiti di rischio consentiti. La liquidità disponibile supera il cinquanta percento dell'equity totale, garantendo un'ottima flessibilità futura. Mantengo quindi la composizione attuale senza effettuare alcuna modifica in attesa della campanella d'apertura.",
-  "perLaProssima": "Verificare l'apertura delle contrattazioni e l'andamento dei prezzi di SPY e QQQ per individuare eventuali opportunità di consolidamento o di nuovo ingresso.",
+  "conto": 96867.9,
+  "piano": "Osservo che il portafoglio detiene posizioni aperte su QQQ e SPY, con QQQ che accusa una perdita temporanea di circa il due percento e mezzo, mentre SPY è sostanzialmente stabile. La liquidità disponibile è ampia, superando cinquantamila dollari, ma ho già due posizioni attive vicine al limite di concentrazione per singolo titolo e non intendo appesantire l'esposizione in questo momento di debolezza. Decido quindi di mantenere l'attuale assetto senza inserire nuovi ordini, lasciando che il mercato evolva e monitorando il comportamento delle quotazioni nei prossimi minuti.",
+  "perLaProssima": "Controllare l'andamento della volatilità intraday e verificare se QQQ riesce a stabilizzarsi o se estende il ribasso, valutando eventuali livelli di stop o di mediazione per la prossima sveglia.",
   "note": "",
   "equityGiorno": 97479.1,
   "posizioni": [
@@ -15,26 +15,26 @@
       "simbolo": "QQQ",
       "qty": 28,
       "prezzoCarico": 691.185,
-      "prezzo": 686.67,
-      "pnlPerc": -0.006532259814666098
+      "prezzo": 672.6877,
+      "pnlPerc": -0.026761720812806988
     },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 756.83,
-      "pnlPerc": 0.009981984386468296
+      "prezzo": 748.38,
+      "pnlPerc": -0.0012944551945019381
     }
   ],
   "quotazioni": {
-    "SPY": 757.37,
-    "QQQ": 689.38,
-    "IWM": 278.42,
-    "AAPL": 354.85,
-    "MSFT": 523,
-    "NVDA": 167.1,
-    "GLD": 354.83,
-    "TLT": 79.72
+    "SPY": 748.385,
+    "QQQ": 672.77,
+    "IWM": 275.21,
+    "AAPL": 357.58,
+    "MSFT": 519.24,
+    "NVDA": 159.245,
+    "GLD": 355.485,
+    "TLT": 79.515
   },
   "ordini48h": [
     {
