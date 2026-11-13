@@ -1,0 +1,57 @@
+{
+  "runId": "2026-11-13-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-13 18:30",
+  "epoch": 1794591000000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 97102.1,
+  "piano": "Osservo il portafoglio che attualmente detiene posizioni aperte su QQQ e SPY, con QQQ che segna una flessione vicina al due percento e SPY in lieve guadagno. La liquidità disponibile è di oltre cinquantamila dollari, ma il conto ha già due posizioni attive che occupano una quota importante del capitale. Non vedo ragioni per forzare nuovi acquisti in questa fase di mercato laterale e preferisco preservare la liquidità. Decido quindi di rimanere flat sul fronte degli ordini e di monitorare la tenuta dei supporti attuali.",
+  "perLaProssima": "Verificare la tenuta dei prezzi per QQQ e SPY alla prossima sveglia e controllare se la volatilità intraday offre spunti operativi o se è meglio mantenere la struttura attuale.",
+  "note": "",
+  "equityGiorno": 97479.1,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 28,
+      "prezzoCarico": 691.185,
+      "prezzo": 677.57,
+      "pnlPerc": -0.019698054789962016
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 752.13,
+      "pnlPerc": 0.003709881897644589
+    }
+  ],
+  "quotazioni": {
+    "SPY": 752.06,
+    "QQQ": 677.35,
+    "IWM": 276.77,
+    "AAPL": 358.05,
+    "MSFT": 524.35,
+    "NVDA": 161.365,
+    "GLD": 355.84,
+    "TLT": 79.5
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T17:38:18.040035Z",
+      "prezzoMed": 691.185
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T15:36:28.919672Z",
+      "prezzoMed": 354.07
+    }
+  ]
+}
