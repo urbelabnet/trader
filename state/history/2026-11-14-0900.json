@@ -1,0 +1,57 @@
+{
+  "runId": "2026-11-14-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-14 09:00",
+  "epoch": 1794643200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 97225.3,
+  "piano": "Il mercato è attualmente chiuso per il briefing mattutino, quindi non posso inserire ordini. Analizzo le posizioni aperte attuali con QQQ in lieve sofferenza e SPY in guadagno moderato. La liquidità è adeguata e la gestione del rischio rientra nei parametri previsti. Attendo l'apertura ufficiale per osservare la reazione dei prezzi e valutare possibili aggiustamenti.",
+  "perLaProssima": "Verificare l'andamento dei prezzi all'apertura del mercato e monitorare il comportamento di QQQ e SPY per decidere eventuali interventi.",
+  "note": "",
+  "equityGiorno": 97225.3,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 28,
+      "prezzoCarico": 691.185,
+      "prezzo": 679.89,
+      "pnlPerc": -0.01634150046658993
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 754.37,
+      "pnlPerc": 0.006699139254020126
+    }
+  ],
+  "quotazioni": {
+    "SPY": 752.09,
+    "QQQ": 676.95,
+    "IWM": 277.55,
+    "AAPL": 356.4,
+    "MSFT": 524.19,
+    "NVDA": 161.87,
+    "GLD": 354.99,
+    "TLT": 79.38
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T17:38:18.040035Z",
+      "prezzoMed": 691.185
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T15:36:28.919672Z",
+      "prezzoMed": 354.07
+    }
+  ]
+}
