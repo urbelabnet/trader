@@ -1,112 +1,42 @@
 {
-  "runId": "2026-11-16-1540",
-  "sveglia": "apertura",
-  "quando": "2026-11-16 15:40",
-  "epoch": 1794840000000,
-  "ordini": [
-    {
-      "simbolo": "QQQ",
-      "lato": "sell",
-      "qty": 28,
-      "esito": "accettato"
-    }
-  ],
+  "runId": "2026-11-16-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-16 18:30",
+  "epoch": 1794850200000,
+  "ordini": [],
   "rifiutati": [],
-  "conto": 96665.38,
-  "piano": "Osservo che i mercati sono aperti e le mie posizioni su QQQ e SPY registrano rispettivamente una perdita del 3.4% e un leggero calo dello 0.4%. La liquidità disponibile è buona, pari a circa 58574 dollari su un totale di quasi 96665 dollari di equity. Decido di mantenere le posizioni attuali senza effettuare nuovi acquisti o vendite in questa fase di apertura. Valuto che i titoli in portafoglio siano vicini ai livelli di carico e preferisco attendere una maggiore stabilizzazione della tendenza intraday.",
-  "perLaProssima": "Controllare l'evoluzione della seduta pomeridiana, verificando se QQQ recupera terreno e se SPY consolida i prezzi attuali per valutare eventuali future operazioni.",
+  "conto": 96589.07,
+  "piano": "Osservo che il mercato è aperto e la mia posizione su SPY è in leggero calo con una perdita percentuale inferiore all'uno percento. Ho chiuso recentemente la posizione su QQQ e al momento detengo liquidità sufficiente per operare ma preferisco non forzare nuovi ingressi. Valuto che il contesto attuale non offra chiari segnali di inversione immediata e decido di mantenere la posizione attuale senza inserire nuovi ordini. Resto prudente per evitare esposizioni non necessarie durante la seduta pomeridiana.",
+  "perLaProssima": "Controllare la tenuta dei prezzi attuali di SPY e verificare se la volatilità aumenta nella seconda parte della seduta.",
   "note": "",
   "equityGiorno": 96998.76,
   "posizioni": [
     {
-      "simbolo": "QQQ",
-      "qty": 28,
-      "prezzoCarico": 691.185,
-      "prezzo": 667.68,
-      "pnlPerc": -0.0340068143839927
-    },
-    {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 746.16,
-      "pnlPerc": -0.004257022753052718
+      "prezzo": 743.03,
+      "pnlPerc": -0.008433976112631013
     }
   ],
   "quotazioni": {
-    "SPY": 746.16,
-    "QQQ": 668.41,
-    "IWM": 274.86,
-    "AAPL": 355.24,
-    "MSFT": 524.71,
-    "NVDA": 158.71,
-    "GLD": 353.51,
-    "TLT": 79.505
+    "SPY": 743.16,
+    "QQQ": 665.13,
+    "IWM": 273.81,
+    "AAPL": 353.1,
+    "MSFT": 521.665,
+    "NVDA": 156.895,
+    "GLD": 353.68,
+    "TLT": 79.37
   },
   "ordini48h": [
     {
       "simbolo": "QQQ",
-      "lato": "buy",
+      "lato": "sell",
       "qty": 28,
       "stato": "filled",
-      "creatoIl": "2026-11-12T17:38:18.040035Z",
-      "prezzoMed": 691.185
-    },
-    {
-      "simbolo": "GLD",
-      "lato": "sell",
-      "qty": 52,
-      "stato": "filled",
-      "creatoIl": "2026-11-12T15:36:28.919672Z",
-      "prezzoMed": 354.07
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "buy",
-      "qty": 26,
-      "stato": "filled",
-      "creatoIl": "2026-11-09T15:36:11.147742Z",
-      "prezzoMed": 749.35
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "sell",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-11-05T17:40:40.253838Z",
-      "prezzoMed": 737.5
-    },
-    {
-      "simbolo": "GLD",
-      "lato": "buy",
-      "qty": 52,
-      "stato": "filled",
-      "creatoIl": "2026-11-05T15:35:44.919105Z",
-      "prezzoMed": 376.200577
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "sell",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-30T15:28:46.897544Z",
-      "prezzoMed": 695.04
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "buy",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-27T18:53:14.904258Z",
-      "prezzoMed": 720.76
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "buy",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-27T18:53:14.169552Z",
-      "prezzoMed": 769.26
+      "creatoIl": "2026-11-16T16:00:10.743393Z",
+      "prezzoMed": 667.6975
     }
   ]
 }

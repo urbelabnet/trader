@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-16-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-16 18:30",
+  "epoch": 1794850200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 96589.07,
+  "piano": "Osservo che il mercato è aperto e la mia posizione su SPY è in leggero calo con una perdita percentuale inferiore all'uno percento. Ho chiuso recentemente la posizione su QQQ e al momento detengo liquidità sufficiente per operare ma preferisco non forzare nuovi ingressi. Valuto che il contesto attuale non offra chiari segnali di inversione immediata e decido di mantenere la posizione attuale senza inserire nuovi ordini. Resto prudente per evitare esposizioni non necessarie durante la seduta pomeridiana.",
+  "perLaProssima": "Controllare la tenuta dei prezzi attuali di SPY e verificare se la volatilità aumenta nella seconda parte della seduta.",
+  "note": "",
+  "equityGiorno": 96998.76,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 743.03,
+      "pnlPerc": -0.008433976112631013
+    }
+  ],
+  "quotazioni": {
+    "SPY": 743.16,
+    "QQQ": 665.13,
+    "IWM": 273.81,
+    "AAPL": 353.1,
+    "MSFT": 521.665,
+    "NVDA": 156.895,
+    "GLD": 353.68,
+    "TLT": 79.37
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-16T16:00:10.743393Z",
+      "prezzoMed": 667.6975
+    }
+  ]
+}
