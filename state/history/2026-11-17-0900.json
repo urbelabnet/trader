@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-17-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-17 09:00",
+  "epoch": 1794902400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 96476.09,
+  "piano": "Siamo nella sessione di briefing mattutino a mercati chiusi, quindi da regole non inserisco alcun ordine. La posizione su SPY mostra un calo contenuto intorno all'1,4%, ampiamente sotto controllo, ed è già al limite massimo di capienza del 20% del conto. La liquidità disponibile è abbondante dopo l'uscita da QQQ nella seduta precedente. Rimango alla finestra in attesa dell'apertura per valutare il sentiment generale prima di intraprendere nuove operazioni.",
+  "perLaProssima": "All'apertura controllare la tenuta del supporto su SPY intorno a 738-740 e verificare se si presentano opportunità d'ingresso su altri titoli dell'universo come GLD o QQQ.",
+  "note": "",
+  "equityGiorno": 96476.09,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 738.7,
+      "pnlPerc": -0.014212317341696106
+    }
+  ],
+  "quotazioni": {
+    "SPY": 740.04,
+    "QQQ": 661.63,
+    "IWM": 273,
+    "AAPL": 352.66,
+    "MSFT": 518.23,
+    "NVDA": 156.66,
+    "GLD": 352.94,
+    "TLT": 79.42
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-16T16:00:10.743393Z",
+      "prezzoMed": 667.6975
+    }
+  ]
+}
