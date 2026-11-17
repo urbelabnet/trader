@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-17-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-17 18:30",
+  "epoch": 1794936600000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 96307.09,
+  "piano": "Osservo che i mercati sono aperti e la posizione attuale su SPY sta registrando una perdita latente di oltre il due percento, pur rimanendo all'interno della soglia di rischio consentita. Il capitale disponibile è elevato ma preferisco non incrementare l'esposizione in questo momento di debolezza generale. Mantengo la posizione attuale senza effettuare nuovi acquisti o vendite per evitare mosse impulsive.",
+  "perLaProssima": "Controllare la chiusura giornaliera di SPY per verificare se il ribasso si accentua e monitorare la reazione dei titoli difensivi come GLD.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· apertura di 2026-11-17 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 96476.09,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 732.2,
+      "pnlPerc": -0.022886501634750086
+    }
+  ],
+  "quotazioni": {
+    "SPY": 732.17,
+    "QQQ": 654.5,
+    "IWM": 270.5,
+    "AAPL": 350.45,
+    "MSFT": 501.32,
+    "NVDA": 153.885,
+    "GLD": 354.16,
+    "TLT": 79.71
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-16T16:00:10.743393Z",
+      "prezzoMed": 667.6975
+    }
+  ]
+}
