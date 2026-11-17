@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-17-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-17 21:40",
+  "epoch": 1794948000000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 96305.27,
+  "piano": "Il mercato è attualmente chiuso e la sveglia corrisponde alla fase di briefing serale, pertanto non è possibile inviare ordini. La posizione aperta su SPY registra una perdita latente del due percento ma rientra nei limiti di rischio consentiti dal capitale. Il portafoglio è composto da un solo titolo e la liquidità è ampia, ma la regola vieta operazioni a mercato chiuso. Mantengo lo status quo in attesa della prossima apertura.",
+  "perLaProssima": "Verificare l'apertura dei mercati nella prossima sessione e controllare se SPY riesce a recuperare i livelli chiave o se la pressione di vendita continua.",
+  "note": "",
+  "equityGiorno": 96476.09,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 749.35,
+      "prezzo": 732.13,
+      "pnlPerc": -0.022979915927136888
+    }
+  ],
+  "quotazioni": {
+    "SPY": 733.26,
+    "QQQ": 657.82,
+    "IWM": 268.96,
+    "AAPL": 350.5,
+    "MSFT": 506.07,
+    "NVDA": 157.08,
+    "GLD": 352.46,
+    "TLT": 79.56
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-16T16:00:10.743393Z",
+      "prezzoMed": 667.6975
+    }
+  ]
+}
