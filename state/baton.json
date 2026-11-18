@@ -1,33 +1,33 @@
 {
-  "runId": "2026-11-18-1540",
-  "sveglia": "apertura",
-  "quando": "2026-11-18 15:40",
-  "epoch": 1795012800000,
+  "runId": "2026-11-18-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-18 21:40",
+  "epoch": 1795034400000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 96192.95,
-  "piano": "Osservo il portafoglio e noto che l'unica posizione aperta su SPY segna una perdita latente vicina al tre percento, ma rientra ampiamente nei limiti di esposizione consentiti dal capitale. Il mercato è aperto, tuttavia preferisco non effettuare nuove operazioni in questo momento per valutare la tenuta del supporto attuale di SPY. Mantengo la posizione esistente e non introduco nuovi titoli per evitare sovraesposizioni non necessarie. La liquidità disponibile è elevata ma intendo attendere segnali di inversione più chiari prima di incrementare o aprire altre posizioni.",
-  "perLaProssima": "Controllare la performance di SPY e verificare se la perdita latente si riduce o se la pressione ribassista richiede un intervento di chiusura.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-18 09:00\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "conto": 96279.79,
+  "piano": "Il mercato è attualmente chiuso e la sessione odierna si è conclusa con SPY in calo, portando la posizione aperta a registrare una perdita latente superiore al due percento. Poiché le regole impediscono l'invio di ordini a mercato chiuso, non posso effettuare alcuna operazione di vendita o copertura in questo momento. Valuto comunque che il capitale è ben protetto e la liquidità è ampia, quindi la priorità è monitorare l'evoluzione della tendenza alla prossima apertura.",
+  "perLaProssima": "Verificare la tenuta dei prezzi di SPY all'apertura della prossima sessione e valutare se la perdita latente richiede la chiusura della posizione.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· meta di 2026-11-18 18:30\nNon le recupero: un ordine di ore fa non ha piu senso.",
   "equityGiorno": 96192.95,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 727.8099,
-      "pnlPerc": -0.028745045706278845
+      "prezzo": 731.15,
+      "pnlPerc": -0.024287716020551204
     }
   ],
   "quotazioni": {
-    "SPY": 727.92,
-    "QQQ": 654.71,
-    "IWM": 269.39,
-    "AAPL": 352.72,
-    "MSFT": 502.855,
-    "NVDA": 152.04,
-    "GLD": 342.88,
-    "TLT": 80.125
+    "SPY": 730.1,
+    "QQQ": 659.41,
+    "IWM": 270.14,
+    "AAPL": 351.77,
+    "MSFT": 508.505,
+    "NVDA": 151.01,
+    "GLD": 341.22,
+    "TLT": 80.26
   },
   "ordini48h": [
     {
