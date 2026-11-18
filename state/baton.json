@@ -1,33 +1,33 @@
 {
-  "runId": "2026-11-17-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-17 21:40",
-  "epoch": 1794948000000,
+  "runId": "2026-11-18-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-18 15:40",
+  "epoch": 1795012800000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 96305.27,
-  "piano": "Il mercato è attualmente chiuso e la sveglia corrisponde alla fase di briefing serale, pertanto non è possibile inviare ordini. La posizione aperta su SPY registra una perdita latente del due percento ma rientra nei limiti di rischio consentiti dal capitale. Il portafoglio è composto da un solo titolo e la liquidità è ampia, ma la regola vieta operazioni a mercato chiuso. Mantengo lo status quo in attesa della prossima apertura.",
-  "perLaProssima": "Verificare l'apertura dei mercati nella prossima sessione e controllare se SPY riesce a recuperare i livelli chiave o se la pressione di vendita continua.",
-  "note": "",
-  "equityGiorno": 96476.09,
+  "conto": 96192.95,
+  "piano": "Osservo il portafoglio e noto che l'unica posizione aperta su SPY segna una perdita latente vicina al tre percento, ma rientra ampiamente nei limiti di esposizione consentiti dal capitale. Il mercato è aperto, tuttavia preferisco non effettuare nuove operazioni in questo momento per valutare la tenuta del supporto attuale di SPY. Mantengo la posizione esistente e non introduco nuovi titoli per evitare sovraesposizioni non necessarie. La liquidità disponibile è elevata ma intendo attendere segnali di inversione più chiari prima di incrementare o aprire altre posizioni.",
+  "perLaProssima": "Controllare la performance di SPY e verificare se la perdita latente si riduce o se la pressione ribassista richiede un intervento di chiusura.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-18 09:00\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 96192.95,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 732.13,
-      "pnlPerc": -0.022979915927136888
+      "prezzo": 727.8099,
+      "pnlPerc": -0.028745045706278845
     }
   ],
   "quotazioni": {
-    "SPY": 733.26,
-    "QQQ": 657.82,
-    "IWM": 268.96,
-    "AAPL": 350.5,
-    "MSFT": 506.07,
-    "NVDA": 157.08,
-    "GLD": 352.46,
-    "TLT": 79.56
+    "SPY": 727.92,
+    "QQQ": 654.71,
+    "IWM": 269.39,
+    "AAPL": 352.72,
+    "MSFT": 502.855,
+    "NVDA": 152.04,
+    "GLD": 342.88,
+    "TLT": 80.125
   },
   "ordini48h": [
     {
@@ -37,6 +37,70 @@
       "stato": "filled",
       "creatoIl": "2026-11-16T16:00:10.743393Z",
       "prezzoMed": 667.6975
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 28,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T17:38:18.040035Z",
+      "prezzoMed": 691.185
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "sell",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-12T15:36:28.919672Z",
+      "prezzoMed": 354.07
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-09T15:36:11.147742Z",
+      "prezzoMed": 749.35
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T17:40:40.253838Z",
+      "prezzoMed": 737.5
+    },
+    {
+      "simbolo": "GLD",
+      "lato": "buy",
+      "qty": 52,
+      "stato": "filled",
+      "creatoIl": "2026-11-05T15:35:44.919105Z",
+      "prezzoMed": 376.200577
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-30T15:28:46.897544Z",
+      "prezzoMed": 695.04
+    },
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.904258Z",
+      "prezzoMed": 720.76
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 25,
+      "stato": "filled",
+      "creatoIl": "2026-10-27T18:53:14.169552Z",
+      "prezzoMed": 769.26
     }
   ]
 }
