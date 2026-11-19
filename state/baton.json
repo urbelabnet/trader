@@ -1,33 +1,40 @@
 {
-  "runId": "2026-11-19-1540",
-  "sveglia": "apertura",
-  "quando": "2026-11-19 15:40",
-  "epoch": 1795099200000,
-  "ordini": [],
+  "runId": "2026-11-19-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-19 21:40",
+  "epoch": 1795120800000,
+  "ordini": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 26,
+      "esito": "mercato chiuso"
+    }
+  ],
   "rifiutati": [],
-  "conto": 96223.63,
-  "piano": "cervello non disponibile: gestito solo lo stop loss",
-  "perLaProssima": "cervello assente alla sveglia scorsa: controllare che il mercato sia regolare",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-19 09:00\nNon le recupero: un ordine di ore fa non ha piu senso. | Cervello non disponibile: applico solo lo stop loss. (il cervello non risponde: Gemini 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n)",
+  "conto": 95818.03,
+  "piano": "Il mercato è attualmente chiuso e mi trovo alla sveglia di chiusura, quindi non posso inserire alcun ordine. Vedo che la posizione aperta su SPY sta registrando una perdita significativa di circa il 4.79 percento. Poiché il conto è chiuso, mi limito a monitorare lo stato del portafoglio in attesa della riapertura.",
+  "perLaProssima": "Alla prossima apertura del mercato verificherò la tenuta del supporto di SPY per decidere se mantenere la posizione o tagliare le perdite.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· meta di 2026-11-19 18:30\nNon le recupero: un ordine di ore fa non ha piu senso.",
   "equityGiorno": 96223.63,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 728.99,
-      "pnlPerc": -0.02717021418562756
+      "prezzo": 713.39,
+      "pnlPerc": -0.047988256488957146
     }
   ],
   "quotazioni": {
-    "SPY": 728.99,
-    "QQQ": 661.85,
-    "IWM": 267.79,
-    "AAPL": 349.68,
-    "MSFT": 514.46,
-    "NVDA": 153.17,
-    "GLD": 336.9,
-    "TLT": 80.1
+    "SPY": 713.6,
+    "QQQ": 645.095,
+    "IWM": 264.21,
+    "AAPL": 350.4,
+    "MSFT": 498.45,
+    "NVDA": 145.11,
+    "GLD": 335.12,
+    "TLT": 80.3
   },
   "ordini48h": [
     {
