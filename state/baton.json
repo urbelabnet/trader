@@ -1,33 +1,33 @@
 {
-  "runId": "2026-11-18-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-18 21:40",
-  "epoch": 1795034400000,
+  "runId": "2026-11-19-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-19 15:40",
+  "epoch": 1795099200000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 96279.79,
-  "piano": "Il mercato è attualmente chiuso e la sessione odierna si è conclusa con SPY in calo, portando la posizione aperta a registrare una perdita latente superiore al due percento. Poiché le regole impediscono l'invio di ordini a mercato chiuso, non posso effettuare alcuna operazione di vendita o copertura in questo momento. Valuto comunque che il capitale è ben protetto e la liquidità è ampia, quindi la priorità è monitorare l'evoluzione della tendenza alla prossima apertura.",
-  "perLaProssima": "Verificare la tenuta dei prezzi di SPY all'apertura della prossima sessione e valutare se la perdita latente richiede la chiusura della posizione.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· meta di 2026-11-18 18:30\nNon le recupero: un ordine di ore fa non ha piu senso.",
-  "equityGiorno": 96192.95,
+  "conto": 96223.63,
+  "piano": "cervello non disponibile: gestito solo lo stop loss",
+  "perLaProssima": "cervello assente alla sveglia scorsa: controllare che il mercato sia regolare",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-19 09:00\nNon le recupero: un ordine di ore fa non ha piu senso. | Cervello non disponibile: applico solo lo stop loss. (il cervello non risponde: Gemini 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n)",
+  "equityGiorno": 96223.63,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 749.35,
-      "prezzo": 731.15,
-      "pnlPerc": -0.024287716020551204
+      "prezzo": 728.99,
+      "pnlPerc": -0.02717021418562756
     }
   ],
   "quotazioni": {
-    "SPY": 730.1,
-    "QQQ": 659.41,
-    "IWM": 270.14,
-    "AAPL": 351.77,
-    "MSFT": 508.505,
-    "NVDA": 151.01,
-    "GLD": 341.22,
-    "TLT": 80.26
+    "SPY": 728.99,
+    "QQQ": 661.85,
+    "IWM": 267.79,
+    "AAPL": 349.68,
+    "MSFT": 514.46,
+    "NVDA": 153.17,
+    "GLD": 336.9,
+    "TLT": 80.1
   },
   "ordini48h": [
     {
