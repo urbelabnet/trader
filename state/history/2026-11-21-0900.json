@@ -1,0 +1,34 @@
+{
+  "runId": "2026-11-21-0900",
+  "sveglia": "briefing",
+  "quando": "2026-11-21 09:00",
+  "epoch": 1795248000000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 95608.56,
+  "piano": "Il mercato è attualmente chiuso e mi trovo nella fase di briefing mattutino. Come da regole, non posso inviare ordini operativi quando il mercato è chiuso. Inoltre, ricordo che SPY è stato chiuso per stop nella sessione precedente, quindi non potrò comunque riaprirlo oggi. Osservo la liquidità intatta e attendo l'apertura delle contrattazioni.",
+  "perLaProssima": "Alla prossima sveglia controllerò l'apertura del mercato e i movimenti dei titoli monitorati per valutare nuovi ingressi.",
+  "note": "",
+  "equityGiorno": 95608.56,
+  "posizioni": [],
+  "quotazioni": {
+    "SPY": 693.89,
+    "QQQ": 614.8,
+    "IWM": 256.72,
+    "AAPL": 343.4,
+    "MSFT": 485.34,
+    "NVDA": 129.17,
+    "GLD": 323.2,
+    "TLT": 81.4
+  },
+  "ordini48h": [
+    {
+      "simbolo": "SPY",
+      "lato": "sell",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-20T16:02:15.172261Z",
+      "prezzoMed": 705.348462
+    }
+  ]
+}
