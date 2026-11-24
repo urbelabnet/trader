@@ -1,0 +1,57 @@
+{
+  "runId": "2026-11-24-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-24 18:30",
+  "epoch": 1795541400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 95150.17,
+  "piano": "Osservo le posizioni aperte su QQQ e SPY che mostrano lievi fluttuazioni negative dopo gli acquisti recenti ma restano ampiamente all'interno dei parametri di rischio consentiti. Il conto possiede ancora una buona liquidità ma preferisco mantenere lo status quo senza effettuare nuove operazioni in questa fase. Questa decisione evita interventi impulsivi e permette di consolidare la struttura del portafoglio esistente. Monitoro la situazione con calma.",
+  "perLaProssima": "Alla prossima sveglia controllerò l'evoluzione dei prezzi di SPY e QQQ per valutare se incrementare o mantenere la struttura attuale.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-24 09:00\n· apertura di 2026-11-24 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 95150.17,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 29,
+      "prezzoCarico": 650.681724,
+      "prezzo": 638.7,
+      "pnlPerc": -0.018414108707931046
+    },
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 722.78,
+      "prezzo": 718.5142,
+      "pnlPerc": -0.005901934198511321
+    }
+  ],
+  "quotazioni": {
+    "SPY": 718.64,
+    "QQQ": 638.83,
+    "IWM": 267.71,
+    "AAPL": 352.87,
+    "MSFT": 496.39,
+    "NVDA": 153.925,
+    "GLD": 325.8,
+    "TLT": 81.7
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "buy",
+      "qty": 29,
+      "stato": "filled",
+      "creatoIl": "2026-11-23T19:10:31.707236Z",
+      "prezzoMed": 650.681724
+    },
+    {
+      "simbolo": "SPY",
+      "lato": "buy",
+      "qty": 26,
+      "stato": "filled",
+      "creatoIl": "2026-11-23T19:10:31.549456Z",
+      "prezzoMed": 722.78
+    }
+  ]
+}

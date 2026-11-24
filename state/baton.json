@@ -1,119 +1,57 @@
 {
-  "runId": "2026-11-23-1830",
+  "runId": "2026-11-24-1830",
   "sveglia": "meta",
-  "quando": "2026-11-23 18:30",
-  "epoch": 1795455000000,
-  "ordini": [
+  "quando": "2026-11-24 18:30",
+  "epoch": 1795541400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 95150.17,
+  "piano": "Osservo le posizioni aperte su QQQ e SPY che mostrano lievi fluttuazioni negative dopo gli acquisti recenti ma restano ampiamente all'interno dei parametri di rischio consentiti. Il conto possiede ancora una buona liquidità ma preferisco mantenere lo status quo senza effettuare nuove operazioni in questa fase. Questa decisione evita interventi impulsivi e permette di consolidare la struttura del portafoglio esistente. Monitoro la situazione con calma.",
+  "perLaProssima": "Alla prossima sveglia controllerò l'evoluzione dei prezzi di SPY e QQQ per valutare se incrementare o mantenere la struttura attuale.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-24 09:00\n· apertura di 2026-11-24 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 95150.17,
+  "posizioni": [
+    {
+      "simbolo": "QQQ",
+      "qty": 29,
+      "prezzoCarico": 650.681724,
+      "prezzo": 638.7,
+      "pnlPerc": -0.018414108707931046
+    },
     {
       "simbolo": "SPY",
-      "lato": "buy",
       "qty": 26,
-      "esito": "accettato"
-    },
+      "prezzoCarico": 722.78,
+      "prezzo": 718.5142,
+      "pnlPerc": -0.005901934198511321
+    }
+  ],
+  "quotazioni": {
+    "SPY": 718.64,
+    "QQQ": 638.83,
+    "IWM": 267.71,
+    "AAPL": 352.87,
+    "MSFT": 496.39,
+    "NVDA": 153.925,
+    "GLD": 325.8,
+    "TLT": 81.7
+  },
+  "ordini48h": [
     {
       "simbolo": "QQQ",
       "lato": "buy",
       "qty": 29,
-      "esito": "accettato"
-    }
-  ],
-  "rifiutati": [],
-  "conto": 95608.56,
-  "piano": "Osservo il portafoglio completamente liquido dopo le recenti chiusure e le quotazioni stabili dei principali indici azionari. Decido di entrare su SPY e QQQ per riallocare il capitale disponibile in modo bilanciato ed efficiente. Questa mossa rispetta rigorosamente il limite del 20% per singolo titolo e non supera la soglia di cinque strumenti contemporanei. Procedo quindi con gli acquisti programmati per sfruttare la liquidità attuale.",
-  "perLaProssima": "Alla prossima sveglia controllerò l'andamento delle posizioni aperte su SPY e QQQ, verificando la tenuta dei livelli di prezzo e monitorando eventuali segnali di rischio.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-23 09:00\n· apertura di 2026-11-23 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
-  "equityGiorno": 95608.56,
-  "posizioni": [],
-  "quotazioni": {
-    "SPY": 722.8,
-    "QQQ": 650.62,
-    "IWM": 265.415,
-    "AAPL": 349.43,
-    "MSFT": 496.26,
-    "NVDA": 164.16,
-    "GLD": 334.79,
-    "TLT": 81.59
-  },
-  "ordini48h": [
-    {
-      "simbolo": "SPY",
-      "lato": "sell",
-      "qty": 26,
       "stato": "filled",
-      "creatoIl": "2026-11-20T16:02:15.172261Z",
-      "prezzoMed": 705.348462
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "sell",
-      "qty": 28,
-      "stato": "filled",
-      "creatoIl": "2026-11-16T16:00:10.743393Z",
-      "prezzoMed": 667.6975
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "buy",
-      "qty": 28,
-      "stato": "filled",
-      "creatoIl": "2026-11-12T17:38:18.040035Z",
-      "prezzoMed": 691.185
-    },
-    {
-      "simbolo": "GLD",
-      "lato": "sell",
-      "qty": 52,
-      "stato": "filled",
-      "creatoIl": "2026-11-12T15:36:28.919672Z",
-      "prezzoMed": 354.07
+      "creatoIl": "2026-11-23T19:10:31.707236Z",
+      "prezzoMed": 650.681724
     },
     {
       "simbolo": "SPY",
       "lato": "buy",
       "qty": 26,
       "stato": "filled",
-      "creatoIl": "2026-11-09T15:36:11.147742Z",
-      "prezzoMed": 749.35
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "sell",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-11-05T17:40:40.253838Z",
-      "prezzoMed": 737.5
-    },
-    {
-      "simbolo": "GLD",
-      "lato": "buy",
-      "qty": 52,
-      "stato": "filled",
-      "creatoIl": "2026-11-05T15:35:44.919105Z",
-      "prezzoMed": 376.200577
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "sell",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-30T15:28:46.897544Z",
-      "prezzoMed": 695.04
-    },
-    {
-      "simbolo": "QQQ",
-      "lato": "buy",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-27T18:53:14.904258Z",
-      "prezzoMed": 720.76
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "buy",
-      "qty": 25,
-      "stato": "filled",
-      "creatoIl": "2026-10-27T18:53:14.169552Z",
-      "prezzoMed": 769.26
+      "creatoIl": "2026-11-23T19:10:31.549456Z",
+      "prezzoMed": 722.78
     }
   ]
 }
