@@ -1,40 +1,47 @@
 {
-  "runId": "2026-11-24-1830",
+  "runId": "2026-11-25-1830",
   "sveglia": "meta",
-  "quando": "2026-11-24 18:30",
-  "epoch": 1795541400000,
-  "ordini": [],
+  "quando": "2026-11-25 18:30",
+  "epoch": 1795627800000,
+  "ordini": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 29,
+      "esito": "accettato"
+    }
+  ],
   "rifiutati": [],
-  "conto": 95150.17,
-  "piano": "Osservo le posizioni aperte su QQQ e SPY che mostrano lievi fluttuazioni negative dopo gli acquisti recenti ma restano ampiamente all'interno dei parametri di rischio consentiti. Il conto possiede ancora una buona liquidità ma preferisco mantenere lo status quo senza effettuare nuove operazioni in questa fase. Questa decisione evita interventi impulsivi e permette di consolidare la struttura del portafoglio esistente. Monitoro la situazione con calma.",
-  "perLaProssima": "Alla prossima sveglia controllerò l'evoluzione dei prezzi di SPY e QQQ per valutare se incrementare o mantenere la struttura attuale.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-24 09:00\n· apertura di 2026-11-24 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
-  "equityGiorno": 95150.17,
+  "conto": 94572.89,
+  "piano": "Osservo le posizioni aperte su QQQ e SPY che continuano a registrare leggere perdite percentuali ma si muovono senza scossoni anomali. La liquidità disponibile è ancora buona e non ci sono motivi validi per forzare ingressi o uscite in questo momento. Preferisco lasciare respirare il portafoglio e attendere segnali di inversione più chiari sui mercati. Non inserisco alcun ordine per mantenere la prudenza.",
+  "perLaProssima": "Alla prossima sveglia controllerò i livelli di prezzo di SPY e QQQ per verificare se le perdite si riducono o se è necessario intervenire per proteggere il capitale.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-25 09:00\n· apertura di 2026-11-25 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 94572.89,
   "posizioni": [
     {
       "simbolo": "QQQ",
       "qty": 29,
       "prezzoCarico": 650.681724,
-      "prezzo": 638.7,
-      "pnlPerc": -0.018414108707931046
+      "prezzo": 625.06,
+      "pnlPerc": -0.039376738357569246
     },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 722.78,
-      "prezzo": 718.5142,
-      "pnlPerc": -0.005901934198511321
+      "prezzo": 711.525,
+      "pnlPerc": -0.015571819917540601
     }
   ],
   "quotazioni": {
-    "SPY": 718.64,
-    "QQQ": 638.83,
-    "IWM": 267.71,
-    "AAPL": 352.87,
-    "MSFT": 496.39,
-    "NVDA": 153.925,
-    "GLD": 325.8,
-    "TLT": 81.7
+    "SPY": 711.505,
+    "QQQ": 625.2,
+    "IWM": 266.98,
+    "AAPL": 353.22,
+    "MSFT": 489.2,
+    "NVDA": 145.975,
+    "GLD": 322.48,
+    "TLT": 82.425
   },
   "ordini48h": [
     {
