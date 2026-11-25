@@ -1,64 +1,42 @@
 {
-  "runId": "2026-11-25-1830",
-  "sveglia": "meta",
-  "quando": "2026-11-25 18:30",
-  "epoch": 1795627800000,
-  "ordini": [
-    {
-      "simbolo": "QQQ",
-      "lato": "sell",
-      "qty": 29,
-      "esito": "accettato"
-    }
-  ],
+  "runId": "2026-11-25-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-25 21:40",
+  "epoch": 1795639200000,
+  "ordini": [],
   "rifiutati": [],
-  "conto": 94572.89,
-  "piano": "Osservo le posizioni aperte su QQQ e SPY che continuano a registrare leggere perdite percentuali ma si muovono senza scossoni anomali. La liquidità disponibile è ancora buona e non ci sono motivi validi per forzare ingressi o uscite in questo momento. Preferisco lasciare respirare il portafoglio e attendere segnali di inversione più chiari sui mercati. Non inserisco alcun ordine per mantenere la prudenza.",
-  "perLaProssima": "Alla prossima sveglia controllerò i livelli di prezzo di SPY e QQQ per verificare se le perdite si riducono o se è necessario intervenire per proteggere il capitale.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-25 09:00\n· apertura di 2026-11-25 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "conto": 94702.13,
+  "piano": "Il mercato è attualmente chiuso e le regole vietano l'inserimento di ordini in questa fase. Vedo la posizione aperta su SPY in lieve perdita, mentre QQQ è stato chiuso di recente. Mantengo l'attuale assetto senza forzare nuove operazioni per rispettare la disciplina di risk management. La liquidità residua rimane adeguata per future opportunità.",
+  "perLaProssima": "Verificare l'apertura dei mercati alla prossima sveglia e controllare la tenuta del supporto di SPY.",
+  "note": "",
   "equityGiorno": 94572.89,
   "posizioni": [
-    {
-      "simbolo": "QQQ",
-      "qty": 29,
-      "prezzoCarico": 650.681724,
-      "prezzo": 625.06,
-      "pnlPerc": -0.039376738357569246
-    },
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 722.78,
-      "prezzo": 711.525,
-      "pnlPerc": -0.015571819917540601
+      "prezzo": 716.7,
+      "pnlPerc": -0.008411964913251512
     }
   ],
   "quotazioni": {
-    "SPY": 711.505,
-    "QQQ": 625.2,
-    "IWM": 266.98,
-    "AAPL": 353.22,
-    "MSFT": 489.2,
-    "NVDA": 145.975,
-    "GLD": 322.48,
-    "TLT": 82.425
+    "SPY": 716.67,
+    "QQQ": 633.92,
+    "IWM": 268.84,
+    "AAPL": 355.14,
+    "MSFT": 489.99,
+    "NVDA": 149.73,
+    "GLD": 327.46,
+    "TLT": 82.16
   },
   "ordini48h": [
     {
       "simbolo": "QQQ",
-      "lato": "buy",
+      "lato": "sell",
       "qty": 29,
       "stato": "filled",
-      "creatoIl": "2026-11-23T19:10:31.707236Z",
-      "prezzoMed": 650.681724
-    },
-    {
-      "simbolo": "SPY",
-      "lato": "buy",
-      "qty": 26,
-      "stato": "filled",
-      "creatoIl": "2026-11-23T19:10:31.549456Z",
-      "prezzoMed": 722.78
+      "creatoIl": "2026-11-25T17:55:10.395932Z",
+      "prezzoMed": 624.876897
     }
   ]
 }
