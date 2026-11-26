@@ -1,14 +1,14 @@
 {
-  "runId": "2026-11-26-1830",
-  "sveglia": "meta",
-  "quando": "2026-11-26 18:30",
-  "epoch": 1795714200000,
+  "runId": "2026-11-26-2140",
+  "sveglia": "chiusura",
+  "quando": "2026-11-26 21:40",
+  "epoch": 1795725600000,
   "ordini": [],
   "rifiutati": [],
   "conto": 94701.74,
-  "piano": "Il mercato è attualmente chiuso e le regole del sistema vietano tassativamente l'invio di ordini quando la borsa non è aperta. Osservo la posizione aperta su SPY che registra un lieve calo ma rimane ben sotto la soglia massima di concentrazione del portafoglio. Ho notato alcune sveglie saltate durante la giornata, ma la situazione complessiva della liquidità e del capitale resta stabile. Non essendoci condizioni operative valide a mercato chiuso, attendo la prossima sessione utile.",
-  "perLaProssima": "Controllare la riapertura dei mercati, verificare la reazione del prezzo di SPY rispetto al livello attuale e monitorare eventuali segnali di inversione o tenuta dei supporti chiave.",
-  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-26 09:00\n· apertura di 2026-11-26 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "piano": "Osservo la chiusura della sessione odierna con una posizione attiva su SPY che registra una perdita contenuta di circa lo zero virgola otto percento. Il mercato è attualmente chiuso, quindi non è possibile né opportuno inviare alcun ordine operativo in questo momento. Il capitale disponibile in contanti è elevato e la gestione del rischio sul titolo in portafoglio rispetta ampiamente i limiti imposti. Mantengo la calma e attendo la prossima riapertura per valutare l'andamento del prezzo.",
+  "perLaProssima": "Verificare l'apertura del mercato nella prossima sessione, controllare l'evoluzione della posizione su SPY e monitorare i livelli tecnici di supporto per decidere se incrementare, mantenere o chiudere l'esposizione.",
+  "note": "",
   "equityGiorno": 94701.74,
   "posizioni": [
     {
