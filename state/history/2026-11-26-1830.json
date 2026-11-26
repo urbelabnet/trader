@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-26-1830",
+  "sveglia": "meta",
+  "quando": "2026-11-26 18:30",
+  "epoch": 1795714200000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 94701.74,
+  "piano": "Il mercato è attualmente chiuso e le regole del sistema vietano tassativamente l'invio di ordini quando la borsa non è aperta. Osservo la posizione aperta su SPY che registra un lieve calo ma rimane ben sotto la soglia massima di concentrazione del portafoglio. Ho notato alcune sveglie saltate durante la giornata, ma la situazione complessiva della liquidità e del capitale resta stabile. Non essendoci condizioni operative valide a mercato chiuso, attendo la prossima sessione utile.",
+  "perLaProssima": "Controllare la riapertura dei mercati, verificare la reazione del prezzo di SPY rispetto al livello attuale e monitorare eventuali segnali di inversione o tenuta dei supporti chiave.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-26 09:00\n· apertura di 2026-11-26 15:40\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 94701.74,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 722.78,
+      "prezzo": 716.7,
+      "pnlPerc": -0.008411964913251512
+    }
+  ],
+  "quotazioni": {
+    "SPY": 716.67,
+    "QQQ": 633.92,
+    "IWM": 268.84,
+    "AAPL": 355.14,
+    "MSFT": 489.99,
+    "NVDA": 149.73,
+    "GLD": 327.46,
+    "TLT": 82.16
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 29,
+      "stato": "filled",
+      "creatoIl": "2026-11-25T17:55:10.395932Z",
+      "prezzoMed": 624.876897
+    }
+  ]
+}
