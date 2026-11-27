@@ -1,33 +1,33 @@
 {
-  "runId": "2026-11-26-2140",
-  "sveglia": "chiusura",
-  "quando": "2026-11-26 21:40",
-  "epoch": 1795725600000,
+  "runId": "2026-11-27-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-27 15:40",
+  "epoch": 1795790400000,
   "ordini": [],
   "rifiutati": [],
-  "conto": 94701.74,
-  "piano": "Osservo la chiusura della sessione odierna con una posizione attiva su SPY che registra una perdita contenuta di circa lo zero virgola otto percento. Il mercato è attualmente chiuso, quindi non è possibile né opportuno inviare alcun ordine operativo in questo momento. Il capitale disponibile in contanti è elevato e la gestione del rischio sul titolo in portafoglio rispetta ampiamente i limiti imposti. Mantengo la calma e attendo la prossima riapertura per valutare l'andamento del prezzo.",
-  "perLaProssima": "Verificare l'apertura del mercato nella prossima sessione, controllare l'evoluzione della posizione su SPY e monitorare i livelli tecnici di supporto per decidere se incrementare, mantenere o chiudere l'esposizione.",
-  "note": "",
-  "equityGiorno": 94701.74,
+  "conto": 94974.74,
+  "piano": "Osservo il mercato all'apertura odierna con una posizione già aperta su SPY in leggero guadagno del zero virgola sei percento. Il capitale disponibile in contanti è solido e la posizione attuale rispetta i limiti di rischio previsti. Non rilevo segnali urgenti di chiusura o di apertura su nuovi titoli in questo momento. Preferisco mantenere la configurazione attuale senza inserire nuovi ordini per questa sveglia.",
+  "perLaProssima": "Monitorare la tenuta del guadagno sulla posizione SPY e controllare eventuali variazioni di prezzo durante la sessione per valutare nuove opportunità nel pomeriggio.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-27 09:00\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 94974.74,
   "posizioni": [
     {
       "simbolo": "SPY",
       "qty": 26,
       "prezzoCarico": 722.78,
-      "prezzo": 716.7,
-      "pnlPerc": -0.008411964913251512
+      "prezzo": 727.2,
+      "pnlPerc": 0.006115277124436306
     }
   ],
   "quotazioni": {
-    "SPY": 716.67,
-    "QQQ": 633.92,
-    "IWM": 268.84,
-    "AAPL": 355.14,
-    "MSFT": 489.99,
-    "NVDA": 149.73,
-    "GLD": 327.46,
-    "TLT": 82.16
+    "SPY": 727.18,
+    "QQQ": 647.34,
+    "IWM": 273.1,
+    "AAPL": 357.89,
+    "MSFT": 491.6,
+    "NVDA": 149.47,
+    "GLD": 333.05,
+    "TLT": 81.265
   },
   "ordini48h": [
     {

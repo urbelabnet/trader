@@ -1,0 +1,42 @@
+{
+  "runId": "2026-11-27-1540",
+  "sveglia": "apertura",
+  "quando": "2026-11-27 15:40",
+  "epoch": 1795790400000,
+  "ordini": [],
+  "rifiutati": [],
+  "conto": 94974.74,
+  "piano": "Osservo il mercato all'apertura odierna con una posizione già aperta su SPY in leggero guadagno del zero virgola sei percento. Il capitale disponibile in contanti è solido e la posizione attuale rispetta i limiti di rischio previsti. Non rilevo segnali urgenti di chiusura o di apertura su nuovi titoli in questo momento. Preferisco mantenere la configurazione attuale senza inserire nuovi ordini per questa sveglia.",
+  "perLaProssima": "Monitorare la tenuta del guadagno sulla posizione SPY e controllare eventuali variazioni di prezzo durante la sessione per valutare nuove opportunità nel pomeriggio.",
+  "note": "Sveglie saltate (macchina spenta o offline):\n· briefing di 2026-11-27 09:00\nNon le recupero: un ordine di ore fa non ha piu senso.",
+  "equityGiorno": 94974.74,
+  "posizioni": [
+    {
+      "simbolo": "SPY",
+      "qty": 26,
+      "prezzoCarico": 722.78,
+      "prezzo": 727.2,
+      "pnlPerc": 0.006115277124436306
+    }
+  ],
+  "quotazioni": {
+    "SPY": 727.18,
+    "QQQ": 647.34,
+    "IWM": 273.1,
+    "AAPL": 357.89,
+    "MSFT": 491.6,
+    "NVDA": 149.47,
+    "GLD": 333.05,
+    "TLT": 81.265
+  },
+  "ordini48h": [
+    {
+      "simbolo": "QQQ",
+      "lato": "sell",
+      "qty": 29,
+      "stato": "filled",
+      "creatoIl": "2026-11-25T17:55:10.395932Z",
+      "prezzoMed": 624.876897
+    }
+  ]
+}
